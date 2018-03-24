@@ -13,6 +13,9 @@ public class Livro {
 	private int numero_paginas;
 	private AreaConhecimento area;
 		
+	public Livro() {
+		
+	}
 	public Livro(long isbn, String titulo, ArrayList<Autor> autores, Editora editora, Date ano_publicacao, int edicao, int numero_paginas, AreaConhecimento area) {
 		this.isbn = isbn;
 		this.titulo = titulo;
