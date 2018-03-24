@@ -6,15 +6,14 @@ import java.util.Date;
 public class Livro {
 	private long isbn;
 	private String titulo;
-	private ArrayList<String> autores;
-	private String editora;
-	private int ano_publicacao;
-	private String edicao;
+	private ArrayList<Autor> autores;
+	private Editora editora;
+	private Date ano_publicacao;
+	private int edicao;
 	private int numero_paginas;
-	private String area;
-	private String tema;
-	
-	public Livro(long isbn, String titulo, ArrayList<String> autores, String editora, int ano_publicacao, String edicao, int numero_paginas, String area, String tema) {
+	private AreaConhecimento area;
+		
+	public Livro(long isbn, String titulo, ArrayList<Autor> autores, Editora editora, Date ano_publicacao, int edicao, int numero_paginas, AreaConhecimento area) {
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autores = autores;
@@ -23,60 +22,70 @@ public class Livro {
 		this.edicao = edicao;
 		this.numero_paginas = numero_paginas;
 		this.area = area;
-		this.tema = tema;
 	}
+
 	public long getIsbn() {
 		return isbn;
 	}
+
 	public void setIsbn(long isbn) {
 		this.isbn = isbn;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public ArrayList<String> getAutores() {
+
+	public ArrayList<Autor> getAutores() {
 		return autores;
 	}
-	public void setAutores(ArrayList<String> autores) {
+
+	public void setAutores(ArrayList<Autor> autores) {
 		this.autores = autores;
 	}
-	public String getEditora() {
+
+	public Editora getEditora() {
 		return editora;
 	}
-	public void setEditora(String editora) {
+
+	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-	public int getAno_publicacao() {
+
+	public Date getAno_publicacao() {
 		return ano_publicacao;
 	}
-	public void setAno_publicacao(int ano_publicacao) {
+
+	public void setAno_publicacao(Date ano_publicacao) {
 		this.ano_publicacao = ano_publicacao;
 	}
-	public String getEdicao() {
+
+	public int getEdicao() {
 		return edicao;
 	}
-	public void setEdicao(String edicao) {
+
+	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
+
 	public int getNumero_paginas() {
 		return numero_paginas;
 	}
+
 	public void setNumero_paginas(int numero_paginas) {
 		this.numero_paginas = numero_paginas;
 	}
-	public String getArea() {
+
+	public AreaConhecimento getArea() {
 		return area;
 	}
-	public void setArea(String area) {
+
+	public void setArea(AreaConhecimento area) {
 		this.area = area;
 	}
-	public String getTema() {
-		return tema;
-	}
-	public void setTema(String tema) {
-		this.tema = tema;
-	}	
+	
 }
