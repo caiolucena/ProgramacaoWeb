@@ -10,7 +10,7 @@ import com.mysql.jdbc.Connection;
 
 public class Conexao {
     public static Connection con;
-    private static String user = "admin";
+    private static String user = "admin1";
     private static String pass = "admin";
     private static final Logger logger = LogManager.getLogger(Conexao.class);
     
