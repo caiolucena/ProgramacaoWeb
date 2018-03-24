@@ -3,22 +3,32 @@ package br.uepb.model.acervo;
 import java.sql.Date;
 
 public class Revista {
+	private int id;
+	
 	private String titulo;
-	private String editora;
-	private Date dataDePublicacao;
+	private Editora editora;
+	private Date data;
 	private String edicao;
-	private int numeroDePaginas;
+	private int num_pag;
 	
 	public Revista() {
 		
 	}
 	
-	public Revista(String titulo, String editora, Date dataDePublicacao, String edicao, int numeroDePaginas) {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Revista(String titulo, Editora editora, Date dataDePublicacao, String edicao, int numeroDePaginas) {
 		this.titulo = titulo ;
 		this.editora = editora;
-		this.dataDePublicacao = dataDePublicacao;
+		this.data = dataDePublicacao;
 		this.edicao = edicao;
-		this.numeroDePaginas = numeroDePaginas;
+		this.num_pag = numeroDePaginas;
 	}
 
 	public String getTitulo() {
@@ -29,20 +39,20 @@ public class Revista {
 		this.titulo = titulo;
 	}
 
-	public String getEditora() {
+	public Editora getEditora() {
 		return editora;
 	}
 
-	public void setEditora(String editora) {
+	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
 
-	public Date getDataDePublicacao() {
-		return dataDePublicacao;
+	public Date getData() {
+		return data;
 	}
 
-	public void setDataDePublicacao(Date dataDePublicacao) {
-		this.dataDePublicacao = dataDePublicacao;
+	public void setData(Date dataDePublicacao) {
+		this.data = dataDePublicacao;
 	}
 
 	public String getEdicao() {
@@ -53,12 +63,12 @@ public class Revista {
 		this.edicao = edicao;
 	}
 
-	public int getNumeroDePaginas() {
-		return numeroDePaginas;
+	public int getNum_pag() {
+		return num_pag;
 	}
 
-	public void setNumeroDePaginas(int numeroDePaginas) {
-		this.numeroDePaginas = numeroDePaginas;
+	public void setNum_pag(int numeroDePaginas) {
+		this.num_pag = numeroDePaginas;
 	}
 	
 		
