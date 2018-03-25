@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.dao.AreaConhecimentoDAO;
+import br.uepb.dao.AutorDAO;
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.acervo.Livro;
@@ -98,9 +100,10 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            Livro l = new Livro();
 	            l.setIsbn(rs.getLong("isbn"));
 	            l.setTitulo(rs.getString("titulo"));
+	            
 	            //Busca a lista de autores daquele livro
 	            AutorDAO autordao = new AutorDAO();
-	            l.setAutores(autodao.buscarAutores(l.getIsbn()));
+	            l.setAutores(autordao.buscarAutoresPorISBN(l.getIsbn()));
 	            
 	            //Buscar a editora do livro
 	            EditoraDAO editoradao = new EditoraDAO();

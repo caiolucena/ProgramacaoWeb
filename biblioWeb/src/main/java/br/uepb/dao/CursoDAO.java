@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Curso;
 import br.uepb.model.enums.Tipo_Curso;
@@ -28,7 +29,6 @@ public class CursoDAO {
 			stmt.setString(1, curso.getNome());
 			stmt.setString(2,curso.getTipo().toString());
 			stmt.setInt(3, curso.getArea().getId());
-			//TODO INSERIR faltar adicionar o id da subarea tema
 			return stmt.execute();
 		} catch (SQLException e) {
 			logger.error("Erro na inserção",e);
@@ -61,13 +61,12 @@ public class CursoDAO {
 	}
 	
 	public boolean updateCurso(Curso curso){
-		String sql = "update curso set nome=?, tipo=?, area_conhecimento_id=?, area_conhecimento_tema_id=? where id=?";
+		String sql = "update curso set nome=?, tipo=?, area_conhecimento_id=? where id=?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, curso.getNome());
 			stmt.setString(2,curso.getTipo().toString());
 			stmt.setInt(3, curso.getArea().getId());
-			//TODO ATUALIZAR faltar adicionar o id da subarea tema
 			return stmt.execute();
 		} catch (SQLException e) {
 			logger.error("Erro na atualização",e);
@@ -82,7 +81,7 @@ public class CursoDAO {
 	}
 	
 	public ArrayList<Curso> searchCurso(Curso curso){
-		String sql = "select * from curso where nome=%?%";
+		String sql = "select * from curso inner join area_conhecimento on curso.area_conhecimento_id = area_conhecimento.id where curso.nome like %?%";
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -97,10 +96,8 @@ public class CursoDAO {
 	            }else if(rs.getString("tipo").equals(Tipo_Curso.pos_graduacao)){
 	            	c.setTipo(Tipo_Curso.pos_graduacao);
 	            }
-	            AreaConhecimentoDAO adao = new AreaConhecimentoDAO();
-	            c.setArea(adao.buscarArea(rs.getInt("area_conhecimento_id")));
-	            //TODO Buscar e adiconar subarea ao curso
-	            
+	            AreaConhecimento area = new AreaConhecimento();
+	            area.setId(rs.getInt(columnLabel));
 	            cursos.add(c);
 	        }
 		} catch (SQLException e) {

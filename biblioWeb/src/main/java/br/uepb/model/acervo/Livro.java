@@ -3,6 +3,9 @@ package br.uepb.model.acervo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import br.uepb.model.AreaConhecimento;
+import br.uepb.model.Autor;
+
 public class Livro {
 	private long isbn;
 	private String titulo;

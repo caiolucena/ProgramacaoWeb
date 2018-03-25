@@ -96,4 +96,52 @@ public class AutorDAO {
 		}
 		return autores;
 	}
+	
+	public Autor searchAutor(int id_autor) {
+		String sql = "select * from autor where id=?";
+		Autor autor = new Autor();
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1,id_autor);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){	            
+				autor.setId(rs.getInt("id"));
+				autor.setNome(rs.getString("nome"));
+	        }
+		} catch (SQLException e) {
+			logger.error("Erro na busca",e);
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				logger.error("Conexao não pode ser fechada",e);
+			}
+		}
+		return autor;
+	}
+	
+	//TODO Acho que essa responsabilidade não é de autor
+	public ArrayList<Autor> buscarAutoresPorISBN(long isbn) {
+		String sql = "select autor_id from autor_has_livro where livro_isbn=?";
+		ArrayList<Autor> autores = new ArrayList<Autor>();
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setLong(1,isbn);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+	            Autor a = new Autor();
+	            a = searchAutor(rs.getInt("autor_id"));
+	            autores.add(a);
+	        }
+		} catch (SQLException e) {
+			logger.error("Erro na busca",e);
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				logger.error("Conexao não pode ser fechada",e);
+			}
+		}
+		return autores;
+	}
 }

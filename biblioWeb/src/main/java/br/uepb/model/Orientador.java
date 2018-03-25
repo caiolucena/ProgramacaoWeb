@@ -3,6 +3,7 @@ package br.uepb.model;
 public class Orientador {
 	private int id;
 	private String nome;
+	private String formacao;
 	
 	public int getId() {
 		return id;
@@ -15,5 +16,11 @@ public class Orientador {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String getFormacao() {
+		return formacao;
+	}
+	public void setFormacao(String formacao) {
+		this.formacao = formacao;
 	}	
 }

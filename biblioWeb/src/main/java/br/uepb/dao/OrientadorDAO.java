@@ -19,10 +19,11 @@ public class OrientadorDAO {
 	}
 	
 	public boolean createOrientador(Orientador orientador){
-		String sql = "insert into autor(nome)values(?)";
+		String sql = "insert into autor(nome,formacao)values(?,?)";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, orientador.getNome());
+			stmt.setString(2, orientador.getFormacao());
 			return stmt.execute();
 		} catch (SQLException e) {
 			logger.error("Erro na inserção",e);
@@ -55,10 +56,11 @@ public class OrientadorDAO {
 	}
 	
 	public boolean updateAutor(Orientador orientador) {
-		String sql = "update autor set nome=? where id=?";
+		String sql = "update autor set nome=?, formacao=? where id=?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,orientador.getNome());
+			stmt.setString(2, orientador.getFormacao());
 			return stmt.execute();
 		} catch (SQLException e) {
 			logger.error("Erro na atualização",e);
@@ -83,6 +85,7 @@ public class OrientadorDAO {
 	            Orientador o = new Orientador();
 	            o.setId(rs.getInt("id"));
 	            o.setNome(rs.getString("nome"));
+	            o.setFormacao(rs.getString("formacao"));
 	            orientadores.add(o);
 	        }
 		} catch (SQLException e) {
