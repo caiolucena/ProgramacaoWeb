@@ -5,6 +5,10 @@ public class Tema {
 	private int id;
 	private String nome;
 	
+	public Tema() {
+		
+	}
+	
 	public Tema(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
