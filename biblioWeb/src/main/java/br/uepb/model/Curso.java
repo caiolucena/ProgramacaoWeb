@@ -3,6 +3,7 @@ package br.uepb.model;
 import br.uepb.model.enums.Tipo_Curso;
 
 public class Curso {
+	
 	private int id;
 	private String nome;
 	private AreaConhecimento area;
@@ -32,7 +33,7 @@ public class Curso {
 	public AreaConhecimento getArea() {
 		return area;
 	}
-	public void setArea(String area) {
+	public void setArea(AreaConhecimento area) {
 		this.area = area;
 	}
 	public Tipo_Curso getTipo() {

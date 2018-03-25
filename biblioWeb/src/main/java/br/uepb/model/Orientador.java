@@ -3,6 +3,7 @@ package br.uepb.model;
 public class Orientador {
 	private int id;
 	private String nome;
+	
 	public int getId() {
 		return id;
 	}
