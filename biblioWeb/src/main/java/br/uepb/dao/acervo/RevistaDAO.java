@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
+import br.uepb.model.acervo.Editora;
 import br.uepb.model.acervo.Revista;
 
 public class RevistaDAO implements Item_Acervo<Revista>{
@@ -22,7 +23,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	public RevistaDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
-
+	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Revista revista) {		
 		String	sql	=	"insert	into	revista"	+
 				"(id,titulo,editora,data,edicao,num_pag)"	+
@@ -59,7 +60,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 
 		
 	}
-
+	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Revista revista) {
 		// TODO Auto-generated method stub
 		String	sql	=	"DELETE FROM revista"	+
@@ -118,16 +119,20 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 		ResultSet rs = null;
 		try{
 			
-			stmt = con.prepareStatement("select * from revista where id = ?");
-			stmt .setInt(1,revista.getId());
+			stmt = con.prepareStatement("SELECT revista.id as 'id_revista', revista.titulo as 'titulo_revista', revista.data as 'data_revista'," + 
+					"revista.edicao as 'edicao_revista', revista.num_pag as 'pag_revista', editora.id as 'id_editora', editora.nome as 'nome_editora'" + 
+					"FROM revista INNER JOIN editora ON revista.editora_id = editora.id where revista.titulo like %?%;");
+			stmt .setString(1,revista.getTitulo());
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Revista rev = new Revista();
-				rev.setId(rs.getInt("id"));
+				rev.setId(rs.getInt("id_revista"));
+				rev.setEditora(new Editora(rs.getInt("id_editora"),rs.getString("nome_editora")));
 				rev.setTitulo(rs.getString("titulo"));
 				rev.setData((Date)rs.getDate("data"));
 				rev.setEdicao(rs.getString("edicao"));	
+				rev.setNum_pag(rs.getInt("pag_revista"));
 				
 				revistas.add(revista);
 			}

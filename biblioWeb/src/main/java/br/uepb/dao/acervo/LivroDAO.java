@@ -107,7 +107,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            
 	            //Buscar a editora do livro
 	            EditoraDAO editoradao = new EditoraDAO();
-	            l.setEditora(editadoa.buscar(rs.getInt("editora_id")));
+	            l.setEditora(editadora.buscar(rs.getInt("editora_id")));
 	            
 	            l.setAno_publicacao(rs.getDate("ano"));
 	            l.setEdicao(rs.getInt("edicao"));

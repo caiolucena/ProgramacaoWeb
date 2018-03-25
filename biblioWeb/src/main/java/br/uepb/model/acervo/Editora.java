@@ -5,6 +5,11 @@ public class Editora {
 	int id;
 	String nome;
 	
+	public Editora(int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+	
 	public int getId() {
 		return id;
 	}
