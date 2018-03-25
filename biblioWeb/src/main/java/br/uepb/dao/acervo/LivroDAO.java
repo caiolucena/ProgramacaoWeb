@@ -120,8 +120,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            
 	            l.setAno_publicacao(rs.getDate("ano"));
 	            l.setEdicao(rs.getInt("edicao"));
-	            l.setNumero_paginas(rs.getInt("num_pag"));
-	            
+	            l.setNumero_paginas(rs.getInt("num_pag"));	            
 	            l.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
 	            livros.add(l);
 	        }

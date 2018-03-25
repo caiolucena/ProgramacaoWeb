@@ -81,7 +81,7 @@ public class CursoDAO {
 	}
 	
 	public ArrayList<Curso> searchCurso(Curso curso){
-		String sql = "select * from curso inner join area_conhecimento on curso.area_conhecimento_id = area_conhecimento.id where curso.nome like %?%";
+		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like '%?%';";
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -89,15 +89,14 @@ public class CursoDAO {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Curso c = new Curso();
-	            c.setId(rs.getInt("id"));
-	            c.setNome(rs.getString("nome"));
-	            if(rs.getString("tipo").equals(Tipo_Curso.graduacao)){
+	            c.setId(rs.getInt("curso_id"));
+	            c.setNome(rs.getString("curso_nome"));
+	            if(rs.getString("curso_tipo").equals(Tipo_Curso.graduacao)){
 	            	c.setTipo(Tipo_Curso.graduacao);
-	            }else if(rs.getString("tipo").equals(Tipo_Curso.pos_graduacao)){
+	            }else if(rs.getString("curso_tipo").equals(Tipo_Curso.pos_graduacao)){
 	            	c.setTipo(Tipo_Curso.pos_graduacao);
 	            }
-	            AreaConhecimento area = new AreaConhecimento();
-	            area.setId(rs.getInt(columnLabel));
+	            c.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
 	            cursos.add(c);
 	        }
 		} catch (SQLException e) {

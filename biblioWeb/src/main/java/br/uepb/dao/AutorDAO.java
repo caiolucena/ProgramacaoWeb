@@ -122,7 +122,7 @@ public class AutorDAO {
 	
 	//TODO Acho que essa responsabilidade não é de autor
 	public ArrayList<Autor> buscarAutoresPorISBN(long isbn) {
-		String sql = "select autor_id from autor_has_livro where livro_isbn=?";
+		String sql = "select * from autor_has_livro inner join autor on autor_id=autor.id where livro_isbn=?";
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -130,7 +130,8 @@ public class AutorDAO {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Autor a = new Autor();
-	            a = searchAutor(rs.getInt("autor_id"));
+	            a.setId(rs.getInt("autor_id"));
+	            a.setNome(rs.getString("nome"));
 	            autores.add(a);
 	        }
 		} catch (SQLException e) {

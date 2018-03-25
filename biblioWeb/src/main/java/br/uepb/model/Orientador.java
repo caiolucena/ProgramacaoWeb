@@ -5,6 +5,16 @@ public class Orientador {
 	private String nome;
 	private String formacao;
 	
+	public Orientador(){
+		
+	}
+	
+	public Orientador(int id,String nome, String formacao){
+		this.id = id;
+		this.nome = nome;
+		this.formacao = formacao;
+	}
+	
 	public int getId() {
 		return id;
 	}
