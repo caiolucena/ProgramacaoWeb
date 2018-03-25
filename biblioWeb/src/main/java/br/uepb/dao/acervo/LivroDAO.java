@@ -92,7 +92,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setLong(1,livro.getIsbn());
+			stmt.setString(1,livro.getTitulo());
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Livro l = new Livro();
@@ -113,6 +113,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            //Buscar a area do conhecimento do area_conhecimento_id
 	            AreaConhecimentoDAO areadao = new AreaConhecimentoDAO();
 	            l.setArea(areadao.buscar(rs.getInt("area_conhecimento_id")));
+	            livros.add(l);
 	        }
 		} catch (SQLException e) {
 			logger.error("Erro na busca",e);
@@ -123,7 +124,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 				logger.error("Conexao não pode ser fechada",e);
 			}
 		}
-		return false;
+		return livros;
 	}
 
 		

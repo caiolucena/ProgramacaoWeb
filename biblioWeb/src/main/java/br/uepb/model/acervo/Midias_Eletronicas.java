@@ -5,15 +5,26 @@ import java.util.Date;
 import br.uepb.model.enums.Tipo_Midia;
 
 public class Midias_Eletronicas {
-	
+	private int id;
 	private String titulo;
 	private Tipo_Midia tipo;
 	private Date data_gravacao;
 	
+	public Midias_Eletronicas(){
+	
+	}
 	public Midias_Eletronicas(String titulo, Tipo_Midia tipo, Date data_gravacao) {
 		this.titulo = titulo;
 		this.tipo = tipo;
 		this.data_gravacao = data_gravacao;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -38,8 +49,6 @@ public class Midias_Eletronicas {
 
 	public void setData_gravacao(Date data_gravacao) {
 		this.data_gravacao = data_gravacao;
-	}
-	
-	
+	}	
 
 }

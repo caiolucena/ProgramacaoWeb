@@ -1,17 +1,27 @@
-package br.uepb.model.curso;
+package br.uepb.model;
 
 import br.uepb.model.enums.Tipo_Curso;
 
 public class Curso {
-	
+	private int id;
 	private String nome;
-	private String area;
+	private AreaConhecimento area;
 	private Tipo_Curso tipo;
 	
-	public Curso(String nome, String area, Tipo_Curso tipo) {
+	public Curso(){
+		
+	}
+	public Curso(String nome, AreaConhecimento area, Tipo_Curso tipo) {
 		this.nome = nome;
 		this.area = area;
 		this.tipo = tipo;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -19,7 +29,7 @@ public class Curso {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getArea() {
+	public AreaConhecimento getArea() {
 		return area;
 	}
 	public void setArea(String area) {
