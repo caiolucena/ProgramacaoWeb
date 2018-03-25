@@ -127,12 +127,12 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 				rev.setId(rs.getInt("id"));
 				rev.setTitulo(rs.getString("titulo"));
 				rev.setData((Date)rs.getDate("data"));
-				rev.setEdicao(rs.getString("edicao"));
+				rev.setEdicao(rs.getString("edicao"));	
 				
-				jornais.add(revista);
+				revistas.add(revista);
 			}
 
-		return jornais;
+		return revistas;
 		
 		}catch (SQLException e) {
 			throw new RuntimeException (e);
