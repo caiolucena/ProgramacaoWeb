@@ -2,6 +2,8 @@ package br.uepb.model.acervo;
 
 import java.sql.Date;
 
+import br.uepb.model.Editora;
+
 public class Revista {
 	private int id;
 	

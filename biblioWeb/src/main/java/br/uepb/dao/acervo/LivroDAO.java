@@ -14,6 +14,8 @@ import br.uepb.dao.AreaConhecimentoDAO;
 import br.uepb.dao.AutorDAO;
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
+import br.uepb.model.AreaConhecimento;
+import br.uepb.model.Editora;
 import br.uepb.model.acervo.Livro;
 
 public class LivroDAO implements Item_Acervo<Livro>{
@@ -90,7 +92,10 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	}
 
 	public ArrayList<Livro> searchItemAcervo(Livro livro) {
-		String sql = "select * from livro where titulo=%?%";
+		String sql = "select L.isbn as 'isbn', L.titulo as 'titulo', L.ano as 'ano', L.edicao as 'edicao', "
+				+ "L.num_pag as 'NumeroDePaginas', E.id as 'editora_id', E.nome as 'editora_nome', A.id as 'area_id', "
+				+ "A.nome as 'area_nome'  from livro as L inner join editora as E on L.editora_id = E.id "
+				+ "inner join area_conhecimento as A on A.id=L.area_conhecimento_id where L.titulo like '%Livro1%'";
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -102,20 +107,22 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            l.setTitulo(rs.getString("titulo"));
 	            
 	            //Busca a lista de autores daquele livro
-	            AutorDAO autordao = new AutorDAO();
+	            AutorDAO autordao = null;
+				try {
+					autordao = new AutorDAO();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	            l.setAutores(autordao.buscarAutoresPorISBN(l.getIsbn()));
 	            
-	            //Buscar a editora do livro
-	            EditoraDAO editoradao = new EditoraDAO();
-	            l.setEditora(editadora.buscar(rs.getInt("editora_id")));
+	            l.setEditora(new Editora(rs.getInt("editora_id"),rs.getString("editora_nome")));
 	            
 	            l.setAno_publicacao(rs.getDate("ano"));
 	            l.setEdicao(rs.getInt("edicao"));
 	            l.setNumero_paginas(rs.getInt("num_pag"));
 	            
-	            //Buscar a area do conhecimento do area_conhecimento_id
-	            AreaConhecimentoDAO areadao = new AreaConhecimentoDAO();
-	            l.setArea(areadao.buscar(rs.getInt("area_conhecimento_id")));
+	            l.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
 	            livros.add(l);
 	        }
 		} catch (SQLException e) {

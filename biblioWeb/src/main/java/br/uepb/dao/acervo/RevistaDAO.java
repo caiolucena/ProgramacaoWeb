@@ -12,7 +12,7 @@ import org.apache.log4j.LogManager;
 
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
-import br.uepb.model.acervo.Editora;
+import br.uepb.model.Editora;
 import br.uepb.model.acervo.Revista;
 
 public class RevistaDAO implements Item_Acervo<Revista>{

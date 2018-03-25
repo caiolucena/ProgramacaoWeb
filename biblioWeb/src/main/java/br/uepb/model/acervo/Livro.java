@@ -5,6 +5,7 @@ import java.util.Date;
 
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
+import br.uepb.model.Editora;
 
 public class Livro {
 	private long isbn;

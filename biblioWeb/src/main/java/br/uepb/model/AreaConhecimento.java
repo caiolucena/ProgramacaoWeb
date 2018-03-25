@@ -11,6 +11,13 @@ public class AreaConhecimento {
 		this.nome = nome;
 		this.tema = tema;
 	}
+	public AreaConhecimento(int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+	public AreaConhecimento () {
+		
+	}
 
 	public int getId() {
 		return id;
