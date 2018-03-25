@@ -81,7 +81,7 @@ public class CursoDAO {
 	}
 	
 	public ArrayList<Curso> searchCurso(Curso curso){
-		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like '%?%';";
+		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like '%?%'";
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);

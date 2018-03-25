@@ -122,6 +122,7 @@ public class AutorDAO {
 	
 	//TODO Acho que essa responsabilidade não é de autor
 	public ArrayList<Autor> buscarAutoresPorISBN(long isbn) {
+		
 		String sql = "select * from autor_has_livro inner join autor on autor_id=autor.id where livro_isbn=?";
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		try {

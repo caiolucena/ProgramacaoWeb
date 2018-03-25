@@ -95,7 +95,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		String sql = "select L.isbn as 'isbn', L.titulo as 'titulo', L.ano as 'ano', L.edicao as 'edicao', "
 				+ "L.num_pag as 'NumeroDePaginas', E.id as 'editora_id', E.nome as 'editora_nome', A.id as 'area_id', "
 				+ "A.nome as 'area_nome'  from livro as L inner join editora as E on L.editora_id = E.id "
-				+ "inner join area_conhecimento as A on A.id=L.area_conhecimento_id where L.titulo like '%Livro1%'";
+				+ "inner join area_conhecimento as A on A.id=L.area_conhecimento_id where L.titulo like '%?%'";
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
