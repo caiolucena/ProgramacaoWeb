@@ -23,7 +23,8 @@ public class AutorDAO {
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, autor.getNome());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na inserção",e);
 		}finally {
@@ -37,7 +38,7 @@ public class AutorDAO {
 	}
 	
 	public boolean removeAutor(Autor autor) {
-		String sql = "delete autor where id=?";
+		String sql = "delete from autor where id=?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,autor.getId());
@@ -59,7 +60,8 @@ public class AutorDAO {
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,autor.getNome());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na atualização",e);
 		}finally {
@@ -73,11 +75,11 @@ public class AutorDAO {
 	}
 	
 	public ArrayList<Autor> searchAutor(Autor autor) {
-		String sql = "select * from autor where nome=%?%";
+		String sql = "select * from autor where nome like ?";
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,autor.getNome());
+			stmt.setString(1,"%"+autor.getNome()+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Autor a = new Autor();

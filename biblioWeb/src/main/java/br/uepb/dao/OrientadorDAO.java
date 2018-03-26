@@ -24,7 +24,8 @@ public class OrientadorDAO {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, orientador.getNome());
 			stmt.setString(2, orientador.getFormacao());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na inserção",e);
 		}finally {
@@ -38,11 +39,12 @@ public class OrientadorDAO {
 	}
 	
 	public boolean removeAutor(Orientador orientador) {
-		String sql = "delete autor where id=?";
+		String sql = "delete from autor where id=?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,orientador.getId());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na remoção",e);
 		}finally {
@@ -61,7 +63,8 @@ public class OrientadorDAO {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,orientador.getNome());
 			stmt.setString(2, orientador.getFormacao());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na atualização",e);
 		}finally {
@@ -75,11 +78,11 @@ public class OrientadorDAO {
 	}
 	
 	public ArrayList<Orientador> searchAutor(Orientador orientador) {
-		String sql = "select * from orientador where nome=%?%";
+		String sql = "select * from orientador where nome like ?";
 		ArrayList<Orientador> orientadores = new ArrayList<Orientador>();
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,orientador.getNome());
+			stmt.setString(1,"%"+orientador.getNome()+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Orientador o = new Orientador(rs.getInt("id"),rs.getString("nome"),rs.getString("formacao"));

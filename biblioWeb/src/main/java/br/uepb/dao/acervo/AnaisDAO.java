@@ -1,5 +1,7 @@
 package br.uepb.dao.acervo;
 
+import java.util.ArrayList;
+
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.acervo.Anais;
 
@@ -20,11 +22,10 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		return false;
 	}
 
-	public Anais searchItemAcervo(Anais objeto) {
+	public ArrayList<Anais> searchItemAcervo(Anais objeto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 	
 

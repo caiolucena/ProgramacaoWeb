@@ -25,14 +25,19 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 	
 	public boolean createItemAcervo(Midias_Eletronicas midia) {
+		
 		String sql = "insert into midia(titulo,tipo,data_gravacao) values (?,?,?)";
 		try {
+			con = Conexao.iniciarConexao(); 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, midia.getTitulo());
 			stmt.setString(2,midia.getTipo().toString());
-			stmt.setDate(3,(Date)midia.getData_gravacao());
-			return stmt.execute();
-		} catch (SQLException e) {
+			stmt.setDate(3,new java.sql.Date(midia.getData_gravacao().getTime()));
+			stmt.execute();
+			return true;
+		}catch (SQLException e) {
+			logger.error("Erro na inserção",e);
+		} catch (Exception e) {
 			logger.error("Erro na inserção",e);
 		}finally {
 			try {
@@ -45,12 +50,16 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 
 	public boolean removeItemAcervo(Midias_Eletronicas midia) {
-		String sql = "delete midia where id=?";
+		String sql = "delete from midia where id=?";
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, midia.getId());
-			return stmt.execute();
+			stmt.execute();
+			return  true;
 		} catch (SQLException e) {
+			logger.error("Erro na remoção",e);
+		} catch (Exception e) {
 			logger.error("Erro na remoção",e);
 		}finally {
 			try {
@@ -63,14 +72,19 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 
 	public boolean updateItemAcervo(Midias_Eletronicas midia) {
-		String sql = "update into midia set titulo=?,tipo=?,data_gravacao=? where id=?";
+		String sql = "update midia set titulo=?,tipo=?,data_gravacao=? where id=?";
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, midia.getTitulo());
 			stmt.setString(2,midia.getTipo().toString());
-			stmt.setDate(3,(Date)midia.getData_gravacao());
-			return stmt.execute();
+			stmt.setDate(3,new java.sql.Date(midia.getData_gravacao().getTime()));
+			stmt.setInt(4, midia.getId());
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
+			logger.error("Erro na atualização",e);
+		} catch (Exception e) {
 			logger.error("Erro na atualização",e);
 		}finally {
 			try {
@@ -83,14 +97,16 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 
 	public ArrayList<Midias_Eletronicas> searchItemAcervo(Midias_Eletronicas midia) {
-		String sql = "select * from midia where titulo=%?%";
+		String sql = "select * from midia where titulo like ?";
 		ArrayList<Midias_Eletronicas> midias = new ArrayList<Midias_Eletronicas>();
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,midia.getTitulo());
+			stmt.setString(1,"%"+midia.getTitulo()+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Midias_Eletronicas m = new Midias_Eletronicas();
+	            m.setId(rs.getInt("id"));
 	            m.setTitulo(rs.getString("titulo"));
 	            if(rs.getString("tipo").equals(Tipo_Midia.CD)){
 	            	m.setTipo(Tipo_Midia.CD);
@@ -101,6 +117,8 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	            midias.add(m);
 	        }
 		} catch (SQLException e) {
+			logger.error("Erro na busca",e);
+		} catch (Exception e) {
 			logger.error("Erro na busca",e);
 		}finally {
 			try {
