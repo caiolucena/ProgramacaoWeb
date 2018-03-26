@@ -31,6 +31,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 		PreparedStatement stmt = null;
 		try	{
 			//	prepared	statement	para	inserção
+			con = Conexao.iniciarConexao();
 			stmt =	con.prepareStatement(sql);
 			//	seta	os	valores
 			stmt.setInt(1,revista.getId());
@@ -67,6 +68,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 				"WHERE id =?";
 		PreparedStatement stmt = null;
 	    try {
+	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setInt(1, revista.getId());
 	    	stmt.executeUpdate();
@@ -90,6 +92,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 				"WHERE id =?";
 		PreparedStatement stmt = null;
 	    try {
+	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 			stmt.setString(1,revista.getTitulo());
 			stmt.setInt(2,revista.getEditora().getId());
@@ -118,7 +121,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 		ArrayList <Revista> revistas = new ArrayList <Revista>();
 		ResultSet rs = null;
 		try{
-			
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("SELECT revista.id as 'id_revista', revista.titulo as 'titulo_revista', revista.data as 'data_revista'," + 
 					"revista.edicao as 'edicao_revista', revista.num_pag as 'pag_revista', editora.id as 'id_editora', editora.nome as 'nome_editora'" + 
 					"FROM revista INNER JOIN editora ON revista.editora_id = editora.id where revista.titulo like %?%;");
@@ -136,18 +139,20 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 				
 				revistas.add(revista);
 			}
-
-		return revistas;
 		
 		}catch (SQLException e) {
-			throw new RuntimeException (e);
+			logger.error("JornalDAO: erro ao fazer a busca",e);
+		} catch (Exception e) {
+			logger.error("JornalDAO: erro ao abrir conexão",e);
 		}finally {
 			try {
 				rs.close();
 				stmt.close();
-			}catch(SQLException ex){
-				ex.printStackTrace();
+				con.close();
+			}catch(SQLException e){
+				logger.error("JornalDAO: erro ao fechar a conexão",e);
 			}
 		}
+		return revistas;
 	}
 }

@@ -24,23 +24,23 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	}
 
 	public boolean createItemAcervo(Jornal jornal) {		
-		String	sql	=	"insert	into	jornal"	+
-				"(id,titulo,data,edicao)"	+
-				"values	(?,?,?,?)";
+		String	sql	=	"insert	into jornal"	+
+				"(titulo,data,edicao)"	+ //tirei o id daqui, porque é autoincremento
+				"values	(?,?,?)";
 		PreparedStatement stmt = null;
 		try	{
 			//	prepared	statement	para	inserção
+			con = Conexao.iniciarConexao();
 			stmt =	con.prepareStatement(sql);
 			//	seta	os	valores
-			stmt.setInt(1,jornal.getId());
-			stmt.setString(2,jornal.getTitulo());
-			stmt.setDate(3, (Date) jornal.getData());
-			stmt.setString(4,jornal.getEdicao());
+			//stmt.setInt(1,jornal.getId()); tirei o id daqui, porque é autoincremento
+			stmt.setString(1,jornal.getTitulo());
+			stmt.setDate(2, (Date) jornal.getData());
+			stmt.setInt(3,jornal.getEdicao());
 			//	executa
 			stmt.execute();
 		}catch	(SQLException	e)	{
-			e.printStackTrace();
-			logger.error("JornalDAO: erro na inserção");
+			logger.error("JornalDAO: erro na inserção",e);
 			return false;
 		}finally {
 			try {
@@ -48,8 +48,8 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 				con.close();
 				logger.info("JornalDAO: Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
+			}catch(SQLException e){
+				logger.error("JornalDAO: erro ao fechar conexão",e);
 				return false;
 			}
 		}
@@ -63,18 +63,20 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 				"WHERE id =?";
 		PreparedStatement stmt = null;
 	    try {
+	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setInt(1, jornal.getId());
 	    	stmt.executeUpdate();
-	    }catch(SQLException ex) {
-	    	ex.printStackTrace();
+	    }catch(SQLException e) {
+	    	logger.error("JornalDAO: erro ao fazer a remoção",e);
 	    }finally {
 			try {
 				stmt.close();
 				con.close();
+				logger.info("JornalDAO: Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
+			}catch(SQLException e){
+				logger.error("JornalDAO: erro ao fechar conexão",e);
 				return false;
 			}
 		}
@@ -86,20 +88,22 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 				"WHERE id =?";
 		PreparedStatement stmt = null;
 	    try {
+	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setString(1, jornal.getTitulo());
 	    	stmt.setDate(2, (Date) jornal.getData());
-	    	stmt.setString(3, jornal.getEdicao());
+	    	stmt.setInt(3, jornal.getEdicao());
 	    	stmt.executeUpdate();
-	    }catch(SQLException ex) {
-	    	ex.printStackTrace();
+	    }catch(SQLException e) {
+	    	logger.error("JornalDAO: erro ao fazer o update",e);
 	    }finally {
 			try {
 				stmt.close();
 				con.close();
+				logger.info("JornalDAO: Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
+			}catch(SQLException e){
+				logger.error("JornalDAO: erro ao fechar conexão",e);
 				return false;
 			}
 		}
@@ -111,10 +115,11 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		PreparedStatement stmt = null;
 		ArrayList <Jornal> jornais = new ArrayList <Jornal>();
 		ResultSet rs = null;
+		
 		try{
-			
-			stmt = con.prepareStatement("select * from jornal where id = ?");
-			stmt .setInt(1,jornal.getId());
+			con = Conexao.iniciarConexao();
+			stmt = con.prepareStatement("select * from jornal where titulo like ?");
+			stmt .setString(1,"%"+ jornal.getTitulo()+ "%");
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
@@ -122,22 +127,28 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 				jor.setId(rs.getInt("id"));
 				jor.setTitulo(rs.getString("titulo"));
 				jor.setData((Date)rs.getDate("data"));
-				jor.setEdicao(rs.getString("edicao"));
+				jor.setEdicao(rs.getInt("edicao"));
 				
 				jornais.add(jornal);
 			}
-
-		return jornais;
-		
+			
 		}catch (SQLException e) {
-			throw new RuntimeException (e);
+			logger.error("JornalDAO: erro ao fazer a busca",e);
+		} catch (Exception e) {
+			logger.error("JornalDAO: erro ao abrir a conexão",e);
+			e.printStackTrace();
 		}finally {
 			try {
-				rs.close();
-				stmt.close();
-			}catch(SQLException ex){
-				ex.printStackTrace();
+				
+//				rs.close();
+//				stmt.close();
+				con.close();
+				logger.info("JornalDAO: Conexão Fechada");
+				
+			}catch(SQLException e){
+				logger.error("JornalDAO: erro ao fechar conexão",e);
 			}
 		}
+		return jornais;
 	}
 }

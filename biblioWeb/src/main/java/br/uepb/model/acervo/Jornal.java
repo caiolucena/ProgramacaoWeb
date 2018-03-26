@@ -7,12 +7,12 @@ public class Jornal {
 
 	private String titulo;
 	private Date data;
-	private String edicao;
+	private int edicao;
 	
 	public Jornal() {
 		
 	}
-	public Jornal(String titulo, Date data, String edicao) {
+	public Jornal(String titulo, Date data, int edicao) {
 		this.titulo = titulo;
 		this.data = data;
 		this.edicao = edicao;
@@ -42,11 +42,11 @@ public class Jornal {
 		this.data = data;
 	}
 
-	public String getEdicao() {
+	public int getEdicao() {
 		return edicao;
 	}
 
-	public void setEdicao(String edicao) {
+	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
 	
