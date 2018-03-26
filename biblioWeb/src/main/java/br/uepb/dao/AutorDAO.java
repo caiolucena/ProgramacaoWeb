@@ -18,60 +18,74 @@ public class AutorDAO {
 		con = Conexao.iniciarConexao();
 	}
 	
+	@SuppressWarnings("finally")
 	public boolean createAutor(Autor autor){
 		String sql = "insert into autor(nome)values(?)";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, autor.getNome());
 			stmt.execute();
-			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na inserção",e);
+			logger.error("Erro na inserção ",e);
+			return false;
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na busca");
+				return true;
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na busca ",e);
+				return false;
 			}
 		}
-		return false;
+		
 	}
 	
+	@SuppressWarnings("finally")
 	public boolean removeAutor(Autor autor) {
 		String sql = "delete from autor where id=?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,autor.getId());
-			return stmt.execute();
+			stmt.execute();
+			
 		} catch (SQLException e) {
-			logger.error("Erro na remoção",e);
+			logger.error("Erro na remoção ",e);
+			return false;
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na remoção");
+				return true;
+				
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na remoção ",e);
+				return false;
 			}
 		}
-		return false;
+		
 	}
 	
+	@SuppressWarnings("finally")
 	public boolean updateAutor(Autor autor) {
 		String sql = "update autor set nome=? where id=?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,autor.getNome());
 			stmt.execute();
-			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na atualização",e);
+			logger.error("Erro na atualização ",e);
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na atualização");
+				return true;
+
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na atualização ",e);
+				return false;
 			}
 		}
-		return false;
 	}
 	
 	public ArrayList<Autor> searchAutor(Autor autor) {
@@ -88,12 +102,13 @@ public class AutorDAO {
 	            autores.add(a);
 	        }
 		} catch (SQLException e) {
-			logger.error("Erro na busca",e);
+			logger.error("Erro na busca ",e);
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexao fechada na busca");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada ",e);
 			}
 		}
 		return autores;
@@ -115,8 +130,9 @@ public class AutorDAO {
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexao fechada na busca");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na busca ",e);
 			}
 		}
 		return autor;
@@ -138,12 +154,13 @@ public class AutorDAO {
 	            autores.add(a);
 	        }
 		} catch (SQLException e) {
-			logger.error("Erro na busca",e);
+			logger.error("Erro na busca ",e);
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexao fechada na busca");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na busca ",e);
 			}
 		}
 		return autores;

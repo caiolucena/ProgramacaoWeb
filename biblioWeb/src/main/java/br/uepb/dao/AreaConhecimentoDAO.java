@@ -34,87 +34,47 @@ public class AreaConhecimentoDAO {
 			stmt.executeUpdate();
 			
 		} catch	(SQLException e)	{
-			e.printStackTrace();
-			logger.error("AreaConhecimentoDAO: erro durante a inserção");
+			logger.error("Erro durante a inserção "+e);
 			return false;
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("AreaConhecimentoDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na inserção");
 				return true;
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("AreaConhecimentoDAO: erro ao fechar a conexão");
+				logger.error("Erro ao fechar a conexão na inserção "+e);
 				return false;
 			}
 		}
 	}
-	
-	public AreaConhecimento searchAreaConhecimento(AreaConhecimento area) {
-		
-		AreaConhecimento retorno = null;
-		Tema tema = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
 
-		try {
-			stmt = con.prepareStatement("SELECT A.id AS id_area, A.nome AS nome_area, T.id AS id_tema, T.nome as nome_tema FROM area_conhecimento AS A INNER JOIN tema AS T ON A.tema_id = T.id WHERE A.nome LIKE '?'");
-			stmt.setString(1,area.getNome());
-			
-			rs = stmt.executeQuery();
-			
-			if(rs.next()) {
-				tema = new Tema(rs.getInt("id_tema"),rs.getString("nome_tema"));
-				retorno = new AreaConhecimento(rs.getInt("id_area"),rs.getString("nome_area"),tema);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("AreaConhecimentoDAO: erro durante a busca da Area do Conhecimento "+area.getNome());
-			return retorno;
-		} finally {
-			try {
-				stmt.close();
-				con.close();
-				logger.info("AreaConhecimentoDAO: Conexão Fechada");
-			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("AreaConhecimentoDAO: Erro ao fechar a conexão");	
-			}		
-		}
-		
-		return retorno;
-	}
-	
-	public ArrayList<AreaConhecimento> searchAllAreaConhecimento(){
+	public ArrayList<AreaConhecimento> searchAreaConhecimento(AreaConhecimento area){
 		ArrayList<AreaConhecimento> listaAreas = new ArrayList<AreaConhecimento>();
-		AreaConhecimento area = null;
-		Tema tema = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			stmt = con.prepareStatement("SELECT A.id AS id_area, A.nome AS nome_area, T.id AS id_tema, T.nome as nome_tema FROM area_conhecimento AS A INNER JOIN tema AS T ON A.tema_id = T.id");
-					
+			stmt = con.prepareStatement("SELECT A.id AS id_area, A.nome AS nome_area, T.id AS id_tema, T.nome as nome_tema FROM area_conhecimento AS A INNER JOIN tema AS T ON A.tema_id = T.id WHERE A.nome LIKE '%?%'");
+			stmt.setString(1, area.getNome());
+			
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				tema = new Tema(rs.getInt("id_tema"),rs.getString("nome_tema"));
-				area = new AreaConhecimento(rs.getInt("id_area"),rs.getString("nome_area"),tema);
-				listaAreas.add(area);
+				Tema tema = new Tema(rs.getInt("id_tema"),rs.getString("nome_tema"));
+				AreaConhecimento a = new AreaConhecimento(rs.getInt("id_area"),rs.getString("nome_area"),tema);
+				listaAreas.add(a);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("AreaConhecimentoDAO: erro durante a busca da lista das Areas do Conhecimento");
+			logger.error("Erro durante a busca "+e);
 			return null;
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("AreaConhecimentoDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na busca");
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("AreaConhecimentoDAO: Erro ao fechar a conexão");	
+				logger.error("Erro ao fechar a conexão na busca "+e);	
 			}		
 		}
 		
@@ -128,30 +88,53 @@ public class AreaConhecimentoDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("DELETE FROM area_conhecimento WHERE id =? AND nome = ?");
+			stmt = con.prepareStatement("DELETE FROM area_conhecimento WHERE id =?");
 			stmt.setInt(1, area.getId());
-			stmt.setString(2, area.getNome());
-			
+		
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("CidadeDAO: erro durante a remoção da Area de Conhecimento "+area.getNome());
+			logger.error("Erro durante a remoção "+e);
 			return false;
 			
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("CidadeDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na remoção");
 				return true;
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("CidadeDAO: Erro ao fechar a conexão");
+				logger.error("Erro ao fechar a conexão na remoção "+e);
 				return false;
 			}
 		}
-		
 	}
 	
+	@SuppressWarnings("finally")
+	public boolean updateAreaConhecimento(AreaConhecimento area) {
+		
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE tema SET nome = ? WHERE id = ?");
+			stmt.setString(1, area.getNome());
+			stmt.setInt(2, area.getId());
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			logger.error("Erro ao atualizar "+e);
+			return false;
+		} finally {
+			
+			try {
+				con.close();
+				stmt.close();
+				logger.info("Conexão fechada na atualização");
+				return true;
+			} catch (SQLException e) {
+				logger.error("Erro ao fechar conexão na atualização "+e);
+				return false;
+			}
+		}
+	}
 }

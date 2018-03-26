@@ -34,92 +34,52 @@ public class CidadeDAO {
 			stmt.executeUpdate();
 			
 		} catch	(SQLException e)	{
-			e.printStackTrace();
-			logger.error("CidadeDAO: erro durante a inserção");
+			logger.error("Erro durante a inserção "+e);
 			return false;
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("CidadeDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na inserção");
 				return true;
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("CidadeDAO: erro ao fechar a conexão");
+				logger.error("Erro ao fechar a conexão na inserção "+e);
 				return false;
 			}
 		}	
 	}
 	
-	public Cidade searchCidade(Cidade cidade) {
-		Cidade retorno = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		
-		try {
-			stmt = con.prepareStatement("SELECT * FROM cidade WHERE Nome = ?");
-			stmt.setString(1,cidade.getNome());
-			
-			rs = stmt.executeQuery();
-			
-			if(rs.next()) {
-			retorno = new Cidade(
-						rs.getInt("Id"),
-						rs.getInt("Codigo"),
-						rs.getString("Nome"),
-						rs.getString(""));
-			}
-			
-		} catch	(SQLException e)	{
-			e.printStackTrace();
-			logger.error("CidadeDAO: erro durante a busca por cidade");
-			return retorno;
-			
-		} finally {
-			try {
-				stmt.close();
-				con.close();
-				logger.info("CidadeDAO: Conexão Fechada");
-			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("CidadeDAO: Erro ao fechar a conexão");
-			}
-		}
-		
-		return retorno;	
-	}
-	
-	public ArrayList<Cidade> searchAllCidades() {
+	public ArrayList<Cidade> searchCidade(Cidade cidade) {
 		
 		ArrayList<Cidade> listaCidades = new ArrayList<Cidade>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			stmt = con.prepareStatement("SELECT * FROM cidades");
+			stmt = con.prepareStatement("SELECT * FROM cidades WHERE nome LIKE '%?%'");
+			stmt.setString(1, cidade.getNome());
+			
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				Cidade cidade = new Cidade(
+				Cidade c = new Cidade(
 						rs.getInt("Id"),
 						rs.getInt("Codigo"),
 						rs.getString("Nome"),
-						rs.getString(""));
-				listaCidades.add(cidade);
+						rs.getString("Uf"));
+				listaCidades.add(c);
 			}
 		
 		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("CidadeDAO: erro durante a busca por cidades");
+			logger.error("Erro durante a busca "+e);
 			return null;
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("CidadeDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na busca");
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("CidadeDAO: Erro ao fechar a conexão");
+				logger.error("Erro ao fechar a conexão na busca "+e);
 			}
 		}
 		
@@ -141,19 +101,17 @@ public class CidadeDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("CidadeDAO: erro durante a remoção da cidade "+cidade.getNome());
+			logger.error("Erro durante a remoção da cidade "+e);
 			return false;
 			
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("CidadeDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na remoção");
 				return true;
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("CidadeDAO: Erro ao fechar a conexão");
+				logger.error("Erro ao fechar a conexão na remoção "+e);
 				return false;
 			}
 		}		
@@ -174,19 +132,17 @@ public class CidadeDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("CidadeDAO: erro durante a atualização da cidade "+cidade.getNome());
+			logger.error("Erro durante a atualização da cidade "+e);
 			return false;
 			
 		} finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("CidadeDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na atualização");
 				return true;
 			}catch(SQLException e){
-				e.printStackTrace();
-				logger.error("CidadeDAO: Erro ao fechar a conexão");
+				logger.error("Erro ao fechar a conexão na atualização "+e);
 				return false;
 			}
 		}		

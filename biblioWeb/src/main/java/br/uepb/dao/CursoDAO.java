@@ -35,8 +35,9 @@ public class CursoDAO {
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na inserção");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na inserção",e);
 			}
 		}
 		return false;
@@ -53,8 +54,9 @@ public class CursoDAO {
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na remoção");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na remoção",e);
 			}
 		}
 		return false;
@@ -70,12 +72,13 @@ public class CursoDAO {
 			stmt.setInt(4, curso.getId());
 			return stmt.execute();
 		} catch (SQLException e) {
-			logger.error("Erro na atualização",e);
+			logger.error("Erro na atualização ",e);
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na atualização");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na atualização",e);
 			}
 		}
 		return false;
@@ -105,8 +108,9 @@ public class CursoDAO {
 		}finally {
 			try {
 				con.close();
+				logger.info("Conexão fechada na busca");
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("Conexao não pode ser fechada na busca ",e);
 			}
 		}
 		return cursos;

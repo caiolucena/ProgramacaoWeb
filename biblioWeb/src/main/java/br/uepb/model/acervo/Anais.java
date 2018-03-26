@@ -1,24 +1,28 @@
 package br.uepb.model.acervo;
 
-import java.util.ArrayList;
 import java.util.Date;
 
+import br.uepb.model.Autor;
+import br.uepb.model.Cidade;
 import br.uepb.model.enums.Tipo_Anal;
 public class Anais {
-
+	
+	private int id;
 	private Tipo_Anal tipo;
 	private String titulo;
-	private ArrayList<String> autores;
+	private Autor autor;
 	private String nome_congresso;
 	private Date anoPublicacao;
-	private String local;
+	private Cidade local;
+	
 	public Anais() {
 		
 	}
-	public Anais(Tipo_Anal tipo, String titulo, ArrayList<String> autores, String nome_congresso, Date anoPublicacao, String local){
+	public Anais(int id,Tipo_Anal tipo, String titulo, Autor autor, String nome_congresso, Date anoPublicacao, Cidade local){
+		this.id = id;
 		this.tipo = tipo;
 		this.titulo = titulo;
-		this.autores = autores;
+		this.autor = autor;
 		this.nome_congresso = nome_congresso;
 		this.anoPublicacao = anoPublicacao;
 		this.local = local;
@@ -35,11 +39,11 @@ public class Anais {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public ArrayList<String> getAutores() {
-		return autores;
+	public Autor getAutor() {
+		return autor;
 	}
-	public void setAutores(ArrayList<String> autores) {
-		this.autores = autores;
+	public void setAutor(Autor autor) {
+		this.autor = autor;
 	}
 	public String getNome_congresso() {
 		return nome_congresso;
@@ -53,11 +57,17 @@ public class Anais {
 	public void setAnoPublicacao(Date anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
-	public String getLocal() {
+	public Cidade getLocal() {
 		return local;
 	}
-	public void setLocal(String local) {
+	public void setLocal(Cidade local) {
 		this.local = local;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

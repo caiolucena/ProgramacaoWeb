@@ -31,16 +31,16 @@ public class TemaDAO {
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			logger.error("TemaDAO: Erro na inserção "+e);
+			logger.error("Erro na inserção "+e);
 			return false;
 		} finally{
 			try {
 				con.close();
 				stmt.close();
-				logger.info("TemaDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na inserção");
 				return true;
 			} catch (SQLException e) {
-				logger.error("TemaDAO: Erro ao fechar a conexão "+e);
+				logger.error("Erro ao fechar a conexão na inserção "+e);
 				return false;
 			}
 		}
@@ -58,16 +58,16 @@ public class TemaDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			logger.error("TemaDAO: Erro na remoção"+e);
+			logger.error("Erro na remoção"+e);
 			return false;
 		} finally {
 			try {
 				con.close();
 				stmt.close();
-				logger.info("TemaDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na remoção");
 				return true;
 			} catch (SQLException e) {
-				logger.error("TemaDAO: Erro ao fechar a conexão "+e);
+				logger.error("Erro ao fechar a conexão na remoção "+e);
 				return false;
 			}
 		}
@@ -87,16 +87,16 @@ public class TemaDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			logger.error("TemaDAO: Erro na atualização "+e);
+			logger.error("Erro na atualização "+e);
 			return false;
 		} finally {
 			try {
 				con.close();
 				stmt.close();
-				logger.info("TemaDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na atualização");
 				return true;
 			} catch (SQLException e) {
-				logger.error("TemaDAO: Erro ao fechar a conexão "+e);
+				logger.error("Erro ao fechar a conexão na atualização "+e);
 				return false;
 			}
 		}	
@@ -119,15 +119,15 @@ public class TemaDAO {
 			}
 			
 		} catch (SQLException e) {
-			logger.error("TemaDAO: Erro na busca "+e);
+			logger.error("Erro na busca "+e);
 		} finally {
 			try {
 				con.close();
 				stmt.close();
-				logger.info("TemaDAO: Conexão Fechada");
+				logger.info("Conexão Fechada na busca");
 				
 			} catch (SQLException e) {
-				logger.error("TemaDAO: Erro ao fechar a conexão "+e);
+				logger.error("Erro ao fechar a conexão na busca "+e);
 			}
 		}
 		
