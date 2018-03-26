@@ -1,25 +1,41 @@
 package br.uepb.model.acervo;
 
-import java.util.ArrayList;
+import java.util.Date;
 
+import br.uepb.model.Autor;
+import br.uepb.model.Cidade;
+import br.uepb.model.Orientador;
 import br.uepb.model.enums.Tipo_Tcc;
 
-public class Tcc {
+public class Tcc { 
 
+	private int id;
 	private String titulo;
-	private ArrayList<String> autores;
-	private String orientadores;
+	private Autor autor;
+	private Orientador orientador;
 	private Tipo_Tcc tipo;
-	private int ano_defesa;
-	private String local;
+	private Date ano_defesa;
+	private Cidade cidade;
 	
-	public Tcc(String titulo, ArrayList<String> autores, String orientadores, Tipo_Tcc tipo, int ano_defesa, String local) {
+	public Tcc() {
+		
+	}
+	
+	public Tcc(int id, String titulo, Autor autor, Orientador orientador, Tipo_Tcc tipo, Date ano_defesa, Cidade cidade) {
+		this.id = id;
 		this.titulo = titulo;
-		this.autores = autores;
-		this.orientadores = orientadores;
+		this.autor = autor;
+		this.orientador = orientador;
 		this.tipo = tipo;
 		this.ano_defesa = ano_defesa;
-		this.local = local;
+		this.cidade = cidade;
+	}
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -27,17 +43,17 @@ public class Tcc {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public ArrayList<String> getAutores() {
-		return autores;
+	public Autor getAutor() {
+		return autor;
 	}
-	public void setAutores(ArrayList<String> autores) {
-		this.autores = autores;
+	public void setAutor(Autor autor) {
+		this.autor = autor;
 	}
-	public String getOrientadores() {
-		return orientadores;
+	public Orientador getOrientador() {
+		return orientador;
 	}
-	public void setOrientadores(String orientadores) {
-		this.orientadores = orientadores;
+	public void setOrientador(Orientador orientador) {
+		this.orientador = orientador;
 	}
 	public Tipo_Tcc getTipo() {
 		return tipo;
@@ -45,16 +61,17 @@ public class Tcc {
 	public void setTipo(Tipo_Tcc tipo) {
 		this.tipo = tipo;
 	}
-	public int getAno_defesa() {
+	public Date getAno_defesa() {
 		return ano_defesa;
 	}
-	public void setAno_defesa(int ano_defesa) {
+	public void setAno_defesa(Date ano_defesa) {
 		this.ano_defesa = ano_defesa;
 	}
-	public String getLocal() {
-		return local;
+	public Cidade getCidade() {
+		return cidade;
 	}
-	public void setLocal(String local) {
-		this.local = local;
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
+	
 }

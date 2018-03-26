@@ -82,10 +82,7 @@ public class OrientadorDAO {
 			stmt.setString(1,orientador.getNome());
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-	            Orientador o = new Orientador();
-	            o.setId(rs.getInt("id"));
-	            o.setNome(rs.getString("nome"));
-	            o.setFormacao(rs.getString("formacao"));
+	            Orientador o = new Orientador(rs.getInt("id"),rs.getString("nome"),rs.getString("formacao"));
 	            orientadores.add(o);
 	        }
 		} catch (SQLException e) {
