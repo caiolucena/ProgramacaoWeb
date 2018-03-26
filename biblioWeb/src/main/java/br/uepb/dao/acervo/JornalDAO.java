@@ -59,16 +59,17 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	public boolean removeItemAcervo(Jornal jornal) {
 		// TODO Auto-generated method stub
-		String	sql	= "DELETE FROM jornal" +
-				"WHERE id =?";
+		String	sql	= "DELETE FROM jornal WHERE id =?";
+				
 		PreparedStatement stmt = null;
 	    try {
 	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setInt(1, jornal.getId());
-	    	stmt.execute();
+	    	logger.info("Remoção feita com sucesso");
 	    }catch(SQLException e) {
 	    	logger.error("JornalDAO: erro ao fazer a remoção",e);
+	    	return false;
 	    }finally {
 			try {
 				stmt.close();
@@ -140,8 +141,8 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		}finally {
 			try {
 				
-//				rs.close();
-//				stmt.close();
+				rs.close();
+				stmt.close();
 				con.close();
 				logger.info("JornalDAO: Conexão Fechada");
 				

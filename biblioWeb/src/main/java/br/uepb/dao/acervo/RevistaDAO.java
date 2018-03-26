@@ -44,17 +44,16 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 			stmt.execute();
 		}catch	(SQLException	e)	{
 			e.printStackTrace();
-			logger.error("RevistaDAO: erro na inserção");
+			logger.error("Erro na inserção");
 			return false;
 		}finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("RevistaDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
-				logger.error("RevistaDAO: erro no fechamento da Conexão");
+			}catch(SQLException e){
+				logger.error("Erro no fechamento da Conexão",e);
 				return false;
 			}
 		}
@@ -72,15 +71,16 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setInt(1, revista.getId());
 	    	stmt.executeUpdate();
-	    }catch(SQLException ex) {
-	    	ex.printStackTrace();
+	    }catch(SQLException e) {
+	    	logger.error("Erro na remoção",e);
 	    }finally {
 			try {
 				stmt.close();
 				con.close();
+				logger.info("Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
+			}catch(SQLException e){
+				logger.error("Erro no fechamento da Conexão",e);
 				return false;
 			}
 		}
@@ -88,8 +88,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Revista revista) {
-		String	sql	=	"UPDATE revista set titulo=?,editora=?,data=?,edica=?,num_pag=?"	+
-				"WHERE id =?";
+		String	sql	=	"UPDATE revista set titulo=?,editora=?,data=?,edica=?,num_pag=? WHERE id =?";
 		PreparedStatement stmt = null;
 	    try {
 	    	con = Conexao.iniciarConexao();
@@ -100,15 +99,16 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 			stmt.setString(4,revista.getEdicao());
 			stmt.setInt(5, revista.getNum_pag());
 	    	stmt.executeUpdate();
-	    }catch(SQLException ex) {
-	    	ex.printStackTrace();
+	    }catch(SQLException e) {
+	    	logger.error("Erro ao fazer o update",e);
+	    	return false;
 	    }finally {
 			try {
 				stmt.close();
 				con.close();
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
+			}catch(SQLException e){
+				logger.error("Erro ao fechar a conexão",e);
 				return false;
 			}
 		}
@@ -141,16 +141,16 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 			}
 		
 		}catch (SQLException e) {
-			logger.error("JornalDAO: erro ao fazer a busca",e);
+			logger.error("Erro ao fazer a busca",e);
 		} catch (Exception e) {
-			logger.error("JornalDAO: erro ao abrir conexão",e);
+			logger.error("Erro ao abrir conexão",e);
 		}finally {
 			try {
 				rs.close();
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
-				logger.error("JornalDAO: erro ao fechar a conexão",e);
+				logger.error("Erro ao fechar a conexão",e);
 			}
 		}
 		return revistas;
