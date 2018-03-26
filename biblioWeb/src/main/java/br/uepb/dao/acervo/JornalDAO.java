@@ -59,14 +59,14 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	public boolean removeItemAcervo(Jornal jornal) {
 		// TODO Auto-generated method stub
-		String	sql	=	"DELETE FROM jornal"	+
+		String	sql	= "DELETE FROM jornal" +
 				"WHERE id =?";
 		PreparedStatement stmt = null;
 	    try {
 	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setInt(1, jornal.getId());
-	    	stmt.executeUpdate();
+	    	stmt.execute();
 	    }catch(SQLException e) {
 	    	logger.error("JornalDAO: erro ao fazer a remoção",e);
 	    }finally {

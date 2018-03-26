@@ -47,5 +47,18 @@ public class TesteCaseJornal {
 		assertEquals(teste.get(0).getTitulo(),jornalDao.searchItemAcervo(jornal).get(0).getTitulo());
 		
 	}
+	
+	@Test
+	public void testRemoveJornal() {
+		jornal.setTitulo("Jornal da Paraiba");
+		jornal.setEdicao(5);
+		Date data = new Date(System.currentTimeMillis());
+		jornal.setData(data);
+		jornal.setId(1);
+		teste.add(jornal);
+		
+		
+		assertTrue(jornalDao.removeItemAcervo(jornal));
+	}
 
 }
