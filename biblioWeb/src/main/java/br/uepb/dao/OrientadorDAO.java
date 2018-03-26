@@ -27,12 +27,12 @@ public class OrientadorDAO {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na inserção",e);
+			logger.error("OrientadorDAO: Erro na inserção",e);
 		}finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("OrientadorDAO: Conexao não pode ser fechada",e);
 			}
 		}
 		return false;
@@ -46,12 +46,12 @@ public class OrientadorDAO {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na remoção",e);
+			logger.error("OrientadorDAO: Erro na remoção",e);
 		}finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("OrientadorDAO: Conexao não pode ser fechada",e);
 			}
 		}
 		return false;
@@ -66,12 +66,12 @@ public class OrientadorDAO {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na atualização",e);
+			logger.error("OrientadorDAO: Erro na atualização",e);
 		}finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("OrientadorDAO: Conexao não pode ser fechada",e);
 			}
 		}
 		return false;
@@ -89,12 +89,12 @@ public class OrientadorDAO {
 	            orientadores.add(o);
 	        }
 		} catch (SQLException e) {
-			logger.error("Erro na busca",e);
+			logger.error("OrientadorDAO: Erro na busca",e);
 		}finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada",e);
+				logger.error("OrientadorDAO: Conexao não pode ser fechada",e);
 			}
 		}
 		return orientadores;
