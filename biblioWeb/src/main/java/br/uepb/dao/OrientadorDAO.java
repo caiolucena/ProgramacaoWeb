@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import br.uepb.model.Orientador;
 
 public class OrientadorDAO {
@@ -20,25 +19,14 @@ public class OrientadorDAO {
 	}
 	
 	public boolean createOrientador(Orientador orientador){
-		String sql = "insert into orientador(nome,formacao)values(?,?)";
+		String sql = "insert into autor(nome,formacao)values(?,?)";
 		try {
-			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, orientador.getNome());
 			stmt.setString(2, orientador.getFormacao());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
-				logger.error("Erro na inserção - Parametros null",e);
-				return false;
-			}
-			logger.error("Erro na inserção",e);
-		} catch (Exception e) {
-			if(e.getClass().equals(new java.lang.NullPointerException().getClass())){
-				logger.error("Erro na inserção - Parametros null",e);
-				return false;
-			}
 			logger.error("Erro na inserção",e);
 		}finally {
 			try {
@@ -51,18 +39,15 @@ public class OrientadorDAO {
 		return false;
 	}
 	
-	public boolean removeOrientador(Orientador orientador) {
-		String sql = "delete from orientador where id=?";
+	public boolean removeAutor(Orientador orientador) {
+		String sql = "delete from autor where id=?";
 		try {
-			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,orientador.getId());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na remoção",e);
-		} catch (Exception e) {
-			logger.error("Erro naremoção",e);
 		}finally {
 			try {
 				con.close();
@@ -74,19 +59,15 @@ public class OrientadorDAO {
 		return false;
 	}
 	
-	public boolean updateOrientador(Orientador orientador) {
-		String sql = "update orientador set nome=?, formacao=? where id=?";
+	public boolean updateAutor(Orientador orientador) {
+		String sql = "update autor set nome=?, formacao=? where id=?";
 		try {
-			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,orientador.getNome());
 			stmt.setString(2, orientador.getFormacao());
-			stmt.setInt(3, orientador.getId());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na atualização",e);
-		} catch (Exception e) {
 			logger.error("Erro na atualização",e);
 		}finally {
 			try {
@@ -99,11 +80,10 @@ public class OrientadorDAO {
 		return false;
 	}
 	
-	public ArrayList<Orientador> searchOrientador(Orientador orientador) {
+	public ArrayList<Orientador> searchAutor(Orientador orientador) {
 		String sql = "select * from orientador where nome like ?";
 		ArrayList<Orientador> orientadores = new ArrayList<Orientador>();
 		try {
-			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,"%"+orientador.getNome()+"%");
 			ResultSet rs = stmt.executeQuery();
@@ -112,8 +92,6 @@ public class OrientadorDAO {
 	            orientadores.add(o);
 	        }
 		} catch (SQLException e) {
-			logger.error("Erro na busca",e);
-		} catch (Exception e) {
 			logger.error("Erro na busca",e);
 		}finally {
 			try {

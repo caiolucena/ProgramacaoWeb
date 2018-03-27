@@ -29,10 +29,6 @@ public class TesteCaseMidia {
 		Date data = new Date(System.currentTimeMillis());
 		midia.setData_gravacao(data);		
 		assertTrue(midiaDao.createItemAcervo(midia));
-		
-		midia = new Midias_Eletronicas();
-		assertFalse(midiaDao.createItemAcervo(midia));
-		
 		ArrayList<Midias_Eletronicas> lista = new ArrayList<Midias_Eletronicas>();
 		lista = midiaDao.searchItemAcervo(midia);
 		for(Midias_Eletronicas m:lista){

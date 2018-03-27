@@ -36,16 +36,8 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 			stmt.execute();
 			return true;
 		}catch (SQLException e) {
-			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
-				logger.error("Erro na inserção - Parametros null",e);
-				return false;
-			}
 			logger.error("Erro na inserção",e);
 		} catch (Exception e) {
-			if(e.getClass().equals(new java.lang.NullPointerException().getClass())){
-				logger.error("Erro na inserção - Parametros null",e);
-				return false;
-			}
 			logger.error("Erro na inserção",e);
 		}finally {
 			try {
