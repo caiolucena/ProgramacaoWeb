@@ -28,6 +28,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	public boolean createItemAcervo(Livro livro) {
 		String sql = "insert into livro(isbn,titulo,editora_id,ano,edicao,num_pag,area_conhecimento_id) values (?,?,?,?,?,?,?)";
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1, livro.getIsbn());
 			stmt.setString(2,livro.getTitulo());
@@ -36,9 +37,20 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			stmt.setInt(5,livro.getEdicao());
 			stmt.setInt(6,livro.getNumero_paginas());
 			stmt.setInt(7, livro.getArea().getId());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na inserção",e);
+			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
+				logger.error("Erro na inserção - Parametros null",e);
+			}else{
+				logger.error("Erro na inserção",e);
+			}
+		} catch (Exception e) {
+			if(e.getClass().equals(new java.lang.NullPointerException().getClass())){
+				logger.error("Erro na inserção - Parametros null",e);
+			}else{
+				logger.error("Erro na inserção",e);
+			}
 		}finally {
 			try {
 				con.close();
@@ -52,11 +64,14 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	public boolean removeItemAcervo(Livro livro) {
 		String sql = "delete from livro where isbn=?";
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,livro.getIsbn());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
+			logger.error("Erro na remoção",e);
+		} catch (Exception e) {
 			logger.error("Erro na remoção",e);
 		}finally {
 			try {
@@ -71,6 +86,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	public boolean updateItemAcervo(Livro livro) {
 		String sql = "update livro set titulo=?,editora_id=?,ano=?,edicao=?,num_pag=?,area_conhecimento_id=? where isbn=?";
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,livro.getTitulo());
 			stmt.setInt(2,livro.getEditora().getId());
@@ -79,9 +95,20 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			stmt.setInt(5,livro.getNumero_paginas());
 			stmt.setInt(6, livro.getArea().getId());
 			stmt.setLong(7, livro.getIsbn());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
-			logger.error("Erro na atualização",e);
+			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
+				logger.error("Erro na atualização - Parametros null",e);
+			}else{
+				logger.error("Erro na atualização",e);
+			}
+		} catch (Exception e) {
+			if(e.getClass().equals(new java.lang.NullPointerException().getClass())){
+				logger.error("Erro na atualização - Parametros null",e);
+			}else{
+				logger.error("Erro na atualização",e);
+			}
 		}finally {
 			try {
 				con.close();

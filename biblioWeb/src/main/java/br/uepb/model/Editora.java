@@ -2,9 +2,12 @@ package br.uepb.model;
 
 public class Editora {
 	
-	int id;
-	String nome;
+	private int id;
+	private String nome;
 	
+	public Editora() {
+
+	}
 	public Editora(int id, String nome) {
 		this.id = id;
 		this.nome = nome;

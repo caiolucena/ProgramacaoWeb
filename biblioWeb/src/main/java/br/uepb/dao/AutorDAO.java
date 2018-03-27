@@ -46,11 +46,11 @@ public class AutorDAO {
 		finally {
 			try {
 				con.close();
-				logger.info("Conexão fechada na busca");
+				logger.info("Conexão fechada na inserção");
 				//return true;//Complicado esse return aqui, porque se inserir mas na hora de fechar a conexao der falha vai retorna false e a interpretação de que não foi inserido
 				//E quando acontece uma exceção ba inserção o método return true pois consegue fechar a conexão, mas deveria retorna false pois não inseriu.
 			} catch (SQLException e) {
-				logger.error("Conexao não pode ser fechada na busca ",e);
+				logger.error("Conexao não pode ser fechada na inserção ",e);
 				//return false;
 			}
 		}
@@ -64,23 +64,20 @@ public class AutorDAO {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,autor.getId());
-			stmt.execute();
-			
+			stmt.execute();			
 		} catch (SQLException e) {
 			logger.error("Erro na remoção ",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na remoção ",e);
 		}finally {
 			try {
 				con.close();
-				logger.info("Conexão fechada na remoção");
-				return true;
-				
+				logger.info("Conexão fechada na remoção");			
 			} catch (SQLException e) {
 				logger.error("Conexao não pode ser fechada na remoção ",e);
-				return false;
 			}
 		}
-		
+		return false;
 	}
 	
 	@SuppressWarnings("finally")
@@ -95,10 +92,8 @@ public class AutorDAO {
 			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na atualização ",e);
-			return false;
 		} catch (Exception e) {
 			logger.error("Erro na atualização ",e);
-			return false;
 		}finally {
 			try {
 				con.close();
@@ -110,6 +105,7 @@ public class AutorDAO {
 				//return false;
 			}
 		}
+		return false;
 	}
 	
 	public ArrayList<Autor> searchAutor(Autor autor) {//busca varios autores pelo nome
