@@ -12,7 +12,10 @@ import org.apache.log4j.Logger;
 
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
+import br.uepb.model.Autor;
+import br.uepb.model.Cidade;
 import br.uepb.model.acervo.Anais;
+import br.uepb.model.enums.Tipo_Anal;
 
 public class AnaisDAO implements Item_Acervo<Anais>{
 	
@@ -27,14 +30,26 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	public boolean createItemAcervo(Anais anal) {
 		
 		PreparedStatement stmt = null;
+		PreparedStatement stmt2 = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO anal (tipo, titulo, congresso, ano_pub, cidade_id) VALUES (?,?,?,?,?)");
-			stmt.setString(1, anal.getTipo().toString());
-			stmt.setString(2, anal.getTitulo());
-			stmt.setString(3,anal.getNome_congresso());
-			stmt.setDate(4, (Date) anal.getAnoPublicacao());
-			stmt.setInt(5, anal.getLocal().getId());
+			stmt = con.prepareStatement("INSERT INTO anal (id,tipo,titulo,congresso,ano_pub,cidade_id) VALUES(?,?,?,?,?,?)");
+	
+			
+			stmt.setInt(1, anal.getId());
+			stmt.setString(2, anal.getTipo().toString());
+			stmt.setString(3, anal.getTitulo());
+			stmt.setString(4,anal.getNome_congresso());
+			stmt.setDate(5,(Date) anal.getAnoPublicacao());
+			stmt.setInt(6, anal.getLocal().getId());
+			
+			stmt.executeUpdate();
+			
+			stmt2 = con.prepareStatement("INSERT INTO anal_has_autor(anal_id, autor_id) VALUES(?,?)");
+			stmt2.setInt(7, anal.getId());
+			stmt2.setInt(8, anal.getAutor().getId());
+			
+			stmt2.executeUpdate();
 			
 		} catch (SQLException e) {
 			logger.error("Erro na inserção",e);
@@ -43,6 +58,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			try {
 				con.close();
 				stmt.close();
+				stmt2.close();
 				logger.info("Conexão fechada na inserção");
 				return true;
 			} catch (SQLException e) {
@@ -55,20 +71,28 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Anais anal) {
 		PreparedStatement stmt = null;
+		PreparedStatement stmt2 = null;
 		
 		try {
-			stmt = con.prepareStatement("DELETE FROM anal WHERE id=?");
+			stmt = con.prepareStatement("DELETE FROM anal_has_autor WHERE anal_id = ? AND autor_id = ? ");
 			stmt.setInt(1, anal.getId());
+			stmt.setInt(2,anal.getAutor().getId());
 			
 			stmt.executeUpdate();
 			
+			stmt2 = con.prepareStatement("DELETE FROM anal WHERE id=?");
+			stmt2.setInt(1, anal.getId());
+			
+			stmt2.executeUpdate();
+			
 		} catch (SQLException e) {
-			logger.error("Erro na remoção");
+			logger.error("Erro na remoção",e);
 			return false;
 		} finally {
 			try {
 				con.close();
 				stmt.close();
+				stmt2.close();
 				logger.info("Conexão fechada na remoção");
 				return true;
 			} catch (SQLException e) {
@@ -108,7 +132,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		}
 		
 	}
-	//TODO implementar o stmt e implementar o resto do método search
+
 	public ArrayList<Anais> searchItemAcervo(Anais anal) {
 		
 		ArrayList<Anais> listaAnais = new ArrayList<Anais>();
@@ -116,16 +140,38 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		ResultSet rs = null;
 		
 		try {
-			stmt = con.prepareStatement("SELECT A.id AS id_anal, A.tipo AS tipo_anal, A.titulo AS titulo_anal, A.congresso AS congresso_anal, A.ano_pub AS ano_pub_anal, "
-					+ "C.Id AS id_cidade, C.Codigo AS codigo_cidade, C.Nome AS nome_cidade, C.Uf AS uf_cidade, "
+			stmt = con.prepareStatement("select A.id as id_anal, A.tipo as tipo_anal, A.titulo as titulo_anal, A.congresso as congresso_anal, A.ano_pub as ano_anal,"
+					+ "C.Id as id_cidade, C.Codigo as codigo_cidade, C.Nome as nome_cidade, C.Uf as uf_cidade, "
 					+ "AU.id as id_autor, AU.nome as nome_autor "
-					+ "FROM anal as A "
-					+ "INNER JOIN cidade AS C ON A.cidade_id = C.Id "
-					+ "INNER JOIN autor AS AU ON A.id = anal_has_autor.anal_id AND AU.id = anal_has_autor.autor_id");
+					+ "from anal as A "
+					+ "inner join anal_has_autor on A.id = anal_has_autor.anal_id "
+					+ "inner join autor as AU on AU.id = anal_has_autor.autor_id "
+					+ "inner join cidade as C on A.cidade_id = C.Id "
+					+ "where titulo like '%?%' ");
+			stmt.setString(1,anal.getTitulo());
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Cidade local = new Cidade(rs.getInt("id_cidade"), rs.getInt("codigo_cidade"), rs.getString("nome_cidade"), rs.getString("uf_cidade"));
+				Autor autor = new Autor(rs.getInt("id_autor"), rs.getString("nome_autor"));
+				Anais a = new Anais(rs.getInt("id_anal"), Enum.valueOf(Tipo_Anal.class, rs.getString("tipo_anal")), rs.getString("titulo_anal"), autor, rs.getString("congresso_anal"), rs.getDate("ano_pub"), local);
+				listaAnais.add(a);
+			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		return null;
+			logger.error("Erro na busca",e);
+		} finally {
+			try {
+				con.close();
+				stmt.close();
+				logger.info("Busca realizada com sucesso");
+			} catch (SQLException e) {
+				logger.error("Erro ao fechar conexão",e);
+			}
+			
+		}
+		
+		return listaAnais;
 	}
 
 	
