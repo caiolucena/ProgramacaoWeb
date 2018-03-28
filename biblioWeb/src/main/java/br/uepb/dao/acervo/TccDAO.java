@@ -45,18 +45,16 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			stmt.executeUpdate();			
 			
 		} catch	(SQLException	e)	{
-			e.printStackTrace();
-			logger.error("TccDAO: erro na inserção");
+			logger.error("Erro na inserção",e);
 			return false;
 		}finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("TccDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
-				logger.error("TccDAO: erro no fechamento da Conexão");
+			}catch(SQLException e){
+				logger.error("Erro no fechamento da Conexão",e);
 				return false;
 			}
 		}
@@ -75,18 +73,16 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			stmt.executeUpdate();
 			
 		}  catch (SQLException	e)	{
-			e.printStackTrace();
-			logger.error("TccDAO: erro na remoção");
+			logger.error("Erro na remoção",e);
 			return false;
 		}finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("TccDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
-				logger.error("TccDAO: erro no fechamento da Conexão");
+			}catch(SQLException e){
+				logger.error("Erro no fechamento da Conexão",e);
 				return false;
 			}
 		}
@@ -108,18 +104,16 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			stmt.executeUpdate();
 			
 		}  catch (SQLException	e)	{
-			e.printStackTrace();
-			logger.error("TccDAO: erro na atualização");
+			logger.error("Erro na atualização",e);
 			return false;
 		}finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("TccDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
-			}catch(SQLException ex){
-				ex.printStackTrace();
-				logger.error("TccDAO: erro no fechamento da Conexão");
+			}catch(SQLException e){
+				logger.error("Erro no fechamento da Conexão",e);
 				return false;
 			}
 		}
@@ -154,16 +148,14 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			
 			
 		} catch (SQLException	e)	{
-			e.printStackTrace();
-			logger.error("TccDAO: erro na busca");
+			logger.error("Erro na busca",e);
 		}finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("TccDAO: Conexão Fechada");
-			}catch(SQLException ex){
-				ex.printStackTrace();
-				logger.error("TccDAO: erro no fechamento da Conexão");
+				logger.info("Conexão Fechada");
+			}catch(SQLException e){
+				logger.error("Erro no fechamento da Conexão",e);
 			}
 		}
 		

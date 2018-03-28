@@ -23,6 +23,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		con = Conexao.iniciarConexao();
 	}
 
+	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Jornal jornal) {		
 		String	sql	=	"insert	into jornal"	+
 				"(titulo,data,edicao)"	+ //tirei o id daqui, porque é autoincremento
@@ -40,16 +41,16 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 			//	executa
 			stmt.execute();
 		}catch	(SQLException	e)	{
-			logger.error("JornalDAO: erro na inserção",e);
+			logger.error("Erro na inserção",e);
 			return false;
 		}finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("JornalDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
 			}catch(SQLException e){
-				logger.error("JornalDAO: erro ao fechar conexão",e);
+				logger.error("Erro ao fechar conexão",e);
 				return false;
 			}
 		}
@@ -57,6 +58,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		
 	}
 
+	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Jornal jornal) {
 		// TODO Auto-generated method stub
 		String	sql	= "DELETE FROM jornal WHERE id =?";
@@ -68,16 +70,16 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	    	stmt.setInt(1, jornal.getId());
 	    	logger.info("Remoção feita com sucesso");
 	    }catch(SQLException e) {
-	    	logger.error("JornalDAO: erro ao fazer a remoção",e);
+	    	logger.error("Erro ao fazer a remoção",e);
 	    	return false;
 	    }finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("JornalDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
 			}catch(SQLException e){
-				logger.error("JornalDAO: erro ao fechar conexão",e);
+				logger.error("Erro ao fechar conexão",e);
 				return false;
 			}
 		}
@@ -96,15 +98,16 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	    	stmt.setInt(3, jornal.getEdicao());
 	    	stmt.executeUpdate();
 	    }catch(SQLException e) {
-	    	logger.error("JornalDAO: erro ao fazer o update",e);
+	    	logger.error("Erro ao fazer o update",e);
+	    	return false;
 	    }finally {
 			try {
 				stmt.close();
 				con.close();
-				logger.info("JornalDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				return true;
 			}catch(SQLException e){
-				logger.error("JornalDAO: erro ao fechar conexão",e);
+				logger.error("Erro ao fechar conexão",e);
 				return false;
 			}
 		}
@@ -134,20 +137,20 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 			}
 			
 		}catch (SQLException e) {
-			logger.error("JornalDAO: erro ao fazer a busca",e);
+			logger.error("Erro ao fazer a busca",e);
+			
 		} catch (Exception e) {
-			logger.error("JornalDAO: erro ao abrir a conexão",e);
-			e.printStackTrace();
+			logger.error("Erro ao abrir a conexão",e);
 		}finally {
 			try {
 				
 				rs.close();
 				stmt.close();
 				con.close();
-				logger.info("JornalDAO: Conexão Fechada");
+				logger.info("Conexão Fechada");
 				
 			}catch(SQLException e){
-				logger.error("JornalDAO: erro ao fechar conexão",e);
+				logger.error("Erro ao fechar conexão",e);
 			}
 		}
 		return jornais;
