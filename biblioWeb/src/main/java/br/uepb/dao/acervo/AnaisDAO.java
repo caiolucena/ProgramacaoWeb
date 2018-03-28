@@ -32,7 +32,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	}
 
 	/**
-	 * método para inserir um Anal de Congresso no banco de dados
+	 * Método para inserir um Anal de Congresso no banco de dados
 	 * @param anal
 	 * @throws SQLException
 	 * @return true or false
@@ -81,7 +81,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	}
 	
 	/**
-	 * método para remover um Anal de Congresso do banco de dados
+	 * Método para remover um Anal de Congresso do banco de dados
 	 * @param anal
 	 * @throws SQLException
 	 * @return true or false
