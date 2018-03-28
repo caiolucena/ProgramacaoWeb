@@ -15,9 +15,20 @@ public class AutorDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public AutorDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
+	
+	/**
+	 * Método para inserir Autor no banco de dados
+	 * @param autor
+	 * @throws SQLException
+	 * @return
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean createAutor(Autor autor){
@@ -57,6 +68,13 @@ public class AutorDAO {
 		
 	}
 	
+	/**
+	 * Método para remover Autor do banco de dados
+	 * @param autor
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean removeAutor(Autor autor) {
 		String sql = "delete from autor where id=?";
@@ -79,6 +97,13 @@ public class AutorDAO {
 		}
 		return false;
 	}
+	
+	/**
+	 * Método para atualizar Autor no banco de dados
+	 * @param autor
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean updateAutor(Autor autor) {
@@ -108,6 +133,13 @@ public class AutorDAO {
 		return false;
 	}
 	
+	/**
+	 * Método para pesquisar Autor no banco de dados
+	 * @param autor
+	 * @throws SQLException
+	 * @return ArrayList<Autor> autores
+	 */
+	
 	public ArrayList<Autor> searchAutor(Autor autor) {//busca varios autores pelo nome
 		String sql = "select * from autor where nome like ?";
 		ArrayList<Autor> autores = new ArrayList<Autor>();
@@ -136,6 +168,13 @@ public class AutorDAO {
 		}
 		return autores;
 	}
+	
+	/**
+	 * Método para pesquisar Autor no banco de dados
+	 * @param autor
+	 * @throws SQLException
+	 * @return autor
+	 */
 	
 	public Autor searchAutor(int id_autor) {//busca um unico autor pelo id
 		String sql = "select * from autor where id=?";

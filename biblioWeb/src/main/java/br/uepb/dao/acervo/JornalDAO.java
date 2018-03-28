@@ -18,10 +18,20 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(JornalDAO.class);
-	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public JornalDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
+	
+	/**
+	 * Método para inserir um Jornal no banco de dados
+	 * @param jornal
+	 * @throws SQLException
+	 * @return true or false
+	 */
 
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Jornal jornal) {		
@@ -58,6 +68,13 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		
 	}
 
+	/**
+	 * Método para remover um Jornal do banco de dados
+	 * @param jornal
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Jornal jornal) {
 		// TODO Auto-generated method stub
@@ -85,6 +102,13 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		}
 	}
 
+	/**
+	 * Método para atualizar um jornal no banco de dados
+	 * @param jornal
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Jornal jornal) {
 		String	sql	=	"UPDATE jornal set titulo =?,data=?,edicao=?"	+
@@ -113,7 +137,13 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		}
 
 	}
-
+	/**
+	 * Método para pesquisar Jornal no banco de dados
+	 * @param jornal
+	 * @throws SQLException
+	 * @return ArrayList <Jornal> jornais
+	 */
+	
 	public ArrayList<Jornal> searchItemAcervo(Jornal jornal) {
 
 		PreparedStatement stmt = null;

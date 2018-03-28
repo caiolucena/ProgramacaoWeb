@@ -16,9 +16,20 @@ public class EditoraDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(EditoraDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public EditoraDAO() throws Exception{
 		con = Conexao.iniciarConexao();		
 	}
+	
+	/**
+	 * Metodo para inserir Editora no banco de dados
+	 * @param editora
+	 * @throws SQLException
+	 * @return true or false
+ 	 */
 	
 	@SuppressWarnings("finally")
 	public boolean createEditora(Editora editora){
@@ -54,6 +65,13 @@ public class EditoraDAO {
 		return false;		
 	}
 	
+	/**
+	 * Método para remover Editora do banco de dados
+	 * @param editora
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean removeEditora(Editora editora) {
 		String sql = "delete from editora where id=?";
@@ -77,6 +95,13 @@ public class EditoraDAO {
 		}
 		return false;		
 	}
+	
+	/**
+	 * Método para atualizar Editora no banco de dados
+	 * @param editora
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	
 	public boolean updateEditora(Editora editora){
 		String sql = "update editora set nome=? where id=?;";
@@ -112,6 +137,13 @@ public class EditoraDAO {
 		return false;		
 	}
 	
+	/**
+	 * Método para pesquisar Editora no banco de dados
+	 * @param editora
+	 * @throws SQLException
+	 * @return ArrayList<Editora> editoras
+	 */
+	
 	public ArrayList<Editora> searchEditora(Editora editora) {//busca varias editoras pelo nome
 		String sql = "select * from editora where nome like ?";
 		ArrayList<Editora> editoras = new ArrayList<Editora>();
@@ -140,6 +172,13 @@ public class EditoraDAO {
 		}
 		return editoras;
 	}
+	
+	/**
+	 * Método para pesquisar Editora no banco de dados
+	 * @param id_editora
+	 * @throws SLQException
+	 * @return editora
+	 */
 	
 	public Editora searchEditora(int id_editora) {//busca uma unica editora pelo id
 		String sql = "select * from editora where id=?;";

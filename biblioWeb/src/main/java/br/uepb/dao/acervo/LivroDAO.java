@@ -48,7 +48,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 				stmt.setLong(2,livro.getIsbn());
 				stmt.execute();
 			}
-			
+		
 			return true;
 		} catch (SQLException e) {
 			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
@@ -84,7 +84,6 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			}
 		
 			String sql = "delete from livro where isbn=?";
-		
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,livro.getIsbn());
 			stmt.execute();

@@ -17,9 +17,20 @@ public class AreaConhecimentoDAO {
 	private Connection con;
 	private static final Logger  logger = LogManager.getLogger(AreaConhecimentoDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public AreaConhecimentoDAO() throws Exception {
 		con = Conexao.iniciarConexao();
 	}
+	
+	/**
+	 * Método para inserir Area de Conhecimento no banco de dados
+	 * @param area
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean createAreaConhecimento(AreaConhecimento area) {
@@ -47,7 +58,14 @@ public class AreaConhecimentoDAO {
 			}
 		}
 	}
-
+    
+	/**
+	 * Método para pesquisar Area de Conhecimento no banco de dados
+	 * @param area
+	 * @throws SQLException
+	 * @return ArrayList<AreaConhecimento> listaAreas
+	 */
+	
 	public ArrayList<AreaConhecimento> searchAreaConhecimento(AreaConhecimento area){
 		ArrayList<AreaConhecimento> listaAreas = new ArrayList<AreaConhecimento>();
 		PreparedStatement stmt = null;
@@ -83,6 +101,13 @@ public class AreaConhecimentoDAO {
 		
 	}
 	
+	/**
+	 * Método para remover Area de Conhecimento do banco de dados
+	 * @param area
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean removeAreaConhecimento(AreaConhecimento area) {
 		
@@ -111,6 +136,13 @@ public class AreaConhecimentoDAO {
 			}
 		}
 	}
+	
+	/**
+	 * Método para atualizar Area de Conhecimento no banco de dados
+	 * @param area
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean updateAreaConhecimento(AreaConhecimento area) {
