@@ -22,10 +22,22 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(JornalDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
+	
 	public AnaisDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
 
+	/**
+	 * método para inserir um Anal de Congresso no banco de dados
+	 * @param anal
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Anais anal) {
 		
@@ -67,7 +79,14 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			}
 		}
 	}
-
+	
+	/**
+	 * método para remover um Anal de Congresso do banco de dados
+	 * @param anal
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Anais anal) {
 		PreparedStatement stmt = null;
@@ -101,6 +120,14 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			}
 		}
 	}
+	
+	/**
+	 * Método para atualizar um Anal de Congresso no banco de dados
+	 * @param anal
+	 * @throws SQLException
+	 * @return true or false
+	 * 
+	 */
 
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Anais anal) {
@@ -132,6 +159,13 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		}
 		
 	}
+	
+	/**
+	 * Método para pesquisar Anais de Congresso no banco de dados
+	 * @param anal
+	 * @throws SQLException
+	 * @return ArrayList<Anais> listaAnais
+	 */
 
 	public ArrayList<Anais> searchItemAcervo(Anais anal) {
 		
