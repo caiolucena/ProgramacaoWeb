@@ -46,25 +46,28 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 			//	seta	os	valores
 			//stmt.setInt(1,jornal.getId()); tirei o id daqui, porque é autoincremento
 			stmt.setString(1,jornal.getTitulo());
-			stmt.setDate(2, (Date) jornal.getData());
+			stmt.setDate(2, new java.sql.Date(jornal.getData().getTime()));
 			stmt.setInt(3,jornal.getEdicao());
 			//	executa
 			stmt.execute();
+			return true;
 		}catch	(SQLException	e)	{
 			logger.error("Erro na inserção",e);
-			return false;
+			
+		} catch (Exception e) {
+			logger.error("Erro na inserção",e);
 		}finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada");
-				return true;
+				
 			}catch(SQLException e){
 				logger.error("Erro ao fechar conexão",e);
-				return false;
+				
 			}
 		}
-
+		return false;
 		
 	}
 
@@ -77,7 +80,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Jornal jornal) {
-		// TODO Auto-generated method stub
+
 		String	sql	= "DELETE FROM jornal WHERE id =?";
 				
 		PreparedStatement stmt = null;
@@ -85,21 +88,25 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setInt(1, jornal.getId());
+	    	stmt.execute();
 	    	logger.info("Remoção feita com sucesso");
+	    	return true;
+	    	
 	    }catch(SQLException e) {
 	    	logger.error("Erro ao fazer a remoção",e);
-	    	return false;
-	    }finally {
+
+	    } catch (Exception e) {
+	    	logger.error("Erro ao fazer a remoção",e);
+		}finally {
 			try {
-				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada");
-				return true;
 			}catch(SQLException e){
 				logger.error("Erro ao fechar conexão",e);
-				return false;
 			}
 		}
+	    return false;
+		
 	}
 
 	/**

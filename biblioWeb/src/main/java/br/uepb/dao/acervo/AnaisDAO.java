@@ -45,39 +45,41 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		PreparedStatement stmt2 = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO anal (id,tipo,titulo,congresso,ano_pub,cidade_id) VALUES(?,?,?,?,?,?)");
+			
+			con = Conexao.iniciarConexao();
+			stmt = con.prepareStatement("INSERT INTO anal (tipo,titulo,congresso,ano_pub,cidade_id) VALUES(?,?,?,?,?)");
 	
 			
-			stmt.setInt(1, anal.getId());
-			stmt.setString(2, anal.getTipo().toString());
-			stmt.setString(3, anal.getTitulo());
-			stmt.setString(4,anal.getNome_congresso());
-			stmt.setDate(5,(Date) anal.getAnoPublicacao());
-			stmt.setInt(6, anal.getLocal().getId());
+			stmt.setString(1, anal.getTipo().toString());
+			stmt.setString(2, anal.getTitulo());
+			stmt.setString(3,anal.getNome_congresso());
+			stmt.setDate(4,new java.sql.Date(anal.getAnoPublicacao().getTime()));
+			stmt.setInt(5, anal.getLocal().getId());
 			
 			stmt.executeUpdate();
 			
 			stmt2 = con.prepareStatement("INSERT INTO anal_has_autor(anal_id, autor_id) VALUES(?,?)");
-			stmt2.setInt(7, anal.getId());
-			stmt2.setInt(8, anal.getAutor().getId());
+			stmt2.setInt(1, anal.getId());
+			stmt2.setInt(2, anal.getAutor().getId());
 			
 			stmt2.executeUpdate();
 			
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na inserção",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na inserção",e);
 		} finally {
 			try {
 				con.close();
 				stmt.close();
 				stmt2.close();
 				logger.info("Conexão fechada na inserção");
-				return true;
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar a conexão na inserção",e);
-				return false;
 			}
 		}
+		return false;
 	}
 	
 	/**
@@ -93,6 +95,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		PreparedStatement stmt2 = null;
 		
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("DELETE FROM anal_has_autor WHERE anal_id = ? AND autor_id = ? ");
 			stmt.setInt(1, anal.getId());
 			stmt.setInt(2,anal.getAutor().getId());
@@ -106,19 +109,19 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			
 		} catch (SQLException e) {
 			logger.error("Erro na remoção",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na remoção",e);
 		} finally {
 			try {
 				con.close();
 				stmt.close();
 				stmt2.close();
 				logger.info("Conexão fechada na remoção");
-				return true;
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar a conexão da remoção",e);
-				return false;
 			}
 		}
+		return false;
 	}
 	
 	/**
@@ -134,6 +137,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		PreparedStatement stmt = null;
 		
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("UPDATE anal SET tipo=?, titulo = ?, congresso=?,ano_pub =? WHERE id = ?");
 			stmt.setString(1, anal.getTipo().toString());
 			stmt.setString(2, anal.getTitulo());
@@ -142,21 +146,21 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			stmt.setInt(5, anal.getId());
 			
 			stmt.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro ao realizar a atualização",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro ao realizar a atualização",e);
 		} finally {
 			try {
 				con.close();
 				stmt.close();
 				logger.info("Conexão fechada na atualização");
-				return true;
 			} catch (SQLException e) {
 				logger.info("Erro ao fechar a conexão na atualização",e);
-				return false;
 			}
 		}
+		return false;
 		
 	}
 	
@@ -174,6 +178,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 		ResultSet rs = null;
 		
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("select A.id as id_anal, A.tipo as tipo_anal, A.titulo as titulo_anal, A.congresso as congresso_anal, A.ano_pub as ano_anal,"
 					+ "C.Id as id_cidade, C.Codigo as codigo_cidade, C.Nome as nome_cidade, C.Uf as uf_cidade, "
 					+ "AU.id as id_autor, AU.nome as nome_autor "
@@ -193,6 +198,8 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			}
 			
 		} catch (SQLException e) {
+			logger.error("Erro na busca",e);
+		} catch (Exception e) {
 			logger.error("Erro na busca",e);
 		} finally {
 			try {

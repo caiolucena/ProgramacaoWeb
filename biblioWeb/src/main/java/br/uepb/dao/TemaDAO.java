@@ -42,20 +42,22 @@ public class TemaDAO {
 			stmt.setString(1, tema.getNome());
 			stmt.setInt(2,tema.getArea().getId());
 			stmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na inserção "+e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na inserção "+e);
 		} finally{
 			try {
 				con.close();
 				stmt.close();
 				logger.info("Conexão Fechada na inserção");
-				return true;
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar a conexão na inserção "+e);
-				return false;
 			}
 		}
+		return false;
+
 	}
 	
 	/**
@@ -75,21 +77,22 @@ public class TemaDAO {
 			stmt.setInt(1, tema.getId());
 			
 			stmt.executeUpdate();
+			return true;
 			
 		} catch (SQLException e) {
 			logger.error("Erro na remoção"+e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na remoção"+e);
 		} finally {
 			try {
 				con.close();
 				stmt.close();
 				logger.info("Conexão Fechada na remoção");
-				return true;
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar a conexão na remoção "+e);
-				return false;
 			}
 		}
+		return false;
 			
 	}
 	
@@ -111,21 +114,21 @@ public class TemaDAO {
 			stmt.setInt(2, tema.getId());
 			
 			stmt.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na atualização "+e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na atualização "+e);
 		} finally {
 			try {
 				con.close();
 				stmt.close();
 				logger.info("Conexão Fechada na atualização");
-				return true;
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar a conexão na atualização "+e);
-				return false;
 			}
-		}	
+		}
+		return false;	
 	}
 	
 	/**

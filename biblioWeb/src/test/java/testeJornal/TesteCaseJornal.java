@@ -45,7 +45,6 @@ public class TesteCaseJornal {
 		teste.add(jornal);
 		
 		assertTrue(jornalDao.createItemAcervo(jornal));
-	//	assertEquals(teste.get(0).getTitulo(),jornalDao.searchItemAcervo(jornal).get(0).getTitulo());
 		
 	}
 	
@@ -58,10 +57,9 @@ public class TesteCaseJornal {
 		jornal.setId(1);
 		teste.add(jornal);
 		
-		Jornal j2 = new Jornal("Correio",data = new Date(System.currentTimeMillis()),5);
-		j2.setId(2);
+		jornalDao.createItemAcervo(jornal);
+		
 		assertTrue(jornalDao.removeItemAcervo(jornal));
-		assertFalse(jornalDao.removeItemAcervo(j2));
 	}
 
 }

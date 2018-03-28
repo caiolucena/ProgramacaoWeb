@@ -82,7 +82,8 @@ public class AutorDAO {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,autor.getId());
-			stmt.execute();			
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na remoção ",e);
 		} catch (Exception e) {

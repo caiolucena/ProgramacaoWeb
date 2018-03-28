@@ -45,18 +45,19 @@ public class AreaConhecimentoDAO {
 			return true;
 		} catch	(SQLException e)	{
 			logger.error("Erro durante a inserção "+e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro durante a inserção "+e);
 		} finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada na inserção");
-				return true;
+			
 			}catch(SQLException e){
 				logger.error("Erro ao fechar a conexão na inserção "+e);
-				return false;
 			}
 		}
+		return false;
 	}
     
 	/**
@@ -119,22 +120,23 @@ public class AreaConhecimentoDAO {
 			stmt.setInt(1, area.getId());
 		
 			stmt.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro durante a remoção "+e);
-			return false;
 			
+		} catch (Exception e) {
+			logger.error("Erro durante a remoção "+e);
 		} finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada na remoção");
-				return true;
 			}catch(SQLException e){
 				logger.error("Erro ao fechar a conexão na remoção "+e);
-				return false;
 			}
 		}
+		return false;
+
 	}
 	
 	/**

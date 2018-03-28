@@ -123,6 +123,7 @@ public class TesteCaseLivro {
 		editoraDao.removeEditora(editora);		
 		autorDao.removeAutor(autor1);
 		autorDao.removeAutor(autor2);
+		
 	}
 
 }
