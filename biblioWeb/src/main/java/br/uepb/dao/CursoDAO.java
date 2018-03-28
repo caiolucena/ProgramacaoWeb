@@ -116,11 +116,7 @@ public class CursoDAO {
 	            Curso c = new Curso();
 	            c.setId(rs.getInt("curso_id"));
 	            c.setNome(rs.getString("curso_nome"));
-	            if(rs.getString("curso_tipo").equals(Tipo_Curso.graduacao)){
-	            	c.setTipo(Tipo_Curso.graduacao);
-	            }else if(rs.getString("curso_tipo").equals(Tipo_Curso.pos_graduacao)){
-	            	c.setTipo(Tipo_Curso.pos_graduacao);
-	            }
+	            c.setTipo(Enum.valueOf(Tipo_Curso.class,rs.getString("curso_tipo")));
 	            c.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
 	            cursos.add(c);
 	        }

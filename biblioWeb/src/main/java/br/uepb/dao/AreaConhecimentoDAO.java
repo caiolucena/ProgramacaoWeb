@@ -15,7 +15,7 @@ import br.uepb.model.Tema;
 public class AreaConhecimentoDAO {
 	
 	private Connection con;
-	private static final Logger  logger = LogManager.getLogger(CidadeDAO.class);
+	private static final Logger  logger = LogManager.getLogger(AreaConhecimentoDAO.class);
 	
 	public AreaConhecimentoDAO() throws Exception {
 		con = Conexao.iniciarConexao();
@@ -27,12 +27,11 @@ public class AreaConhecimentoDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("INSERT INTO area_conhecimento(nome,tema_id) VALUES(?,?)");
-			stmt.setString(1, area.getNome());
-			stmt.setInt(2, area.getTema().getId());
-			
+			con = Conexao.iniciarConexao();
+			stmt = con.prepareStatement("INSERT INTO area_conhecimento(nome) VALUES(?)");
+			stmt.setString(1, area.getNome());			
 			stmt.executeUpdate();
-			
+			return true;
 		} catch	(SQLException e)	{
 			logger.error("Erro durante a inserção "+e);
 			return false;
@@ -55,17 +54,19 @@ public class AreaConhecimentoDAO {
 		ResultSet rs = null;
 
 		try {
-			stmt = con.prepareStatement("SELECT A.id AS id_area, A.nome AS nome_area, T.id AS id_tema, T.nome as nome_tema FROM area_conhecimento AS A INNER JOIN tema AS T ON A.tema_id = T.id WHERE A.nome LIKE '%?%'");
-			stmt.setString(1, area.getNome());
-			
-			rs = stmt.executeQuery();
-			
+			con = Conexao.iniciarConexao();
+			//stmt = con.prepareStatement("SELECT A.id AS id_area, A.nome AS nome_area, T.id AS id_tema, T.nome as nome_tema FROM area_conhecimento AS A INNER JOIN tema AS T ON A.tema_id = T.id WHERE A.nome LIKE '%?%'");
+			stmt = con.prepareStatement("SELECT * from area_conhecimento where nome LIKE ?");
+			stmt.setString(1,"%"+area.getNome()+"%");			
+			rs = stmt.executeQuery();			
 			while(rs.next()) {
-				Tema tema = new Tema(rs.getInt("id_tema"),rs.getString("nome_tema"));
-				AreaConhecimento a = new AreaConhecimento(rs.getInt("id_area"),rs.getString("nome_area"),tema);
+				AreaConhecimento a = new AreaConhecimento(rs.getInt("id"),rs.getString("nome"));				
 				listaAreas.add(a);
 			}
 		} catch (SQLException e) {
+			logger.error("Erro durante a busca "+e);
+			return null;
+		} catch (Exception e) {
 			logger.error("Erro durante a busca "+e);
 			return null;
 		} finally {
@@ -88,6 +89,7 @@ public class AreaConhecimentoDAO {
 		PreparedStatement stmt = null;
 
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("DELETE FROM area_conhecimento WHERE id =?");
 			stmt.setInt(1, area.getId());
 		
@@ -116,11 +118,12 @@ public class AreaConhecimentoDAO {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("UPDATE tema SET nome = ? WHERE id = ?");
+			con = Conexao.iniciarConexao();
+			stmt = con.prepareStatement("UPDATE area_conhecimneto SET nome = ? WHERE id = ?");
 			stmt.setString(1, area.getNome());
-			stmt.setInt(2, area.getId());
-			
+			stmt.setInt(2, area.getId());			
 			stmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro ao atualizar "+e);
 			return false;

@@ -15,6 +15,7 @@ import br.uepb.dao.AutorDAO;
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.AreaConhecimento;
+import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 import br.uepb.model.acervo.Livro;
 
@@ -33,11 +34,21 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			stmt.setLong(1, livro.getIsbn());
 			stmt.setString(2,livro.getTitulo());
 			stmt.setInt(3,livro.getEditora().getId());
-			stmt.setDate(4,(Date) livro.getAno_publicacao());
+			stmt.setDate(4,new java.sql.Date(livro.getAno_publicacao().getTime()));
 			stmt.setInt(5,livro.getEdicao());
 			stmt.setInt(6,livro.getNumero_paginas());
 			stmt.setInt(7, livro.getArea().getId());
 			stmt.execute();
+			
+			//inserir em autor_has_livro os ids do array de autores do livro
+			for(Autor autor : livro.getAutores()){
+				sql = "insert into autor_has_livro(autor_id,livro_isbn)values(?,?);";
+				stmt = con.prepareStatement(sql);
+				stmt.setInt(1,autor.getId());
+				stmt.setLong(2,livro.getIsbn());
+				stmt.execute();
+			}
+			
 			return true;
 		} catch (SQLException e) {
 			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
@@ -62,9 +73,18 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	}
 
 	public boolean removeItemAcervo(Livro livro) {
-		String sql = "delete from livro where isbn=?";
 		try {
 			con = Conexao.iniciarConexao();
+			for(Autor a: livro.getAutores()) {
+				PreparedStatement stmt2 = null;
+				stmt2 = con.prepareStatement("delete from autor_has_livro where autor_id = ? and livro_isbn = ?");
+				stmt2.setInt(1, a.getId());
+				stmt2.setLong(2, livro.getIsbn());
+				stmt2.executeUpdate();
+			}
+		
+			String sql = "delete from livro where isbn=?";
+		
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,livro.getIsbn());
 			stmt.execute();
@@ -90,7 +110,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,livro.getTitulo());
 			stmt.setInt(2,livro.getEditora().getId());
-			stmt.setDate(3,(Date) livro.getAno_publicacao());
+			stmt.setDate(3,new java.sql.Date(livro.getAno_publicacao().getTime()));
 			stmt.setInt(4,livro.getEdicao());
 			stmt.setInt(5,livro.getNumero_paginas());
 			stmt.setInt(6, livro.getArea().getId());
@@ -126,6 +146,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 				+ "inner join area_conhecimento as A on A.id=L.area_conhecimento_id where L.titulo like ?";
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		try {
+			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,"%"+livro.getTitulo()+"%");
 			ResultSet rs = stmt.executeQuery();
@@ -139,8 +160,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 				try {
 					autordao = new AutorDAO();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.error("Expeciton em AutorDAO",e);
 				}
 	            l.setAutores(autordao.buscarAutoresPorISBN(l.getIsbn()));
 	            
@@ -148,12 +168,14 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            
 	            l.setAno_publicacao(rs.getDate("ano"));
 	            l.setEdicao(rs.getInt("edicao"));
-	            l.setNumero_paginas(rs.getInt("num_pag"));	            
+	            l.setNumero_paginas(rs.getInt("NumeroDePaginas"));	            
 	            l.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
 	            livros.add(l);
 	        }
 		} catch (SQLException e) {
 			logger.error("Erro na busca",e);
+		} catch (Exception e1) {
+			logger.error("Erro na busca",e1);
 		}finally {
 			try {
 				con.close();

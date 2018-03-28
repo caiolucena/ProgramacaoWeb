@@ -4,19 +4,13 @@ public class AreaConhecimento {
 	
 	private int id;
 	private String nome;
-	private Tema tema;
 	
-	public AreaConhecimento(int id, String nome, Tema tema) {
-		this.id = id;
-		this.nome = nome;
-		this.tema = tema;
+	public AreaConhecimento() {
+		
 	}
 	public AreaConhecimento(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
-	}
-	public AreaConhecimento () {
-		
 	}
 
 	public int getId() {
@@ -33,16 +27,6 @@ public class AreaConhecimento {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Tema getTema() {
-		return tema;
-	}
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
-	
-	
+	}	
 
 }

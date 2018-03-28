@@ -4,14 +4,15 @@ public class Tema {
 	
 	private int id;
 	private String nome;
+	private AreaConhecimento area;
 	
-	public Tema() {
+	public Tema(){
 		
 	}
-	
-	public Tema(int id, String nome) {
+	public Tema(int id, String nome,AreaConhecimento area) {
 		this.id = id;
 		this.nome = nome;
+		this.area = area;
 	}
 
 	public int getId() {
@@ -30,5 +31,11 @@ public class Tema {
 		this.nome = nome;
 	}
 	
+	public AreaConhecimento getArea() {
+		return area;
+	}
 
+	public void setArea(AreaConhecimento area) {
+		this.area = area;
+	}
 }

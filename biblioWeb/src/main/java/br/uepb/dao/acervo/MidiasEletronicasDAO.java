@@ -116,11 +116,7 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	            Midias_Eletronicas m = new Midias_Eletronicas();
 	            m.setId(rs.getInt("id"));
 	            m.setTitulo(rs.getString("titulo"));
-	            if(rs.getString("tipo").equals(Tipo_Midia.CD)){
-	            	m.setTipo(Tipo_Midia.CD);
-	            }else if(rs.getString("tipo").equals(Tipo_Midia.DVD)){
-	            	m.setTipo(Tipo_Midia.DVD);
-	            }
+	            m.setTipo(Enum.valueOf(Tipo_Midia.class,rs.getString("tipo")));
 	            m.setData_gravacao(rs.getDate("data_gravacao"));
 	            midias.add(m);
 	        }

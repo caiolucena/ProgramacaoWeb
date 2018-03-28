@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Tema;
 
 public class TemaDAO {
 	
 	private Connection con;
-	private static final Logger logger = LogManager.getLogger(OrientadorDAO.class);
+	private static final Logger logger = LogManager.getLogger(TemaDAO.class);
 	
 	public TemaDAO() throws Exception{
 		con = Conexao.iniciarConexao();
@@ -26,9 +27,10 @@ public class TemaDAO {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO tema(nome) VALUES (?)");
+			con = Conexao.iniciarConexao();
+			stmt = con.prepareStatement("INSERT INTO tema(nome,areaconhecimento_id) VALUES (?,?)");
 			stmt.setString(1, tema.getNome());
-			
+			stmt.setInt(2,tema.getArea().getId());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("Erro na inserção "+e);
@@ -52,6 +54,7 @@ public class TemaDAO {
 		PreparedStatement stmt = null;
 		
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("DELETE FROM tema WHERE id = ?");
 			stmt.setInt(1, tema.getId());
 			
@@ -80,6 +83,7 @@ public class TemaDAO {
 		PreparedStatement stmt = null;
 		
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("UPDATE tema SET nome = ? WHERE id = ?");
 			stmt.setString(1, tema.getNome());
 			stmt.setInt(2, tema.getId());
@@ -109,16 +113,18 @@ public class TemaDAO {
 		ResultSet rs = null;
 		
 		try {
-			stmt = con.prepareStatement("SELECT * FROM tema WHERE nome LIKE '%?%'");
-			stmt.setString(1, tema.getNome());
-			
+			con = Conexao.iniciarConexao();
+			stmt = con.prepareStatement("select t.id as 'tema_id', t.nome as 'tema_nome', a.id as 'area_id', a.nome as 'area_nome' from tema as t inner join area_conhecimento as a on t.areaconhecimento_id = a.id where t.nome like ?");
+			stmt.setString(1,"%"+tema.getNome()+"%");			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				Tema t = new Tema(rs.getInt("id"),rs.getString("nome"));
+				Tema t = new Tema(rs.getInt("tema_id"),rs.getString("tema_nome"),new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
 				listaTema.add(t);	
 			}
 			
 		} catch (SQLException e) {
+			logger.error("Erro na busca "+e);
+		} catch (Exception e) {
 			logger.error("Erro na busca "+e);
 		} finally {
 			try {
