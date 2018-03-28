@@ -18,9 +18,21 @@ public class CursoDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
+	
 	public CursoDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
+	
+	/**
+	 * Método para inserir Curso no banco de dados
+	 * @param curso
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	
 	public boolean createCurso(Curso curso){
 		String sql = "insert into curso(nome,tipo,area_conhecimento_id)values(?,?,?)";
@@ -55,6 +67,13 @@ public class CursoDAO {
 		return false;
 	}
 	
+	/**
+	 * Método para remover Curso do banco de dados
+	 * @param curso
+	 * @throws SQLException
+	 * @return true or false
+	 */
+	
 	public boolean removeCurso(Curso curso){
 		String sql = "delete from curso where id=?";
 		try {
@@ -77,6 +96,13 @@ public class CursoDAO {
 		}
 		return false;
 	}
+	
+	/**
+	 * Método para atualizar Curso no banco de dados
+	 * @param curso
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	
 	public boolean updateCurso(Curso curso){
 		String sql = "update curso set nome=?, tipo=?, area_conhecimento_id=? where id=?";
@@ -103,6 +129,13 @@ public class CursoDAO {
 		}
 		return false;
 	}
+	
+	/**
+	 * Método para pesquisar Curso no banco de dados
+	 * @param curso
+	 * @throws SQLException
+	 * @return ArrayList<Curso> cursos
+	 */
 	
 	public ArrayList<Curso> searchCurso(Curso curso){
 		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like ?";

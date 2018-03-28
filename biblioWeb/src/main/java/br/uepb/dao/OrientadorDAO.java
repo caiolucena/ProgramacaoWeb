@@ -15,10 +15,20 @@ public class OrientadorDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(OrientadorDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public OrientadorDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
 	
+	/**
+	 * Método para inserir Orientador no banco de dados
+	 * @param orientador
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public boolean createOrientador(Orientador orientador){
 		String sql = "insert into orientador(nome,formacao)values(?,?)";
 		try {
@@ -51,6 +61,12 @@ public class OrientadorDAO {
 		return false;
 	}
 	
+	/**
+	 * Método para remover Orientador do banco de dados
+	 * @param orientador
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public boolean removeOrientador(Orientador orientador) {
 		String sql = "delete from orientador where id=?";
 		try {
@@ -74,6 +90,12 @@ public class OrientadorDAO {
 		return false;
 	}
 	
+	/**
+	 * Método para atualizar Orientador no banco de dados
+	 * @param orientador
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public boolean updateOrientador(Orientador orientador) {
 		String sql = "update orientador set nome=?, formacao=? where id=?";
 		try {
@@ -99,6 +121,12 @@ public class OrientadorDAO {
 		return false;
 	}
 	
+	/**
+	 * Método para pesquisar Orientador no banco de dados
+	 * @param orientador
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public ArrayList<Orientador> searchOrientador(Orientador orientador) {
 		String sql = "select * from orientador where nome like ?";
 		ArrayList<Orientador> orientadores = new ArrayList<Orientador>();

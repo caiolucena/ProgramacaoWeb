@@ -16,10 +16,20 @@ public class TemaDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(OrientadorDAO.class);
 	
+	/**
+	 * Método construtor
+	 * @throws Exception
+	 */
 	public TemaDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
 	
+	/**
+	 * Método para inserir Tema no banco de dados
+	 * @param tema
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	@SuppressWarnings("finally")
 	public boolean createTema(Tema tema) {
 		
@@ -46,6 +56,12 @@ public class TemaDAO {
 		}
 	}
 	
+	/**
+	 * Método para remover Tema do banco de dados
+	 * @param tema
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	@SuppressWarnings("finally")
 	public boolean removeTema(Tema tema) {
 		
@@ -74,6 +90,12 @@ public class TemaDAO {
 			
 	}
 	
+	/**
+	 * Método para atualizar Tema no banco de dados
+	 * @param tema
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	@SuppressWarnings("finally")
 	public boolean updateTema(Tema tema) {
 		
@@ -102,6 +124,12 @@ public class TemaDAO {
 		}	
 	}
 	
+	/**
+	 * Método para pesquisar Tema no banco de dados
+	 * @param tema
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public ArrayList<Tema> searchTema(Tema tema){
 		
 		ArrayList<Tema> listaTema = new ArrayList<Tema>();

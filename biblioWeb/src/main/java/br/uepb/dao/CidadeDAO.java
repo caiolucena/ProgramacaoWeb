@@ -16,9 +16,20 @@ public class CidadeDAO {
 	private Connection con;
 	private static final Logger  logger = LogManager.getLogger(CidadeDAO.class);
 	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public CidadeDAO() throws Exception {
 		con = Conexao.iniciarConexao();
 	}
+	
+	/**
+	 * Método para inserir Cidade no banco de dados
+	 * @param cidade
+	 * @throws SQLException
+	 * @return true or false 
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean createCidade(Cidade cidade) {
@@ -48,6 +59,13 @@ public class CidadeDAO {
 			}
 		}	
 	}
+	
+	/**
+	 * Método para pesquisar Cidade no banco de dados
+	 * @param cidade
+	 * @throws SQLException
+	 * @return ArrayList<Cidade> listaCidades
+	 */
 	
 	public ArrayList<Cidade> searchCidade(Cidade cidade) {
 		
@@ -86,6 +104,12 @@ public class CidadeDAO {
 		return listaCidades;
 	}
 	
+	/**
+	 * Método para remover Cidade do banco de dados
+	 * @param cidade
+	 * @throws SQLException
+	 * @return true or false 
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean removeCidade(Cidade cidade) {
@@ -116,6 +140,13 @@ public class CidadeDAO {
 			}
 		}		
 	}
+	
+	/**
+	 * Método para atualizar Cidade no banco de dados
+	 * @param cidade
+	 * @throws SQLException
+	 * @return true or false 
+	 */
 	
 	@SuppressWarnings("finally")
 	public boolean updateCidade(Cidade cidade) {
