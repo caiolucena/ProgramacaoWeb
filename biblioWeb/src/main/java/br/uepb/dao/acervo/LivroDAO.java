@@ -15,6 +15,7 @@ import br.uepb.dao.AutorDAO;
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.AreaConhecimento;
+import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 import br.uepb.model.acervo.Livro;
 
@@ -38,6 +39,19 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			stmt.setInt(6,livro.getNumero_paginas());
 			stmt.setInt(7, livro.getArea().getId());
 			stmt.execute();
+			
+			/* Esse for de inserir os ids na tabela autor_has_livro tem que ser executado apos
+			 * o livro estar no banco de dados, para poder dar certo.
+			 * 
+			for (Autor a: livro.getAutores()) {
+				PreparedStatement stmt2 = null;
+				stmt2 = con.prepareStatement("insert into autor_has_livro(autor_id,livro_isbn) values(?,?)");
+				stmt2.setInt(1, a.getId());
+				stmt2.setLong(2, livro.getIsbn());
+				stmt2.executeUpdate();
+			}
+			*/
+			
 			return true;
 		} catch (SQLException e) {
 			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
@@ -65,6 +79,19 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		String sql = "delete from livro where isbn=?";
 		try {
 			con = Conexao.iniciarConexao();
+			
+			/*Esse for de deletar os ids na tabela autor_has_livro tem que ser executado antes
+			 * do livro ser deletado do banco de dados, para poder dar certo.
+			 * 
+			for(Autor a: livro.getAutores()) {
+				PreparedStatement stmt2 = null;
+				stmt2 = con.prepareStatement("delete from autor_has_livro where autor_id = ? and livro_isbn = ?");
+				stmt2.setInt(1, a.getId());
+				stmt2.setLong(2, livro.getIsbn());
+				stmt2.executeUpdate();
+			}
+			*/
+			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setLong(1,livro.getIsbn());
 			stmt.execute();
