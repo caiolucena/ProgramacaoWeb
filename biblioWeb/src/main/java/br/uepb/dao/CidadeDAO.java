@@ -28,6 +28,7 @@ public class CidadeDAO {
 	 * Método para inserir Cidade no banco de dados
 	 * @param cidade
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false 
 	 */
 	
@@ -64,6 +65,7 @@ public class CidadeDAO {
 	 * Método para pesquisar Cidade no banco de dados
 	 * @param cidade
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return ArrayList<Cidade> listaCidades
 	 */
 	
@@ -108,6 +110,7 @@ public class CidadeDAO {
 	 * Método para remover Cidade do banco de dados
 	 * @param cidade
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false 
 	 */
 	
@@ -145,6 +148,7 @@ public class CidadeDAO {
 	 * Método para atualizar Cidade no banco de dados
 	 * @param cidade
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false 
 	 */
 	

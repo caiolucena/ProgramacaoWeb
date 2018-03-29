@@ -22,11 +22,21 @@ public class TccDAO implements Item_Acervo<Tcc>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(RevistaDAO.class);
-	
+	/**
+	 * Método construtor
+	 * @throws Exception
+	 */
 	public TccDAO() throws Exception {
 		con = Conexao.iniciarConexao(); 
 	}
 
+	/**
+	 * Método para inserir Tcc no banco de dados
+	 * @param tcc
+	 * @throws SQLExcption
+	 * @throws JavaLangException
+	 * @return true or false
+	 */
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Tcc tcc) {
 
@@ -61,6 +71,13 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		
 	}
 
+	/**
+	 * Método para remover Tcc no banco de dados
+	 * @param tcc
+	 * @throws SQLExcption
+	 * @throws JavaLangException
+	 * @return true or false
+	 */
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Tcc tcc) {
 
@@ -89,6 +106,13 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		
 	}
 
+	/**
+	 * Método para atualizar Tcc no banco de dados
+	 * @param tcc
+	 * @throws SQLExcption
+	 * @throws JavaLangException
+	 * @return true or false
+	 */
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Tcc tcc) {
 
@@ -118,7 +142,13 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			}
 		}
 	}
-
+	/**
+	 * Método para pesquisar Tcc no banco de dados
+	 * @param tcc
+	 * @throws SQLExcption
+	 * @throws JavaLangException
+	 * @return ArrayList<Tcc> listaTcc
+	 */
 	public ArrayList<Tcc> searchItemAcervo(Tcc tcc) {
 		
 		ArrayList<Tcc> listaTcc = new ArrayList<Tcc>();		

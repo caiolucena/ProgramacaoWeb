@@ -27,6 +27,7 @@ public class OrientadorDAO {
 	 * Método para inserir Orientador no banco de dados
 	 * @param orientador
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	public boolean createOrientador(Orientador orientador){
@@ -65,6 +66,7 @@ public class OrientadorDAO {
 	 * Método para remover Orientador do banco de dados
 	 * @param orientador
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	public boolean removeOrientador(Orientador orientador) {
@@ -94,6 +96,7 @@ public class OrientadorDAO {
 	 * Método para atualizar Orientador no banco de dados
 	 * @param orientador
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	public boolean updateOrientador(Orientador orientador) {
@@ -125,6 +128,7 @@ public class OrientadorDAO {
 	 * Método para pesquisar Orientador no banco de dados
 	 * @param orientador
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	public ArrayList<Orientador> searchOrientador(Orientador orientador) {

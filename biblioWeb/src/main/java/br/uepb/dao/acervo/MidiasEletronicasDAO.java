@@ -20,10 +20,22 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(MidiasEletronicasDAO.class); 
 	
+	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public MidiasEletronicasDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
 	
+	/**
+	 * Método para inserir Midia Eletrônica no banco de dados
+	 * @param midia
+	 * @throws SQLException 
+	 * @throws JavaLangException 
+	 * @return true or false
+	 */
 	public boolean createItemAcervo(Midias_Eletronicas midia) {
 		
 		String sql = "insert into midia(titulo,tipo,data_gravacao) values (?,?,?)";
@@ -57,6 +69,13 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 		return false;
 	}
 
+	/**
+	 * Método para remover Midia Eletrônica do banco de dados
+	 * @param midia
+	 * @throws SQLException 
+	 * @throws JavaLangException 
+	 * @return true or false
+	 */
 	public boolean removeItemAcervo(Midias_Eletronicas midia) {
 		String sql = "delete from midia where id=?";
 		try {
@@ -78,7 +97,13 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 		}
 		return false;
 	}
-
+	/**
+	 * Método para atualizar Midia Eletrônica no banco de dados
+	 * @param midia
+	 * @throws SQLException 
+	 * @throws JavaLangException 
+	 * @return true or false
+	 */
 	public boolean updateItemAcervo(Midias_Eletronicas midia) {
 		String sql = "update midia set titulo=?,tipo=?,data_gravacao=? where id=?";
 		try {
@@ -103,7 +128,13 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 		}
 		return false;
 	}
-
+	/**
+	 * Método para pesquisar Midia Eletrônica no banco de dados
+	 * @param midia
+	 * @throws SQLException 
+	 * @throws JavaLangException 
+	 * @return ArrayList<Midias_Eletronicas> midias
+	 */
 	public ArrayList<Midias_Eletronicas> searchItemAcervo(Midias_Eletronicas midia) {
 		String sql = "select * from midia where titulo like ?";
 		ArrayList<Midias_Eletronicas> midias = new ArrayList<Midias_Eletronicas>();

@@ -31,6 +31,7 @@ public class CursoDAO {
 	 * Método para inserir Curso no banco de dados
 	 * @param curso
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -71,6 +72,7 @@ public class CursoDAO {
 	 * Método para remover Curso do banco de dados
 	 * @param curso
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -101,6 +103,7 @@ public class CursoDAO {
 	 * Método para atualizar Curso no banco de dados
 	 * @param curso
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -134,6 +137,7 @@ public class CursoDAO {
 	 * Método para pesquisar Curso no banco de dados
 	 * @param curso
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return ArrayList<Curso> cursos
 	 */
 	

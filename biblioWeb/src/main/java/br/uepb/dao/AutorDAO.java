@@ -27,6 +27,7 @@ public class AutorDAO {
 	 * Método para inserir Autor no banco de dados
 	 * @param autor
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return
 	 */
 	
@@ -72,6 +73,7 @@ public class AutorDAO {
 	 * Método para remover Autor do banco de dados
 	 * @param autor
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -103,6 +105,7 @@ public class AutorDAO {
 	 * Método para atualizar Autor no banco de dados
 	 * @param autor
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -138,6 +141,7 @@ public class AutorDAO {
 	 * Método para pesquisar Autor no banco de dados
 	 * @param autor
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return ArrayList<Autor> autores
 	 */
 	
@@ -174,6 +178,7 @@ public class AutorDAO {
 	 * Método para pesquisar Autor no banco de dados
 	 * @param autor
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return autor
 	 */
 	
@@ -204,7 +209,13 @@ public class AutorDAO {
 		return autor;
 	}
 	
-	//TODO Acho que essa responsabilidade não é de autor
+	/**
+	 * Método para pesquisar Autor pelo ISBN no banco de dados
+	 * @param isbn
+	 * @throws SQLException
+	 * @throws JavaLangException
+	 * @return ArrayList<Autor> autores
+	 */
 	public ArrayList<Autor> buscarAutoresPorISBN(long isbn) {
 		
 		String sql = "select * from autor_has_livro inner join autor on autor_id=autor.id where livro_isbn=?";

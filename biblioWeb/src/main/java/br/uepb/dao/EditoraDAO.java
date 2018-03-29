@@ -28,6 +28,7 @@ public class EditoraDAO {
 	 * Metodo para inserir Editora no banco de dados
 	 * @param editora
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
  	 */
 	
@@ -68,6 +69,7 @@ public class EditoraDAO {
 	 * Método para remover Editora do banco de dados
 	 * @param editora
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -99,6 +101,7 @@ public class EditoraDAO {
 	 * Método para atualizar Editora no banco de dados
 	 * @param editora
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -140,6 +143,7 @@ public class EditoraDAO {
 	 * Método para pesquisar Editora no banco de dados
 	 * @param editora
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return ArrayList<Editora> editoras
 	 */
 	
@@ -176,6 +180,7 @@ public class EditoraDAO {
 	 * Método para pesquisar Editora no banco de dados
 	 * @param id_editora
 	 * @throws SLQException
+	 * @throws JavaLangException
 	 * @return editora
 	 */
 	

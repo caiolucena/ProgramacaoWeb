@@ -19,10 +19,21 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(RevistaDAO.class);
-	
+	/**
+	 * Método Construtor
+	 * @throws Exception
+	 */
 	public RevistaDAO() throws Exception{
 		con = Conexao.iniciarConexao();
 	}
+	
+	/**
+	 * Método para inserir Revista no banco de dados
+	 * @param revista
+	 * @throws SQLException
+	 * @throws JavaLangException
+	 * @return true or false 
+	 */
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Revista revista) {		
 		String	sql	=	"insert	into	revista"	+
@@ -59,6 +70,14 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 
 		
 	}
+	
+	/**
+	 * Método para remover Revista do banco de dados
+	 * @param revista
+	 * @throws SQLException
+	 * @throws JavaLangException
+	 * @return true or false 
+	 */
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Revista revista) {
 		// TODO Auto-generated method stub
@@ -85,6 +104,13 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 		}
 	}
 
+	/**
+	 * Método para atualizar Revista no banco de dados
+	 * @param revista
+	 * @throws SQLException
+	 * @throws JavaLangException
+	 * @return true or false 
+	 */
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Revista revista) {
 		String	sql	=	"UPDATE revista set titulo=?,editora=?,data=?,edica=?,num_pag=? WHERE id =?";
@@ -114,6 +140,13 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 
 	}
 
+	/**
+	 * Método para pesquisar Revista no banco de dados
+	 * @param revista
+	 * @throws SQLException
+	 * @throws JavaLangException
+	 * @return ArrayList<Revista> revistas
+	 */
 	public ArrayList<Revista> searchItemAcervo(Revista revista) {
 
 		PreparedStatement stmt = null;

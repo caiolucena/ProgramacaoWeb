@@ -29,6 +29,7 @@ public class TemaDAO {
 	 * Método para inserir Tema no banco de dados
 	 * @param tema
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	@SuppressWarnings("finally")
@@ -64,6 +65,7 @@ public class TemaDAO {
 	 * Método para remover Tema do banco de dados
 	 * @param tema
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	@SuppressWarnings("finally")
@@ -100,6 +102,7 @@ public class TemaDAO {
 	 * Método para atualizar Tema no banco de dados
 	 * @param tema
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	@SuppressWarnings("finally")
@@ -135,6 +138,7 @@ public class TemaDAO {
 	 * Método para pesquisar Tema no banco de dados
 	 * @param tema
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	public ArrayList<Tema> searchTema(Tema tema){

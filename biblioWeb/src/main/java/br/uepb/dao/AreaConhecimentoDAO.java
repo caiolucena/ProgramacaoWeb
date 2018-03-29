@@ -29,6 +29,7 @@ public class AreaConhecimentoDAO {
 	 * Método para inserir Area de Conhecimento no banco de dados
 	 * @param area
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -64,6 +65,7 @@ public class AreaConhecimentoDAO {
 	 * Método para pesquisar Area de Conhecimento no banco de dados
 	 * @param area
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return ArrayList<AreaConhecimento> listaAreas
 	 */
 	
@@ -105,7 +107,8 @@ public class AreaConhecimentoDAO {
 	/**
 	 * Método para remover Area de Conhecimento do banco de dados
 	 * @param area
-	 * @throws SQLException
+	 * @throws SQLException,
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
@@ -143,6 +146,7 @@ public class AreaConhecimentoDAO {
 	 * Método para atualizar Area de Conhecimento no banco de dados
 	 * @param area
 	 * @throws SQLException
+	 * @throws JavaLangException
 	 * @return true or false
 	 */
 	
