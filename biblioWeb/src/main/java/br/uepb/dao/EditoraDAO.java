@@ -43,7 +43,6 @@ public class EditoraDAO {
 		} catch(SQLException e) {
 			if(e.getClass().equals(new com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException().getClass())){
 				logger.error("Erro na inserção - Parametros null",e);
-				return false;
 			}else{
 				logger.error("Erro na inserção ",e);
 			}		
