@@ -10,7 +10,7 @@ public class Revista {
 	private String titulo;
 	private Editora editora;
 	private Date data;
-	private String edicao;
+	private int edicao;
 	private int num_pag;
 	
 	public Revista() {
@@ -25,7 +25,7 @@ public class Revista {
 		this.id = id;
 	}
 
-	public Revista(String titulo, Editora editora, Date dataDePublicacao, String edicao, int numeroDePaginas) {
+	public Revista(String titulo, Editora editora, Date dataDePublicacao, int edicao, int numeroDePaginas) {
 		this.titulo = titulo ;
 		this.editora = editora;
 		this.data = dataDePublicacao;
@@ -57,11 +57,11 @@ public class Revista {
 		this.data = dataDePublicacao;
 	}
 
-	public String getEdicao() {
+	public int getEdicao() {
 		return edicao;
 	}
 
-	public void setEdicao(String edicao) {
+	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
 

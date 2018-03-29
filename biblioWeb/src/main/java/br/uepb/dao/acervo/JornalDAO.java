@@ -125,7 +125,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	    	con = Conexao.iniciarConexao();
 	    	stmt =	con.prepareStatement(sql);
 	    	stmt.setString(1, jornal.getTitulo());
-	    	stmt.setDate(2, (Date) jornal.getData());
+	    	stmt.setDate(2, new java.sql.Date(jornal.getData().getTime()));
 	    	stmt.setInt(3, jornal.getEdicao());
 	    	stmt.executeUpdate();
 	    }catch(SQLException e) {

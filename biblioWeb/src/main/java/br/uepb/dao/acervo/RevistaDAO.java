@@ -26,7 +26,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Revista revista) {		
 		String	sql	=	"insert	into	revista"	+
-				"(id,titulo,editora,data,edicao,num_pag)"	+
+				"(id,titulo,editora_id,data,edicao,num_pag)"	+
 				"values	(?,?,?,?,?,?)";
 		PreparedStatement stmt = null;
 		try	{
@@ -37,14 +37,13 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 			stmt.setInt(1,revista.getId());
 			stmt.setString(2,revista.getTitulo());
 			stmt.setInt(3,revista.getEditora().getId());
-			stmt.setDate(4, (Date) revista.getData());
-			stmt.setString(5,revista.getEdicao());
+			stmt.setDate(4, new java.sql.Date(revista.getData().getTime()));
+			stmt.setInt(5,revista.getEdicao());
 			stmt.setInt(6, revista.getNum_pag());
 			//	executa
 			stmt.execute();
 		}catch	(SQLException	e)	{
-			e.printStackTrace();
-			logger.error("Erro na inserção");
+			logger.error("Erro na inserção",e);
 			return false;
 		}finally {
 			try {
@@ -95,8 +94,8 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	    	stmt =	con.prepareStatement(sql);
 			stmt.setString(1,revista.getTitulo());
 			stmt.setInt(2,revista.getEditora().getId());
-			stmt.setDate(3, (Date) revista.getData());
-			stmt.setString(4,revista.getEdicao());
+			stmt.setDate(3, new java.sql.Date(revista.getData().getTime()));
+			stmt.setInt(4,revista.getEdicao());
 			stmt.setInt(5, revista.getNum_pag());
 	    	stmt.executeUpdate();
 	    }catch(SQLException e) {
@@ -134,7 +133,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 				rev.setEditora(new Editora(rs.getInt("id_editora"),rs.getString("nome_editora")));
 				rev.setTitulo(rs.getString("titulo"));
 				rev.setData((Date)rs.getDate("data"));
-				rev.setEdicao(rs.getString("edicao"));	
+				rev.setEdicao(rs.getInt("edicao"));	
 				rev.setNum_pag(rs.getInt("pag_revista"));
 				
 				revistas.add(revista);

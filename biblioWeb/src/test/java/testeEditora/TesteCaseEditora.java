@@ -27,7 +27,7 @@ public class TesteCaseEditora {
 	public void testCreateEditora() {
 		ed.setNome("Abril");
 		assertTrue(edDao.createEditora(ed));
-		
+		assertFalse(edDao.createEditora(new Editora()));
 	}
 
 	@Test
