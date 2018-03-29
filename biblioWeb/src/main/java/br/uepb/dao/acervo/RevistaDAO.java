@@ -62,8 +62,8 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Revista revista) {
 		// TODO Auto-generated method stub
-		String	sql	=	"DELETE FROM revista"	+
-				"WHERE id =?";
+		String	sql	=	"DELETE FROM revista WHERE id =?"; 
+				
 		PreparedStatement stmt = null;
 	    try {
 	    	con = Conexao.iniciarConexao();
@@ -122,9 +122,9 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 		try{
 			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("SELECT revista.id as 'id_revista', revista.titulo as 'titulo_revista', revista.data as 'data_revista'," + 
-					"revista.edicao as 'edicao_revista', revista.num_pag as 'pag_revista', editora.id as 'id_editora', editora.nome as 'nome_editora'" + 
-					"FROM revista INNER JOIN editora ON revista.editora_id = editora.id where revista.titulo like %?%;");
-			stmt .setString(1,revista.getTitulo());
+					" revista.edicao as 'edicao_revista', revista.num_pag as 'pag_revista', editora.id as 'id_editora', editora.nome as 'nome_editora'" + 
+					" FROM revista INNER JOIN editora ON revista.editora_id = editora.id where revista.titulo like ?;");
+			stmt .setString(1,"%"+revista.getTitulo()+"%");
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {

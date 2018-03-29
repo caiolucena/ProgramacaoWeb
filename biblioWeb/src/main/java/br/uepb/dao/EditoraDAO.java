@@ -179,13 +179,13 @@ public class EditoraDAO {
 	 * @return editora
 	 */
 	
-	public Editora searchEditora(int id_editora) {//busca uma unica editora pelo id
-		String sql = "select * from editora where id=?;";
+	public Editora searchEditora(String nome) {//busca uma unica editora pelo nome
+		String sql = "select * from editora where nome=?;";
 		Editora editora = new Editora();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setInt(1,id_editora);
+			stmt.setString(1,nome);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				editora.setId(rs.getInt("id"));

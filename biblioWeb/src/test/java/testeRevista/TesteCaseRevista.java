@@ -4,6 +4,7 @@ package testeRevista;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +21,7 @@ public class TesteCaseRevista {
 	RevistaDAO revDao;
 	Editora ed;
 	EditoraDAO edDao;
+	ArrayList <Revista> lista;
 	
 	@Before
 	public void setup() throws Exception {
@@ -27,6 +29,7 @@ public class TesteCaseRevista {
 		revDao = new RevistaDAO();
 		ed = new Editora();
 		edDao = new EditoraDAO();
+		lista = new ArrayList<Revista>();
 	}
 	
 	@Test
@@ -34,6 +37,8 @@ public class TesteCaseRevista {
 		ed.setNome("Editora Tec");
 		
 		edDao.createEditora(ed);
+		
+		ed = edDao.searchEditora(ed.getNome());
 		
 		rev.setTitulo("MasterClass");
 		rev.setNum_pag(355);
@@ -48,8 +53,18 @@ public class TesteCaseRevista {
 	}
 	@Test
 	public void testDelete() {
+		assertTrue(revDao.removeItemAcervo(rev));
+		assertTrue(edDao.removeEditora(ed));
+	}
+	
+	@Test
+	public void testBusca() {
 		
+		lista = revDao.searchItemAcervo(rev);
 		
+		for(Revista a:lista) {
+			revDao.removeItemAcervo(a);
+		}
 	}
 	
 }
