@@ -3,7 +3,6 @@ package br.uepb.model;
 import br.uepb.model.enums.Tipo_Curso;
 
 public class Curso {
-	
 	private int id;
 	private String nome;
 	private AreaConhecimento area;

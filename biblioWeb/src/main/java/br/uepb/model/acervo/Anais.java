@@ -6,7 +6,6 @@ import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.enums.Tipo_Anal;
 public class Anais {
-	
 	private int id;
 	private Tipo_Anal tipo;
 	private String titulo;

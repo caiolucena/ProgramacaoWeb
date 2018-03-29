@@ -1,7 +1,6 @@
 package br.uepb.model;
 
 public class Cidade {
-	
 	private int id;
 	private int codigo;
 	private String nome;

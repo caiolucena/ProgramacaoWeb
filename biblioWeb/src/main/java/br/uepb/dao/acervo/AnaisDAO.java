@@ -22,6 +22,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(JornalDAO.class);
 	
+	
 	/**
 	 * Método Construtor
 	 * @throws Exception

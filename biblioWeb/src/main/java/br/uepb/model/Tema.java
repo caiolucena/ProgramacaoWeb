@@ -1,7 +1,6 @@
 package br.uepb.model;
 
 public class Tema {
-	
 	private int id;
 	private String nome;
 	private AreaConhecimento area;

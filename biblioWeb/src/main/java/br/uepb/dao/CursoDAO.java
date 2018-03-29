@@ -18,6 +18,7 @@ public class CursoDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
+	
 	/**
 	 * Método Construtor
 	 * @throws Exception

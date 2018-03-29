@@ -16,6 +16,7 @@ public class CidadeDAO {
 	private Connection con;
 	private static final Logger  logger = LogManager.getLogger(CidadeDAO.class);
 	
+	
 	/**
 	 * Método Construtor
 	 * @throws Exception

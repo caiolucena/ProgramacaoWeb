@@ -22,6 +22,7 @@ public class TccDAO implements Item_Acervo<Tcc>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(TccDAO.class);
+	
 	/**
 	 * Método construtor
 	 * @throws Exception

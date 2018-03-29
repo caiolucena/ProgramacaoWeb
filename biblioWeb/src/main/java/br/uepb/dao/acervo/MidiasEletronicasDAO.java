@@ -19,8 +19,7 @@ import br.uepb.model.enums.Tipo_Midia;
 public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(MidiasEletronicasDAO.class); 
-	
-	
+		
 	/**
 	 * Método Construtor
 	 * @throws Exception

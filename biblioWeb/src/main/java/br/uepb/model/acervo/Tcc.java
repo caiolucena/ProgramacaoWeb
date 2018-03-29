@@ -8,7 +8,6 @@ import br.uepb.model.Orientador;
 import br.uepb.model.enums.Tipo_Tcc;
 
 public class Tcc { 
-
 	private int id;
 	private String titulo;
 	private Autor autor;
@@ -17,8 +16,7 @@ public class Tcc {
 	private Date ano_defesa;
 	private Cidade cidade;
 	
-	public Tcc() {
-		
+	public Tcc() {		
 	}
 	
 	public Tcc(int id, String titulo, Autor autor, Orientador orientador, Tipo_Tcc tipo, Date ano_defesa, Cidade cidade) {

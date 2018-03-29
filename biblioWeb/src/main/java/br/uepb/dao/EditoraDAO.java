@@ -16,6 +16,7 @@ public class EditoraDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(EditoraDAO.class);
 	
+	
 	/**
 	 * Método Construtor
 	 * @throws Exception

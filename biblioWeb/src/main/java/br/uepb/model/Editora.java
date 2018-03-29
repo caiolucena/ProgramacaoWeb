@@ -1,7 +1,6 @@
 package br.uepb.model;
 
 public class Editora {
-	
 	private int id;
 	private String nome;
 	

@@ -8,5 +8,5 @@ public interface Item_Acervo<T> {
 	public boolean removeItemAcervo(T objeto);
 	public boolean updateItemAcervo(T objeto);
 	public ArrayList<T> searchItemAcervo(T objeto);
-	//teste
+	
 }

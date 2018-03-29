@@ -5,8 +5,7 @@ public class Orientador {
 	private String nome;
 	private String formacao;
 	
-	public Orientador(){
-		
+	public Orientador(){		
 		
 	}
 	

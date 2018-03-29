@@ -3,8 +3,7 @@ package br.uepb.model.acervo;
 import java.util.Date;
 
 public class Jornal {
-	int id;
-
+	private int id;
 	private String titulo;
 	private Date data;
 	private int edicao;

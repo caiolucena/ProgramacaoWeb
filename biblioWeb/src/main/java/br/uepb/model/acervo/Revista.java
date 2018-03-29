@@ -13,8 +13,7 @@ public class Revista {
 	private int edicao;
 	private int num_pag;
 	
-	public Revista() {
-		
+	public Revista() {		
 	}
 	
 	public int getId() {

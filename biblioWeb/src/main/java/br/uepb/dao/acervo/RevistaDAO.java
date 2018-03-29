@@ -19,6 +19,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(RevistaDAO.class);
+	
 	/**
 	 * Método Construtor
 	 * @throws Exception

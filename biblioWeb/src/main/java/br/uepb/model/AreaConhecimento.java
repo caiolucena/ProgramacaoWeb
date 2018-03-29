@@ -1,7 +1,6 @@
 package br.uepb.model;
 
 public class AreaConhecimento {
-	
 	private int id;
 	private String nome;
 	

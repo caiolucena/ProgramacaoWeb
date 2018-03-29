@@ -10,8 +10,7 @@ public class Midias_Eletronicas {
 	private Tipo_Midia tipo;
 	private Date data_gravacao;
 	
-	public Midias_Eletronicas(){
-	
+	public Midias_Eletronicas(){	
 	}
 	public Midias_Eletronicas(String titulo, Tipo_Midia tipo, Date data_gravacao) {
 		this.titulo = titulo;

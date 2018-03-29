@@ -157,25 +157,25 @@ public class AreaConhecimentoDAO {
 		
 		try {
 			con = Conexao.iniciarConexao();
-			stmt = con.prepareStatement("UPDATE area_conhecimneto SET nome = ? WHERE id = ?");
+			stmt = con.prepareStatement("UPDATE area_conhecimento SET nome = ? WHERE id = ?");
 			stmt.setString(1, area.getNome());
 			stmt.setInt(2, area.getId());			
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			logger.error("Erro ao atualizar "+e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro ao atualizar "+e);
 		} finally {
 			
 			try {
 				con.close();
 				stmt.close();
 				logger.info("Conexão fechada na atualização");
-				return true;
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar conexão na atualização "+e);
-				return false;
 			}
 		}
+		return false;
 	}
 }
