@@ -45,7 +45,7 @@ public class testCaseTcc {
 		orientador.setNome("Orientador1");
 		orientador.setFormacao("Graduado");
 		assertTrue(orientadorDao.createOrientador(orientador));
-		
+		orientador = orientadorDao.searchOrientador(orientador).get(0);
 		
 		autor.setNome("Autor1");
 		autorDao.createAutor(autor);
@@ -57,11 +57,13 @@ public class testCaseTcc {
 		trabalho.setCidade(cidade);
 		trabalho.setTitulo("Trabalho de conclusao");
 		trabalho.setTipo(Tipo_Tcc.monografia);
+		trabalho.setOrientador(orientador);
 		
 		assertTrue(trabalhoDao.createItemAcervo(trabalho));
 		
 		trabalho = trabalhoDao.searchItemAcervo(trabalho).get(0);
 		assertTrue(trabalhoDao.removeItemAcervo(trabalho));
+		assertTrue(orientadorDao.removeOrientador(orientador));
 		
 		
 		

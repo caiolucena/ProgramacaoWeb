@@ -32,7 +32,9 @@ public class TesteCaseEditora {
 
 	@Test
 	public void testBuscaDeleteEditora() {
+		ed.setNome("Abril");
 		listaEd = edDao.searchEditora(ed);
+		System.out.println(listaEd.size());
 		for(Editora a:listaEd) {
 			assertTrue(edDao.removeEditora(a));
 		}

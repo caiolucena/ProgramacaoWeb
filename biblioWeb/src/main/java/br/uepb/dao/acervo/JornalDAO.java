@@ -170,7 +170,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 				jor.setData((Date)rs.getDate("data"));
 				jor.setEdicao(rs.getInt("edicao"));
 				
-				jornais.add(jornal);
+				jornais.add(jor);
 			}
 			
 		}catch (SQLException e) {

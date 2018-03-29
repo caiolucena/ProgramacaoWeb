@@ -164,12 +164,12 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 				Revista rev = new Revista();
 				rev.setId(rs.getInt("id_revista"));
 				rev.setEditora(new Editora(rs.getInt("id_editora"),rs.getString("nome_editora")));
-				rev.setTitulo(rs.getString("titulo"));
-				rev.setData((Date)rs.getDate("data"));
-				rev.setEdicao(rs.getInt("edicao"));	
+				rev.setTitulo(rs.getString("titulo_revista"));
+				rev.setData((Date)rs.getDate("data_revista"));
+				rev.setEdicao(rs.getInt("edicao_revista"));	
 				rev.setNum_pag(rs.getInt("pag_revista"));
 				
-				revistas.add(revista);
+				revistas.add(rev);
 			}
 		
 		}catch (SQLException e) {

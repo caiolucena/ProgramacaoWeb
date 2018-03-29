@@ -11,7 +11,7 @@ import com.mysql.jdbc.Connection;
 public class Conexao {
     public static Connection con;
     private static String user = "root";
-    private static String pass = "123";
+    private static String pass = "root";
     private static final Logger logger = LogManager.getLogger(Conexao.class);
     
     public static Connection iniciarConexao() throws Exception{

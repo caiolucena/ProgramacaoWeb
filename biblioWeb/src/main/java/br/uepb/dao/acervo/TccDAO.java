@@ -21,7 +21,7 @@ import br.uepb.model.enums.Tipo_Tcc;
 public class TccDAO implements Item_Acervo<Tcc>{
 	
 	private Connection con;
-	private static final Logger logger = LogManager.getLogger(RevistaDAO.class);
+	private static final Logger logger = LogManager.getLogger(TccDAO.class);
 	/**
 	 * Método construtor
 	 * @throws Exception
@@ -43,32 +43,32 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		PreparedStatement stmt = null;
 		
 		try {
+			con = Conexao.iniciarConexao(); 
 			stmt = con.prepareStatement("INSERT INTO tcc(id,titulo,autor_id,orientador_id,tipo,defesa,cidade_id) VALUES(?,?,?,?,?,?,?)");
 			stmt.setInt(1,tcc.getId());
 			stmt.setString(2, tcc.getTitulo());
 			stmt.setInt(3, tcc.getAutor().getId());
 			stmt.setInt(4,tcc.getOrientador().getId());
 			stmt.setString(5, tcc.getTipo().toString());
-			stmt.setDate(6, (Date) tcc.getAno_defesa());
+			stmt.setDate(6, new java.sql.Date(tcc.getAno_defesa().getTime()));
 			stmt.setInt(7, tcc.getCidade().getId());
 			
 			stmt.executeUpdate();			
-			
+			return true;
 		} catch	(SQLException	e)	{
 			logger.error("Erro na inserção",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na inserção",e);
 		}finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada");
-				return true;
 			}catch(SQLException e){
 				logger.error("Erro no fechamento da Conexão",e);
-				return false;
 			}
 		}
-		
+		return false;
 	}
 
 	/**
@@ -84,26 +84,26 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		PreparedStatement stmt = null;
 		
 		try {
+			con = Conexao.iniciarConexao(); 
 			stmt = con.prepareStatement("DELETE FROM tcc WHERE id=?");
 			stmt.setInt(1, tcc.getId());
 			
 			stmt.executeUpdate();
-			
+			return true;
 		}  catch (SQLException	e)	{
 			logger.error("Erro na remoção",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na remoção",e);
 		}finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada");
-				return true;
 			}catch(SQLException e){
 				logger.error("Erro no fechamento da Conexão",e);
-				return false;
 			}
 		}
-		
+		return false;
 	}
 
 	/**
@@ -119,6 +119,7 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		PreparedStatement stmt = null;
 		
 		try {
+			con = Conexao.iniciarConexao(); 
 			stmt = con.prepareStatement("UPDATE tcc SET titulo=?, tipo=?, defesa = ?  WHERE id=?");
 			stmt.setString(1, tcc.getTitulo());
 			stmt.setString(2, tcc.getTipo().toString());
@@ -126,21 +127,21 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			stmt.setInt(4, tcc.getId());
 			
 			stmt.executeUpdate();
-			
+			return true;
 		}  catch (SQLException	e)	{
 			logger.error("Erro na atualização",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na atualização",e);
 		}finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada");
-				return true;
 			}catch(SQLException e){
 				logger.error("Erro no fechamento da Conexão",e);
-				return false;
 			}
 		}
+		return false;
 	}
 	/**
 	 * Método para pesquisar Tcc no banco de dados
@@ -156,16 +157,17 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		ResultSet rs = null;
 		
 		try {
-			stmt = con.prepareStatement("SELECT T.id AS id_tcc, T.titulo as titulo_tcc, T.tipo as tipo_tcc, T.defesa as defesa_tcc"
-					+ " A.id as id_autor, A.nome AS nome_autor, "
+			con = Conexao.iniciarConexao(); 
+			stmt = con.prepareStatement("SELECT T.id AS id_tcc, T.titulo as titulo_tcc, T.tipo as tipo_tcc, T.defesa as defesa_tcc, "
+					+ "A.id as id_autor, A.nome AS nome_autor, "
 					+ "O.id AS id_orientador, O.nome AS nome_orientador, O.formacao AS formacao_orientador, "
 					+ "C.Id as id_cidade, C.Codigo AS codigo_cidade, C.Nome AS nome_cidade, C.Uf AS uf_cidade "
 					+ "FROM tcc AS T "
 					+ "INNER JOIN autor AS A ON T.autor_id = A.id "
 					+ "INNER JOIN cidade AS C ON T.cidade_id = C.id "
 					+ "INNER JOIN orientador AS O ON T.orientador_id = O.id  "
-					+ "WHERE T.titulo LIKE '%?%'\r\n");
-			stmt.setString(1,tcc.getTitulo());
+					+ "WHERE T.titulo LIKE ?");
+			stmt.setString(1,"%"+tcc.getTitulo()+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
@@ -178,6 +180,8 @@ public class TccDAO implements Item_Acervo<Tcc>{
 			
 			
 		} catch (SQLException	e)	{
+			logger.error("Erro na busca",e);
+		} catch (Exception e) {
 			logger.error("Erro na busca",e);
 		}finally {
 			try {

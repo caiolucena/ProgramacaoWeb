@@ -57,6 +57,17 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			stmt.setInt(5, anal.getLocal().getId());
 			
 			stmt.executeUpdate();
+			stmt = con.prepareStatement("select id from anal where tipo=? and titulo=? and congresso=? and ano_pub=? and cidade_id=?");
+			stmt.setString(1, anal.getTipo().toString());
+			stmt.setString(2, anal.getTitulo());
+			stmt.setString(3,anal.getNome_congresso());
+			stmt.setDate(4,new java.sql.Date(anal.getAnoPublicacao().getTime()));
+			stmt.setInt(5, anal.getLocal().getId());
+			
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				anal.setId(rs.getInt("id"));
+			}
 			
 			stmt2 = con.prepareStatement("INSERT INTO anal_has_autor(anal_id, autor_id) VALUES(?,?)");
 			stmt2.setInt(1, anal.getId());
@@ -106,7 +117,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			stmt2.setInt(1, anal.getId());
 			
 			stmt2.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			logger.error("Erro na remoção",e);
 		} catch (Exception e) {
@@ -186,14 +197,14 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 					+ "inner join anal_has_autor on A.id = anal_has_autor.anal_id "
 					+ "inner join autor as AU on AU.id = anal_has_autor.autor_id "
 					+ "inner join cidade as C on A.cidade_id = C.Id "
-					+ "where titulo like '%?%' ");
-			stmt.setString(1,anal.getTitulo());
+					+ "where titulo like ? ");
+			stmt.setString(1,"%"+anal.getTitulo()+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
 				Cidade local = new Cidade(rs.getInt("id_cidade"), rs.getInt("codigo_cidade"), rs.getString("nome_cidade"), rs.getString("uf_cidade"));
 				Autor autor = new Autor(rs.getInt("id_autor"), rs.getString("nome_autor"));
-				Anais a = new Anais(rs.getInt("id_anal"), Enum.valueOf(Tipo_Anal.class, rs.getString("tipo_anal")), rs.getString("titulo_anal"), autor, rs.getString("congresso_anal"), rs.getDate("ano_pub"), local);
+				Anais a = new Anais(rs.getInt("id_anal"), Enum.valueOf(Tipo_Anal.class, rs.getString("tipo_anal")), rs.getString("titulo_anal"), autor, rs.getString("congresso_anal"), rs.getDate("ano_anal"), local);
 				listaAnais.add(a);
 			}
 			
@@ -205,7 +216,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			try {
 				con.close();
 				stmt.close();
-				logger.info("Busca realizada com sucesso");
+				logger.info("Busca realizada com sucesso ");
 			} catch (SQLException e) {
 				logger.error("Erro ao fechar conexão",e);
 			}

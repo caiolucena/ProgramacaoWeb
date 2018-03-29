@@ -33,6 +33,8 @@ public class TesteCaseJornal {
 		Date data = new Date(System.currentTimeMillis());
 		jornal.setData(data);
 		assertTrue(jornalDao.createItemAcervo(jornal));
+		jornal = jornalDao.searchItemAcervo(jornal).get(0);
+		assertTrue(jornalDao.removeItemAcervo(jornal));
 		
 	}
 	@Test
@@ -41,11 +43,15 @@ public class TesteCaseJornal {
 		jornal.setEdicao(5);
 		Date data = new Date(System.currentTimeMillis());
 		jornal.setData(data);
-		
-		teste.add(jornal);
-		
+			
 		assertTrue(jornalDao.createItemAcervo(jornal));
 		
+		Jornal novoJornal = jornalDao.searchItemAcervo(jornal).get(0);
+		
+		assertTrue(jornal.getTitulo().equals(novoJornal.getTitulo()));
+		assertFalse(jornal.getId() == novoJornal.getId());
+		
+	
 	}
 	
 	@Test
@@ -55,9 +61,8 @@ public class TesteCaseJornal {
 		Date data = new Date(System.currentTimeMillis());
 		jornal.setData(data);
 		jornal.setId(1);
-		teste.add(jornal);
 		
-		jornalDao.createItemAcervo(jornal);
+		jornal = jornalDao.searchItemAcervo(jornal).get(0);
 		
 		assertTrue(jornalDao.removeItemAcervo(jornal));
 	}

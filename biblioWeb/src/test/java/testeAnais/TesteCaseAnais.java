@@ -46,6 +46,8 @@ public class TesteCaseAnais {
 	
 	@Test
 	public void testeRemoveAnais() {
+		anais.setTitulo("Titulo1");
+		anais = anaisDao.searchItemAcervo(anais).get(0);
 		assertTrue(anaisDao.removeItemAcervo(anais));
 	}
 	
