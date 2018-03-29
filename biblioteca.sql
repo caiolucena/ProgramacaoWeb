@@ -3,7 +3,8 @@
 # Generator: MySQL-Front 5.3  (Build 5.24)
 
 /*!40101 SET NAMES utf8 */;
-
+CREATE SCHEMA IF NOT EXISTS `biblioteca` DEFAULT CHARACTER SET utf8 ;
+USE `biblioteca` ;
 #
 # Structure for table "area_conhecimento"
 #
