@@ -7,7 +7,7 @@ import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 
-public class Livro {
+public class Livro implements Acervo{
 	private long isbn;
 	private String titulo;
 	private ArrayList<Autor> autores;

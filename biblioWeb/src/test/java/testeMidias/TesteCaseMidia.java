@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import br.uepb.dao.acervo.MidiasEletronicasDAO;
 import br.uepb.model.acervo.Midias_Eletronicas;
-import br.uepb.model.enums.Tipo_Midia;
+import br.uepb.model.enums.Tipo_midia;
 
 public class TesteCaseMidia {
 	private Midias_Eletronicas midia;
@@ -25,7 +25,7 @@ public class TesteCaseMidia {
 	@Test
 	public void testeCreateMidia(){
 		midia.setTitulo("Teste");
-		midia.setTipo(Tipo_Midia.CD);
+		midia.setTipo(Tipo_midia.CD);
 		Date data = new Date(System.currentTimeMillis());
 		midia.setData_gravacao(data);		
 		assertTrue(midiaDao.createItemAcervo(midia));
@@ -43,7 +43,7 @@ public class TesteCaseMidia {
 	@Test
 	public void testeUpdateMidia(){
 		midia.setTitulo("Teste");
-		midia.setTipo(Tipo_Midia.CD);
+		midia.setTipo(Tipo_midia.CD);
 		Date data = new Date(System.currentTimeMillis());
 		midia.setData_gravacao(data);		
 		assertTrue(midiaDao.createItemAcervo(midia));
@@ -52,7 +52,7 @@ public class TesteCaseMidia {
 		lista = midiaDao.searchItemAcervo(midia);
 		midia = lista.get(0);
 		midia.setTitulo("Novo Teste");
-		midia.setTipo(Tipo_Midia.DVD);
+		midia.setTipo(Tipo_midia.DVD);
 		assertTrue(midiaDao.updateItemAcervo(midia));
 		lista = midiaDao.searchItemAcervo(midia);
 		for(Midias_Eletronicas m:lista){
@@ -63,17 +63,17 @@ public class TesteCaseMidia {
 	@Test
 	public void testeRemoveMidia(){
 		midia.setTitulo("Teste1");
-		midia.setTipo(Tipo_Midia.CD);
+		midia.setTipo(Tipo_midia.CD);
 		Date data = new Date(System.currentTimeMillis());
 		midia.setData_gravacao(data);		
 		assertTrue(midiaDao.createItemAcervo(midia));
 		midia.setTitulo("Teste2");
-		midia.setTipo(Tipo_Midia.CD);
+		midia.setTipo(Tipo_midia.CD);
 		data = new Date(System.currentTimeMillis());
 		midia.setData_gravacao(data);		
 		assertTrue(midiaDao.createItemAcervo(midia));
 		midia.setTitulo("Teste3");
-		midia.setTipo(Tipo_Midia.CD);
+		midia.setTipo(Tipo_midia.CD);
 		data = new Date(System.currentTimeMillis());
 		midia.setData_gravacao(data);		
 		assertTrue(midiaDao.createItemAcervo(midia));

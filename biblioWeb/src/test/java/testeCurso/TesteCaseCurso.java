@@ -11,7 +11,7 @@ import br.uepb.dao.AreaConhecimentoDAO;
 import br.uepb.dao.CursoDAO;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Curso;
-import br.uepb.model.enums.Tipo_Curso;
+import br.uepb.model.enums.Tipo_curso;
 
 public class TesteCaseCurso {
 	private Curso curso;
@@ -28,7 +28,8 @@ public class TesteCaseCurso {
 	@Test
 	public void testeCreateCurso(){
 		curso.setNome("Computação");
-		curso.setTipo(Tipo_Curso.graduacao);
+		curso.setSigla("CC");
+		curso.setTipo(Tipo_curso.graduacao);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
@@ -47,17 +48,18 @@ public class TesteCaseCurso {
 	@Test
 	public void testeRemoveCurso(){
 		curso.setNome("Computação1");
-		curso.setTipo(Tipo_Curso.graduacao);
+		curso.setSigla("CC");
+		curso.setTipo(Tipo_curso.graduacao);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
 		curso.setNome("Computação2");
-		curso.setTipo(Tipo_Curso.graduacao);
+		curso.setTipo(Tipo_curso.graduacao);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
 		curso.setNome("Computação3");
-		curso.setTipo(Tipo_Curso.graduacao);
+		curso.setTipo(Tipo_curso.graduacao);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
@@ -72,7 +74,8 @@ public class TesteCaseCurso {
 	@Test
 	public void testeUpdateCurso(){
 		curso.setNome("Computação1");
-		curso.setTipo(Tipo_Curso.graduacao);
+		curso.setSigla("CC");
+		curso.setTipo(Tipo_curso.graduacao);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
@@ -81,7 +84,7 @@ public class TesteCaseCurso {
 		curso = lista.get(0);
 		
 		curso.setNome("ComputaçãoNovo");
-		curso.setTipo(Tipo_Curso.pos_graduacao);
+		curso.setTipo(Tipo_curso.pos_graduacao);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.updateCurso(curso));
 		

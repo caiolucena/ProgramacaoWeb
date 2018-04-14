@@ -14,19 +14,11 @@ import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.acervo.Livro;
 import br.uepb.model.acervo.Midias_Eletronicas;
-import br.uepb.model.enums.Tipo_Midia;
+import br.uepb.model.enums.Tipo_midia;
 
 public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(MidiasEletronicasDAO.class); 
-		
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public MidiasEletronicasDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
 	
 	/**
 	 * Método para inserir Midia Eletrônica no banco de dados
@@ -146,7 +138,7 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	            Midias_Eletronicas m = new Midias_Eletronicas();
 	            m.setId(rs.getInt("id"));
 	            m.setTitulo(rs.getString("titulo"));
-	            m.setTipo(Enum.valueOf(Tipo_Midia.class,rs.getString("tipo")));
+	            m.setTipo(Enum.valueOf(Tipo_midia.class,rs.getString("tipo")));
 	            m.setData_gravacao(rs.getDate("data_gravacao"));
 	            midias.add(m);
 	        }

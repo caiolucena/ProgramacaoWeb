@@ -14,16 +14,7 @@ import br.uepb.model.Orientador;
 public class OrientadorDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(OrientadorDAO.class);
-	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public OrientadorDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
-	
-	
+		
 	/**
 	 * Método para inserir Orientador no banco de dados
 	 * @param orientador

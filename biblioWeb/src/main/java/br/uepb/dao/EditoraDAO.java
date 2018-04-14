@@ -16,15 +16,6 @@ public class EditoraDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(EditoraDAO.class);
 	
-	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public EditoraDAO() throws Exception{
-		con = Conexao.iniciarConexao();		
-	}
-	
 	/**
 	 * Metodo para inserir Editora no banco de dados
 	 * @param editora

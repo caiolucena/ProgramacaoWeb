@@ -5,21 +5,21 @@ import java.util.Date;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
-import br.uepb.model.enums.Tipo_Tcc;
+import br.uepb.model.enums.Tipo_tcc;
 
-public class Tcc { 
+public class Tcc implements Acervo{ 
 	private int id;
 	private String titulo;
 	private Autor autor;
 	private Orientador orientador;
-	private Tipo_Tcc tipo;
+	private Tipo_tcc tipo;
 	private Date ano_defesa;
 	private Cidade cidade;
 	
 	public Tcc() {		
 	}
 	
-	public Tcc(int id, String titulo, Autor autor, Orientador orientador, Tipo_Tcc tipo, Date ano_defesa, Cidade cidade) {
+	public Tcc(int id, String titulo, Autor autor, Orientador orientador, Tipo_tcc tipo, Date ano_defesa, Cidade cidade) {
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
@@ -53,10 +53,10 @@ public class Tcc {
 	public void setOrientador(Orientador orientador) {
 		this.orientador = orientador;
 	}
-	public Tipo_Tcc getTipo() {
+	public Tipo_tcc getTipo() {
 		return tipo;
 	}
-	public void setTipo(Tipo_Tcc tipo) {
+	public void setTipo(Tipo_tcc tipo) {
 		this.tipo = tipo;
 	}
 	public Date getAno_defesa() {

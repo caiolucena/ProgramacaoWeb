@@ -2,7 +2,7 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
-public class Jornal {
+public class Jornal implements Acervo{
 	private int id;
 	private String titulo;
 	private Date data;

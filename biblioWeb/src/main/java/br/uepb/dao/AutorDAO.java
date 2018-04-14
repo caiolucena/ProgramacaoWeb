@@ -15,15 +15,6 @@ public class AutorDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
-	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public AutorDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
-	
 	/**
 	 * Método para inserir Autor no banco de dados
 	 * @param autor

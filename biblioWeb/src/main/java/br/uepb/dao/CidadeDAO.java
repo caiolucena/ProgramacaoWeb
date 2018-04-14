@@ -15,16 +15,7 @@ public class CidadeDAO {
 	
 	private Connection con;
 	private static final Logger  logger = LogManager.getLogger(CidadeDAO.class);
-	
-	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public CidadeDAO() throws Exception {
-		con = Conexao.iniciarConexao();
-	}
-	
+		
 	/**
 	 * Método para inserir Cidade no banco de dados
 	 * @param cidade

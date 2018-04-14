@@ -15,23 +15,13 @@ import br.uepb.dao.Item_Acervo;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.acervo.Anais;
-import br.uepb.model.enums.Tipo_Anal;
+import br.uepb.model.enums.Tipo_anal;
 
 public class AnaisDAO implements Item_Acervo<Anais>{
 	
 	private Connection con;
-	private static final Logger logger = LogManager.getLogger(JornalDAO.class);
+	private static final Logger logger = LogManager.getLogger(AnaisDAO.class);
 	
-	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	
-	public AnaisDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
-
 	/**
 	 * Método para inserir um Anal de Congresso no banco de dados
 	 * @param anal
@@ -205,7 +195,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 			while(rs.next()) {
 				Cidade local = new Cidade(rs.getInt("id_cidade"), rs.getInt("codigo_cidade"), rs.getString("nome_cidade"), rs.getString("uf_cidade"));
 				Autor autor = new Autor(rs.getInt("id_autor"), rs.getString("nome_autor"));
-				Anais a = new Anais(rs.getInt("id_anal"), Enum.valueOf(Tipo_Anal.class, rs.getString("tipo_anal")), rs.getString("titulo_anal"), autor, rs.getString("congresso_anal"), rs.getDate("ano_anal"), local);
+				Anais a = new Anais(rs.getInt("id_anal"), Enum.valueOf(Tipo_anal.class, rs.getString("tipo_anal")), rs.getString("titulo_anal"), autor, rs.getString("congresso_anal"), rs.getDate("ano_anal"), local);
 				listaAnais.add(a);
 			}
 			

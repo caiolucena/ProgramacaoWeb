@@ -18,15 +18,6 @@ public class TemaDAO {
 	private static final Logger logger = LogManager.getLogger(TemaDAO.class);
 	
 	/**
-	 * Método construtor
-	 * @throws Exception
-	 */
-	public TemaDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
-	
-	
-	/**
 	 * Método para inserir Tema no banco de dados
 	 * @param tema
 	 * @throws SQLException

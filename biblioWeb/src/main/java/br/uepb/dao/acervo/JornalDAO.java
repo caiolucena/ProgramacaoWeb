@@ -18,15 +18,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(JornalDAO.class);
-	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public JornalDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
-	
+
 	/**
 	 * Método para inserir um Jornal no banco de dados
 	 * @param jornal

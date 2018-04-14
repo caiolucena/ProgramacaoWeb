@@ -16,20 +16,12 @@ import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
 import br.uepb.model.acervo.Tcc;
-import br.uepb.model.enums.Tipo_Tcc;
+import br.uepb.model.enums.Tipo_tcc;
 
 public class TccDAO implements Item_Acervo<Tcc>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(TccDAO.class);
-	
-	/**
-	 * Método construtor
-	 * @throws Exception
-	 */
-	public TccDAO() throws Exception {
-		con = Conexao.iniciarConexao(); 
-	}
 
 	/**
 	 * Método para inserir Tcc no banco de dados
@@ -175,7 +167,7 @@ public class TccDAO implements Item_Acervo<Tcc>{
 				Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nome_autor"));			
 				Orientador orientador = new Orientador(rs.getInt("id_orientador"),rs.getString("nome_orientador"),rs.getString("formacao_orientador"));
 				Cidade cidade = new Cidade(rs.getInt("id_cidade"), rs.getInt("codigo_cidade"), rs.getString("nome_cidade"), rs.getString("uf_cidade"));
-				Tcc TCC = new Tcc(rs.getInt("id_tcc"), rs.getString("titulo_tcc"), autor, orientador, Tipo_Tcc.valueOf(Tipo_Tcc.class,rs.getString("tipo_tcc")), rs.getDate("defesa_tcc"), cidade);
+				Tcc TCC = new Tcc(rs.getInt("id_tcc"), rs.getString("titulo_tcc"), autor, orientador, Tipo_tcc.valueOf(Tipo_tcc.class,rs.getString("tipo_tcc")), rs.getDate("defesa_tcc"), cidade);
 				listaTcc.add(TCC);	
 			}
 			

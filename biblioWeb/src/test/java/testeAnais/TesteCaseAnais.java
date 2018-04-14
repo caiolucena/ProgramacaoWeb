@@ -12,7 +12,7 @@ import br.uepb.dao.acervo.AnaisDAO;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.acervo.Anais;
-import br.uepb.model.enums.Tipo_Anal;
+import br.uepb.model.enums.Tipo_anal;
 
 public class TesteCaseAnais {
 	private Anais anais;
@@ -39,7 +39,7 @@ public class TesteCaseAnais {
 		anais.setAutor(autor);		
 		anais.setLocal(cidade);
 		anais.setNome_congresso("Congreso1");
-		anais.setTipo(Tipo_Anal.artigo);
+		anais.setTipo(Tipo_anal.artigo);
 		anais.setTitulo("Titulo1");
 		assertTrue(anaisDao.createItemAcervo(anais));
 	}

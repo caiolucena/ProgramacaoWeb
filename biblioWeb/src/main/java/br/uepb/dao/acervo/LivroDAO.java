@@ -22,11 +22,13 @@ import br.uepb.model.acervo.Livro;
 public class LivroDAO implements Item_Acervo<Livro>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(LivroDAO.class); 
-	
-	public LivroDAO() throws Exception {
-		con = Conexao.iniciarConexao();
-	}
-	
+
+	/**
+	 * Método para inserir um Livro no banco de dados
+	 * @param livro
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public boolean createItemAcervo(Livro livro) {
 		String sql = "insert into livro(isbn,titulo,editora_id,ano,edicao,num_pag,area_conhecimento_id) values (?,?,?,?,?,?,?)";
 		try {
@@ -73,6 +75,12 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		return false;
 	}
 
+	/**
+	 * Método para remover um Livro no banco de dados
+	 * @param livro
+	 * @throws SQLException
+	 * @return true or false
+	 */
 	public boolean removeItemAcervo(Livro livro) {
 		try {
 			con = Conexao.iniciarConexao();
@@ -102,6 +110,13 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		}
 		return false;
 	}
+	
+	/**
+	 * Método para atualizar um Livro no banco de dados
+	 * @param livro
+	 * @throws SQLException
+	 * @return true or false
+	 */
 
 	public boolean updateItemAcervo(Livro livro) {
 		String sql = "update livro set titulo=?,editora_id=?,ano=?,edicao=?,num_pag=?,area_conhecimento_id=? where isbn=?";
@@ -139,6 +154,12 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		return false;
 	}
 
+	/**
+	 * Método para buscar um Livro no banco de dados
+	 * @param livro
+	 * @throws SQLException
+	 * @return ArrayList<Livro>
+	 */
 	public ArrayList<Livro> searchItemAcervo(Livro livro) {
 		String sql = "select L.isbn as 'isbn', L.titulo as 'titulo', L.ano as 'ano', L.edicao as 'edicao', "
 				+ "L.num_pag as 'NumeroDePaginas', E.id as 'editora_id', E.nome as 'editora_nome', A.id as 'area_id', "

@@ -21,14 +21,6 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	private static final Logger logger = LogManager.getLogger(RevistaDAO.class);
 	
 	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public RevistaDAO() throws Exception{
-		con = Conexao.iniciarConexao();
-	}
-	
-	/**
 	 * Método para inserir Revista no banco de dados
 	 * @param revista
 	 * @throws SQLException
@@ -54,21 +46,23 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 			stmt.setInt(6, revista.getNum_pag());
 			//	executa
 			stmt.execute();
+			return true;
 		}catch	(SQLException	e)	{
 			logger.error("Erro na inserção",e);
-			return false;
+		} catch (Exception e) {
+			logger.error("Erro na inserção",e);
 		}finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada");
-				return true;
+				
 			}catch(SQLException e){
 				logger.error("Erro no fechamento da Conexão",e);
-				return false;
+				
 			}
 		}
-
+		return false;
 		
 	}
 	

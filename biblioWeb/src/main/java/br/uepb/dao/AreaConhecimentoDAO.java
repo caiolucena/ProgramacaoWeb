@@ -17,13 +17,6 @@ public class AreaConhecimentoDAO {
 	private Connection con;
 	private static final Logger  logger = LogManager.getLogger(AreaConhecimentoDAO.class);
 	
-	/**
-	 * Método Construtor
-	 * @throws Exception
-	 */
-	public AreaConhecimentoDAO() throws Exception {
-		con = Conexao.iniciarConexao();
-	}
 	
 	/**
 	 * Método para inserir Area de Conhecimento no banco de dados

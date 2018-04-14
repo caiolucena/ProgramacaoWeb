@@ -4,10 +4,10 @@ import java.util.Date;
 
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
-import br.uepb.model.enums.Tipo_Anal;
-public class Anais {
+import br.uepb.model.enums.Tipo_anal;
+public class Anais implements Acervo{
 	private int id;
-	private Tipo_Anal tipo;
+	private Tipo_anal tipo;
 	private String titulo;
 	private Autor autor;
 	private String nome_congresso;
@@ -17,7 +17,7 @@ public class Anais {
 	public Anais() {
 		
 	}
-	public Anais(int id,Tipo_Anal tipo, String titulo, Autor autor, String nome_congresso, Date anoPublicacao, Cidade local){
+	public Anais(int id,Tipo_anal tipo, String titulo, Autor autor, String nome_congresso, Date anoPublicacao, Cidade local){
 		this.id = id;
 		this.tipo = tipo;
 		this.titulo = titulo;
@@ -26,10 +26,10 @@ public class Anais {
 		this.anoPublicacao = anoPublicacao;
 		this.local = local;
 	}
-	public Tipo_Anal getTipo() {
+	public Tipo_anal getTipo() {
 		return tipo;
 	}
-	public void setTipo(Tipo_Anal tipo) {
+	public void setTipo(Tipo_anal tipo) {
 		this.tipo = tipo;
 	}
 	public String getTitulo() {

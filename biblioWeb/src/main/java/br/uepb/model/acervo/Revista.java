@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import br.uepb.model.Editora;
 
-public class Revista {
+public class Revista implements Acervo{
 	private int id;
 	
 	private String titulo;

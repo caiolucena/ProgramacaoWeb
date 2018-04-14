@@ -2,17 +2,17 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
-import br.uepb.model.enums.Tipo_Midia;
+import br.uepb.model.enums.Tipo_midia;
 
-public class Midias_Eletronicas {
+public class Midias_Eletronicas implements Acervo{
 	private int id;
 	private String titulo;
-	private Tipo_Midia tipo;
+	private Tipo_midia tipo;
 	private Date data_gravacao;
 	
 	public Midias_Eletronicas(){	
 	}
-	public Midias_Eletronicas(String titulo, Tipo_Midia tipo, Date data_gravacao) {
+	public Midias_Eletronicas(String titulo, Tipo_midia tipo, Date data_gravacao) {
 		this.titulo = titulo;
 		this.tipo = tipo;
 		this.data_gravacao = data_gravacao;
@@ -34,11 +34,11 @@ public class Midias_Eletronicas {
 		this.titulo = titulo;
 	}
 
-	public Tipo_Midia getTipo() {
+	public Tipo_midia getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Tipo_Midia tipo) {
+	public void setTipo(Tipo_midia tipo) {
 		this.tipo = tipo;
 	}
 

@@ -1,6 +1,6 @@
 package br.uepb.model.enums;
 
-public enum Tipo_Curso {
+public enum Tipo_curso {
 	
 	graduacao, pos_graduacao;
 
