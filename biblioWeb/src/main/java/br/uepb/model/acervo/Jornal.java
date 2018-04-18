@@ -2,11 +2,9 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
-public class Jornal implements Acervo{
+public class Jornal extends ItemAcervo{
+	
 	private int id;
-	private String titulo;
-	private Date data;
-	private int edicao;
 	
 	public Jornal() {
 		
@@ -33,20 +31,5 @@ public class Jornal implements Acervo{
 		this.titulo = titulo;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public int getEdicao() {
-		return edicao;
-	}
-
-	public void setEdicao(int edicao) {
-		this.edicao = edicao;
-	}
 	
 }

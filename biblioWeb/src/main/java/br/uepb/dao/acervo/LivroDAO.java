@@ -37,7 +37,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			stmt.setLong(1, livro.getIsbn());
 			stmt.setString(2,livro.getTitulo());
 			stmt.setInt(3,livro.getEditora().getId());
-			stmt.setDate(4,new java.sql.Date(livro.getAno_publicacao().getTime()));
+			stmt.setDate(4,new java.sql.Date(livro.getData().getTime()));
 			stmt.setInt(5,livro.getEdicao());
 			stmt.setInt(6,livro.getNumero_paginas());
 			stmt.setInt(7, livro.getArea().getId());
@@ -125,7 +125,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,livro.getTitulo());
 			stmt.setInt(2,livro.getEditora().getId());
-			stmt.setDate(3,new java.sql.Date(livro.getAno_publicacao().getTime()));
+			stmt.setDate(3,new java.sql.Date(livro.getData().getTime()));
 			stmt.setInt(4,livro.getEdicao());
 			stmt.setInt(5,livro.getNumero_paginas());
 			stmt.setInt(6, livro.getArea().getId());
@@ -187,7 +187,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	            
 	            l.setEditora(new Editora(rs.getInt("editora_id"),rs.getString("editora_nome")));
 	            
-	            l.setAno_publicacao(rs.getDate("ano"));
+	            l.setData(rs.getDate("ano"));
 	            l.setEdicao(rs.getInt("edicao"));
 	            l.setNumero_paginas(rs.getInt("NumeroDePaginas"));	            
 	            l.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));

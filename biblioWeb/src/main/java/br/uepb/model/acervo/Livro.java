@@ -7,13 +7,12 @@ import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 
-public class Livro implements Acervo{
+public class Livro extends ItemAcervo{
 	private long isbn;
-	private String titulo;
+
 	private ArrayList<Autor> autores;
 	private Editora editora;
-	private Date ano_publicacao;
-	private int edicao;
+	
 	private int numero_paginas;
 	private AreaConhecimento area;
 		
@@ -24,7 +23,7 @@ public class Livro implements Acervo{
 		this.titulo = titulo;
 		this.autores = autores;
 		this.editora = editora;
-		this.ano_publicacao = ano_publicacao;
+		this.data = ano_publicacao;
 		this.edicao = edicao;
 		this.numero_paginas = numero_paginas;
 		this.area = area;
@@ -36,14 +35,6 @@ public class Livro implements Acervo{
 
 	public void setIsbn(long isbn) {
 		this.isbn = isbn;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
 	}
 
 	public ArrayList<Autor> getAutores() {
@@ -62,21 +53,6 @@ public class Livro implements Acervo{
 		this.editora = editora;
 	}
 
-	public Date getAno_publicacao() {
-		return ano_publicacao;
-	}
-
-	public void setAno_publicacao(Date ano_publicacao) {
-		this.ano_publicacao = ano_publicacao;
-	}
-
-	public int getEdicao() {
-		return edicao;
-	}
-
-	public void setEdicao(int edicao) {
-		this.edicao = edicao;
-	}
 
 	public int getNumero_paginas() {
 		return numero_paginas;
