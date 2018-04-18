@@ -23,13 +23,5 @@ public class Jornal extends ItemAcervo{
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return titulo;
-	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	
 }
