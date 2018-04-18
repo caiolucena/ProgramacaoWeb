@@ -1,7 +1,7 @@
 package br.uepb.model;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Orientador.
+ * Essa classe é utilizada como modelo para um objeto do tipo Orientador.
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */

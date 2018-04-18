@@ -1,6 +1,6 @@
 package br.uepb.model.usuarios;
 /**
- * Essa classe é responsável por criar um objeto do tipo Funcionário;
+ * Essa classe é utilizada como modelo para um objeto do tipo Funcionário;
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Aluno extende a classe Usuário, que contém os atributos e métodos comuns a todos os usuários do sistema.
  * @author EquipeACL

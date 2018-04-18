@@ -8,7 +8,7 @@ import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Livro.
+ * Essa classe é utilizada como modelo para um objeto do tipo Livro.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Livro estende a classe ItemAcervo
  * @author EquipeACL

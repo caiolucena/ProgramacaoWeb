@@ -3,7 +3,7 @@ package br.uepb.model;
 import br.uepb.model.enums.Tipo_curso;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Curso.
+ * Essa classe é utilizada como modelo para um objeto do tipo Curso.
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */

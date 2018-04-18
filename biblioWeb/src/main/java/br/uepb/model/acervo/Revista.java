@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import br.uepb.model.Editora;
 /**
- * Essa classe é responsável por criar um objeto do tipo Revista.
+ * Essa classe é utilizada como modelo para um objeto do tipo Revista.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Revista implementa a interface Acervo
  * @author EquipeACL

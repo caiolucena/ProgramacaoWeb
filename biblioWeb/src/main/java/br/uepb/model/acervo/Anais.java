@@ -7,7 +7,7 @@ import br.uepb.model.Cidade;
 import br.uepb.model.enums.Tipo_anal;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Anais.
+ * Essa classe é utilizada como modelo para um objeto do tipo Anais.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Anais implementa a interface Acervo
  * @author EquipeACL

@@ -3,7 +3,7 @@ package br.uepb.model.acervo;
 import java.util.Date;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Jornal.
+ * Essa classe é utilizada como modelo para um objeto do tipo Jornal.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Jornal estende a classe ItemAcervo
  * @author EquipeACL

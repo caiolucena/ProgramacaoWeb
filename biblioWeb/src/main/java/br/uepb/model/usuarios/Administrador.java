@@ -7,7 +7,7 @@ import br.uepb.dao.usuarios.FuncionarioDAO;
 import br.uepb.model.acervo.Acervo;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Administrador.
+ * Essa classe é utilizada como modelo para um objeto do tipo Administrador.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Administrador extende a classe Usuário, que contém os atributos e métodos comuns a todos os usuários do sistema.
  * A classe Administrador implementa as interfaces que contém métodos para manter o usuário e manter o acervo.

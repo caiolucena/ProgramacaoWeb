@@ -5,7 +5,7 @@ import java.util.Date;
 import br.uepb.model.enums.Tipo_midia;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Midias_Eletronicas.
+ * Essa classe é utilizada como modelo para um objeto do tipo Midias_Eletronicas.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Midias_Eletronicas implementa a interface Acervo
  * @author EquipeACL

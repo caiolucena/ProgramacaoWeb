@@ -7,7 +7,7 @@ import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
 import br.uepb.model.enums.Tipo_tcc;
 /**
- * Essa classe é responsável por criar um objeto do tipo Tcc.
+ * Essa classe é utilizada como modelo para um objeto do tipo Tcc.
  * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Tcc implementa a interface Acervo
  * @author EquipeACL

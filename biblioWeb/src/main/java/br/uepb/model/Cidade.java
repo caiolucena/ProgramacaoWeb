@@ -1,7 +1,7 @@
 package br.uepb.model;
 
 /**
- * Essa classe é responsável por criar um objeto do tipo Cidade.
+ * Essa classe é utilizada como modelo para um objeto do tipo Cidade.
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */
