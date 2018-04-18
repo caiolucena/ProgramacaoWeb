@@ -17,18 +17,23 @@ import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
 import br.uepb.model.acervo.Tcc;
 import br.uepb.model.enums.Tipo_tcc;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Tcc
+ * Ela implementa a interface Item_Acervo passando o tipo Tcc.
+ * @author EquipeACL
+ */
 public class TccDAO implements Item_Acervo<Tcc>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(TccDAO.class);
 
 	/**
-	 * Método para inserir Tcc no banco de dados
-	 * @param tcc
+	 * Método para inserir um Tcc no banco de dados
+	 * @param tcc, objeto do tipo Tcc
 	 * @throws SQLExcption
 	 * @throws JavaLangException
-	 * @return true or false
+	  * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Tcc tcc) {
@@ -65,11 +70,12 @@ public class TccDAO implements Item_Acervo<Tcc>{
 	}
 
 	/**
-	 * Método para remover Tcc no banco de dados
-	 * @param tcc
+	 * Método para remover um Tcc no banco de dados, utilizando o seu id
+	 * @param tcc, objeto do tipo Tcc
 	 * @throws SQLExcption
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Tcc tcc) {
@@ -100,11 +106,12 @@ public class TccDAO implements Item_Acervo<Tcc>{
 	}
 
 	/**
-	 * Método para atualizar Tcc no banco de dados
-	 * @param tcc
+	 * Método para atualizar um Tcc no banco de dados, utilizando o seu id
+	 * @param tcc, objeto do tipo Tcc
 	 * @throws SQLExcption
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Tcc tcc) {
@@ -137,11 +144,11 @@ public class TccDAO implements Item_Acervo<Tcc>{
 		return false;
 	}
 	/**
-	 * Método para pesquisar Tcc no banco de dados
-	 * @param tcc
+	 * Método para pesquisar Tcc no banco de dados, utilizando seu titulo
+	 * @param tcc, objeto do tipo Tcc
 	 * @throws SQLExcption
 	 * @throws JavaLangException
-	 * @return ArrayList<Tcc> listaTcc
+	 * @return ArrayList<Tcc> listaTcc, lista de tccs retornados pela busca
 	 */
 	public ArrayList<Tcc> searchItemAcervo(Tcc tcc) {
 		

@@ -18,16 +18,21 @@ import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 import br.uepb.model.acervo.Livro;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Livro
+ * Ela implementa a interface Item_Acervo passando o tipo Livro.
+ * @author EquipeACL
+ */
 public class LivroDAO implements Item_Acervo<Livro>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(LivroDAO.class); 
 
 	/**
 	 * Método para inserir um Livro no banco de dados
-	 * @param livro
+	 * @param livro, objeto do tipo Livro
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean createItemAcervo(Livro livro) {
 		String sql = "insert into livro(isbn,titulo,editora_id,ano,edicao,num_pag,area_conhecimento_id) values (?,?,?,?,?,?,?)";
@@ -77,9 +82,10 @@ public class LivroDAO implements Item_Acervo<Livro>{
 
 	/**
 	 * Método para remover um Livro no banco de dados
-	 * @param livro
+	 * @param livro, objeto do tipo Livro
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean removeItemAcervo(Livro livro) {
 		try {
@@ -113,11 +119,11 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	
 	/**
 	 * Método para atualizar um Livro no banco de dados
-	 * @param livro
+	 * @param livro, objeto do tipo Livro
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
-
 	public boolean updateItemAcervo(Livro livro) {
 		String sql = "update livro set titulo=?,editora_id=?,ano=?,edicao=?,num_pag=?,area_conhecimento_id=? where isbn=?";
 		try {
@@ -156,9 +162,9 @@ public class LivroDAO implements Item_Acervo<Livro>{
 
 	/**
 	 * Método para buscar um Livro no banco de dados
-	 * @param livro
+	 * @param livro, objeto do tipo Livro
 	 * @throws SQLException
-	 * @return ArrayList<Livro>
+	 * @return ArrayList<Livro> livros, lista de livros retornados pela busca
 	 */
 	public ArrayList<Livro> searchItemAcervo(Livro livro) {
 		String sql = "select L.isbn as 'isbn', L.titulo as 'titulo', L.ano as 'ano', L.edicao as 'edicao', "

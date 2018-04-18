@@ -13,7 +13,11 @@ import org.apache.log4j.LogManager;
 import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.acervo.Jornal;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Jornal
+ * Ela implementa a interface Item_Acervo passando o tipo Jornal.
+ * @author EquipeACL
+ */
 public class JornalDAO implements Item_Acervo<Jornal>{
 
 	private Connection con;
@@ -21,11 +25,11 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	/**
 	 * Método para inserir um Jornal no banco de dados
-	 * @param jornal
+	 * @param jornal, objeto do tipo Jornal
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
-
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Jornal jornal) {		
 		String	sql	=	"insert	into jornal"	+
@@ -66,11 +70,11 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	/**
 	 * Método para remover um Jornal do banco de dados
-	 * @param jornal
+	 * @param jornal, objeto do tipo Jornal
 	 * @throws SQLException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Jornal jornal) {
 
@@ -104,11 +108,11 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 
 	/**
 	 * Método para atualizar um jornal no banco de dados
-	 * @param jornal
+	 * @param jornal, objeto do tipo Jornal
 	 * @throws SQLException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Jornal jornal) {
 		String	sql	=	"UPDATE jornal set titulo =?,data=?,edicao=?"	+
@@ -139,11 +143,10 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	}
 	/**
 	 * Método para pesquisar Jornal no banco de dados
-	 * @param jornal
+	 * @param jornal, objeto do tipo Jornal
 	 * @throws SQLException
-	 * @return ArrayList <Jornal> jornais
-	 */
-	
+	 * @return ArrayList <Jornal> jornais, lista de jornais retornados pela busca
+	 */	
 	public ArrayList<Jornal> searchItemAcervo(Jornal jornal) {
 
 		PreparedStatement stmt = null;

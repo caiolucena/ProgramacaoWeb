@@ -14,7 +14,11 @@ import br.uepb.dao.Conexao;
 import br.uepb.dao.Item_Acervo;
 import br.uepb.model.Editora;
 import br.uepb.model.acervo.Revista;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Revista
+ * Ela implementa a interface Item_Acervo passando o tipo Revista.
+ * @author EquipeACL
+ */
 public class RevistaDAO implements Item_Acervo<Revista>{
 
 	private Connection con;
@@ -22,10 +26,11 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	
 	/**
 	 * Método para inserir Revista no banco de dados
-	 * @param revista
+	 * @param revista, objeto do tipo Revista
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false 
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Revista revista) {		
@@ -67,11 +72,12 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	}
 	
 	/**
-	 * Método para remover Revista do banco de dados
-	 * @param revista
+	 * Método para remover uma Revista do banco de dados, utilizando seu id
+	 * @param revista, objeto do tipo Revista
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false 
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Revista revista) {
@@ -100,11 +106,12 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	}
 
 	/**
-	 * Método para atualizar Revista no banco de dados
-	 * @param revista
+	 * Método para atualizar uma Revista no banco de dados
+	 * @param revista, objeto do tipo Revista
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false 
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Revista revista) {
@@ -136,11 +143,11 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	}
 
 	/**
-	 * Método para pesquisar Revista no banco de dados
-	 * @param revista
+	 * Método para pesquisar uma Revista utilizando o titulo no banco de dados
+	 * @param revista, objeto do tipo Revista
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<Revista> revistas
+	 * @return ArrayList<Revista> revistas, lista de revistas retornadas pela busca
 	 */
 	public ArrayList<Revista> searchItemAcervo(Revista revista) {
 

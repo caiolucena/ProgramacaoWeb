@@ -15,17 +15,22 @@ import br.uepb.dao.Item_Acervo;
 import br.uepb.model.acervo.Livro;
 import br.uepb.model.acervo.Midias_Eletronicas;
 import br.uepb.model.enums.Tipo_midia;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Midias_Eletronicas
+ * Ela implementa a interface Item_Acervo passando o tipo Midias_Eletronicas.
+ * @author EquipeACL
+ */
 public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(MidiasEletronicasDAO.class); 
 	
 	/**
-	 * Método para inserir Midia Eletrônica no banco de dados
-	 * @param midia
+	 * Método para inserir uma Midia Eletrônica no banco de dados
+	 * @param midia, objeto do tipo Midias_Eletronicas
 	 * @throws SQLException 
 	 * @throws JavaLangException 
-	 * @return true or false
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean createItemAcervo(Midias_Eletronicas midia) {
 		
@@ -61,11 +66,12 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 
 	/**
-	 * Método para remover Midia Eletrônica do banco de dados
-	 * @param midia
+	 * Método para remover uma Midia Eletrônica do banco de dados
+	 * @param midia, objeto do tipo Midias_Eletronicas
 	 * @throws SQLException 
 	 * @throws JavaLangException 
-	 * @return true or false
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean removeItemAcervo(Midias_Eletronicas midia) {
 		String sql = "delete from midia where id=?";
@@ -90,10 +96,11 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 	/**
 	 * Método para atualizar Midia Eletrônica no banco de dados
-	 * @param midia
+	 * @param midia, objeto do tipo Midias_Eletronicas
 	 * @throws SQLException 
 	 * @throws JavaLangException 
-	 * @return true or false
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean updateItemAcervo(Midias_Eletronicas midia) {
 		String sql = "update midia set titulo=?,tipo=?,data_gravacao=? where id=?";
@@ -121,10 +128,10 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	}
 	/**
 	 * Método para pesquisar Midia Eletrônica no banco de dados
-	 * @param midia
+	 * @param midia, objeto do tipo Midias_Eletronicas
 	 * @throws SQLException 
 	 * @throws JavaLangException 
-	 * @return ArrayList<Midias_Eletronicas> midias
+	 * @return ArrayList<Midias_Eletronicas> midias, lista de midias retornadas pela busca
 	 */
 	public ArrayList<Midias_Eletronicas> searchItemAcervo(Midias_Eletronicas midia) {
 		String sql = "select * from midia where titulo like ?";

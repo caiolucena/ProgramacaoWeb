@@ -16,7 +16,11 @@ import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.acervo.Anais;
 import br.uepb.model.enums.Tipo_anal;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Anais
+ * Ela implementa a interface Item_Acervo passando o tipo Anais.
+ * @author EquipeACL
+ */
 public class AnaisDAO implements Item_Acervo<Anais>{
 	
 	private Connection con;
@@ -24,11 +28,11 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	
 	/**
 	 * Método para inserir um Anal de Congresso no banco de dados
-	 * @param anal
+	 * @param anal, objeto do tipo Anais
 	 * @throws SQLException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operaçao de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	@SuppressWarnings("finally")
 	public boolean createItemAcervo(Anais anal) {
 		
@@ -86,11 +90,11 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	
 	/**
 	 * Método para remover um Anal de Congresso do banco de dados
-	 * @param anal
+	 * @param anal, objeto do tipo Anais
 	 * @throws SQLException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operaçao de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */		
 	@SuppressWarnings("finally")
 	public boolean removeItemAcervo(Anais anal) {
 		PreparedStatement stmt = null;
@@ -128,12 +132,11 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	
 	/**
 	 * Método para atualizar um Anal de Congresso no banco de dados
-	 * @param anal
+	 * @param anal, objeto do tipo Anais
 	 * @throws SQLException
-	 * @return true or false
-	 * 
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
-
 	@SuppressWarnings("finally")
 	public boolean updateItemAcervo(Anais anal) {
 		PreparedStatement stmt = null;
@@ -168,11 +171,10 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	
 	/**
 	 * Método para pesquisar Anais de Congresso no banco de dados
-	 * @param anal
+	 * @param anal, objeto do tipo Anais
 	 * @throws SQLException
-	 * @return ArrayList<Anais> listaAnais
+	 * @return ArrayList<Anais> listaAnais, lista de anais retornados pela busca
 	 */
-
 	public ArrayList<Anais> searchItemAcervo(Anais anal) {
 		
 		ArrayList<Anais> listaAnais = new ArrayList<Anais>();
