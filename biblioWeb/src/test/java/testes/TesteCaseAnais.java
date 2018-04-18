@@ -39,7 +39,7 @@ public class TesteCaseAnais {
 		anais.setAutor(autor);		
 		anais.setLocal(cidade);
 		anais.setNome_congresso("Congreso1");
-		anais.setTipo(Tipo_anal.artigo);
+		anais.setTipo(Tipo_anal.ARTIGO);
 		anais.setTitulo("Titulo1");
 		assertTrue(anaisDao.createItemAcervo(anais));
 	}

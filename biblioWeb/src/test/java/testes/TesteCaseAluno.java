@@ -18,7 +18,7 @@ public class TesteCaseAluno {
 	@Test
 	public void test() throws Exception {
 		AreaConhecimento area = new AreaConhecimento(1,"EXATAS");
-		Curso c = new Curso("sad","as", area, Tipo_curso.graduacao);
+		Curso c = new Curso("sad","as", area, Tipo_curso.GRADUACAO);
 		c.setId(1);
 		Aluno a = new Aluno(123,123,"CG","Lucas","Cleo","rua 2",123,c,Tipo_nivel_aluno.G,"qwe",new Date(System.currentTimeMillis()),1,"123");
 		System.out.println(a.getMatricula());

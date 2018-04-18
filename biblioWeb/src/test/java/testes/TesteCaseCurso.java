@@ -29,7 +29,7 @@ public class TesteCaseCurso {
 	public void testeCreateCurso(){
 		curso.setNome("Computação");
 		curso.setSigla("CC");
-		curso.setTipo(Tipo_curso.graduacao);
+		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
@@ -49,17 +49,17 @@ public class TesteCaseCurso {
 	public void testeRemoveCurso(){
 		curso.setNome("Computação1");
 		curso.setSigla("CC");
-		curso.setTipo(Tipo_curso.graduacao);
+		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
 		curso.setNome("Computação2");
-		curso.setTipo(Tipo_curso.graduacao);
+		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
 		curso.setNome("Computação3");
-		curso.setTipo(Tipo_curso.graduacao);
+		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
@@ -75,7 +75,7 @@ public class TesteCaseCurso {
 	public void testeUpdateCurso(){
 		curso.setNome("Computação1");
 		curso.setSigla("CC");
-		curso.setTipo(Tipo_curso.graduacao);
+		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
@@ -84,7 +84,7 @@ public class TesteCaseCurso {
 		curso = lista.get(0);
 		
 		curso.setNome("ComputaçãoNovo");
-		curso.setTipo(Tipo_curso.pos_graduacao);
+		curso.setTipo(Tipo_curso.POS_GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
 		assertTrue(cursoDao.updateCurso(curso));
 		

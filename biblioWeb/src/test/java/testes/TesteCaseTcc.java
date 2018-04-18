@@ -17,7 +17,7 @@ import br.uepb.model.Orientador;
 import br.uepb.model.acervo.Tcc;
 import br.uepb.model.enums.Tipo_tcc;
 
-public class testCaseTcc {
+public class TesteCaseTcc {
 
 	Tcc trabalho;
 	TccDAO trabalhoDao;
@@ -56,7 +56,7 @@ public class testCaseTcc {
 		trabalho.setAno_defesa(new Date(System.currentTimeMillis()));
 		trabalho.setCidade(cidade);
 		trabalho.setTitulo("Trabalho de conclusao");
-		trabalho.setTipo(Tipo_tcc.monografia);
+		trabalho.setTipo(Tipo_tcc.MONOGRAFIA);
 		trabalho.setOrientador(orientador);
 		
 		assertTrue(trabalhoDao.createItemAcervo(trabalho));

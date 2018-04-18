@@ -77,7 +77,7 @@ public class TesteCaseLivro {
 		livro.setEdicao(1);
 		livro.setEditora(editora);
 		livro.setNumero_paginas(200);
-		livro.setAno_publicacao(new Date(System.currentTimeMillis()));
+		livro.setData(new Date(System.currentTimeMillis()));
 		assertTrue(livroDao.createItemAcervo(livro));
 		assertTrue(livroDao.removeItemAcervo(livro));
 	}
@@ -91,7 +91,7 @@ public class TesteCaseLivro {
 		livro.setEdicao(1);
 		livro.setEditora(editora);
 		livro.setNumero_paginas(200);
-		livro.setAno_publicacao(new Date(System.currentTimeMillis()));
+		livro.setData(new Date(System.currentTimeMillis()));
 		assertTrue(livroDao.createItemAcervo(livro));
 		livro.setTitulo("NovoTitulo");
 		assertTrue(livroDao.updateItemAcervo(livro));
@@ -107,7 +107,7 @@ public class TesteCaseLivro {
 		livro.setEdicao(1);
 		livro.setEditora(editora);
 		livro.setNumero_paginas(200);
-		livro.setAno_publicacao(new Date(System.currentTimeMillis()));
+		livro.setData(new Date(System.currentTimeMillis()));
 		assertTrue(livroDao.createItemAcervo(livro));
 		livro.setTitulo("NovoTitulo");
 		assertTrue(livroDao.updateItemAcervo(livro));
