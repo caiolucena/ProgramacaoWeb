@@ -5,7 +5,12 @@ import java.text.DateFormat;
 
 import br.uepb.model.Curso;
 import br.uepb.model.enums.Tipo_nivel_aluno;
-
+/**
+ * Essa classe é responsável por criar um objeto do tipo Aluno;
+ * A classe contém os respectivos getters and setters de seus atributos únicos.
+ * A classe Aluno extende a classe Usuário, que contém os atributos e métodos comuns a todos os usuários do sistema.
+ * @author EquipeACL
+ */
 public class Aluno extends Usuario {
 	
 	private String matricula;
@@ -15,31 +20,65 @@ public class Aluno extends Usuario {
 	private Date anoIngresso;
 	private int periodoIngresso;
 
-	
+	/**
+	 * Método construtor da classe Aluno
+	 * Construtor vazio (utilizado para criar um objeto do tipo Aluno sem parâmetros definidos)
+	 */
 	public Aluno() {	
 	}
-		
+	/**
+	 * Método construtor da classe Aluno (utilizado para instanciar objetos durante a busca de um objeto do tipo Aluno no Banco de Dados)
+	 * @param matricula, matrícula do aluno
+	 * @param cpf, número do CPF do aluno
+	 * @param rg, número do RG do aluno
+	 * @param naturalidade, cidade natal do aluno
+	 * @param nomeCompleto, nome completo do aluno
+	 * @param nomeMae, nome completo da mãe do aluno
+	 * @param endereco, endereço do aluno
+	 * @param telefone, telefone para contato do aluno
+	 * @param curso, Objeto do tipo Curso referente ao curso que o aluno ingressou
+	 * @param nivel, Enum do nivel do aluno (se é graduando, mestrando, doutorando ou pós-doutorando)
+	 * @param email, endereço de email do aluno
+	 * @param anoIngresso, o ano de ingresso do aluno no curso
+	 * @param periodoIngresso, o período de ingresso do aluno no curso
+	 * @param senhaAcesso, a senha de acesso ao sistema do aluno
+	 */
 	public Aluno(String matricula, int cpf, int rg, String naturalidade, String nomeCompleto, String nomeMae,
 			String endereco, int telefone, Curso curso, Tipo_nivel_aluno nivel, String email, Date anoIngresso,
 			int periodoIngresso, String senhaAcesso) {
 		super(cpf, nomeCompleto, rg, naturalidade, endereco, telefone, email, senhaAcesso);
-		this.nomeMae = nomeMae;
-		this.curso = curso;
-		this.nivel = nivel;
-		this.anoIngresso = anoIngresso;
-		this.periodoIngresso = periodoIngresso;
+		setMatricula(matricula);
+		setCurso(curso);
+		setNivel(nivel);
+		setAnoIngresso(anoIngresso);
+		setPeriodoIngresso(periodoIngresso);
 	}
-
+	/**
+	 * Método construtor da classe Aluno (utilizado como objeto que será passado por parâmetro durante a inserção de um objeto do tipo Aluno no Banco de Dados
+	 * @param cpf, número do CPF do aluno
+	 * @param rg, número do RG do aluno
+	 * @param naturalidade, cidade natal do aluno
+	 * @param nomeCompleto, nome completo do aluno
+	 * @param nomeMae, nome completo da mãe do aluno
+	 * @param endereco, endereço do aluno
+	 * @param telefone, telefone para contato do aluno
+	 * @param curso, Objeto do tipo Curso referente ao curso que o aluno ingressou
+	 * @param nivel, Enum do nivel do aluno (se é graduando, mestrando, doutorando ou pós-doutorando)
+	 * @param email, endereço de email do aluno
+	 * @param anoIngresso, o ano de ingresso do aluno no curso
+	 * @param periodoIngresso, o período de ingresso do aluno no curso
+	 * @param senhaAcesso, a senha de acesso ao sistema do aluno
+	 */
 	public Aluno(int cpf, int rg, String naturalidade, String nomeCompleto, String nomeMae,
 			String endereco, int telefone, Curso curso, Tipo_nivel_aluno nivel, String email, Date anoIngresso, int periodoIngresso,
 			String senhaAcesso) {
 		super(cpf, nomeCompleto, rg, naturalidade, endereco, telefone, email, senhaAcesso);
 
-		this.nomeMae = nomeMae;
-		this.curso = curso;
-		this.nivel = nivel;
-		this.anoIngresso = anoIngresso;
-		this.periodoIngresso = periodoIngresso;
+		setNomeMae(nomeMae);
+		setCurso(curso);
+		setNivel(nivel);
+		setAnoIngresso(anoIngresso);
+		setPeriodoIngresso(periodoIngresso);
 		gerarMatrcula();
 		
 	}
@@ -81,6 +120,9 @@ public class Aluno extends Usuario {
 	public void setPeriodoIngresso(int periodoIngresso) {
 		this.periodoIngresso = periodoIngresso;
 	}
+	/**
+	 * Método utilizaod para gerar a matrícula do aluno, utilizando os atributos da própria classe
+	 */
 	public void gerarMatrcula() {
 		
 		this.matricula = "";

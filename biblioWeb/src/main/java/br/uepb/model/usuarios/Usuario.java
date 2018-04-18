@@ -3,7 +3,12 @@ package br.uepb.model.usuarios;
 import java.util.ArrayList;
 
 import br.uepb.dao.usuarios.AlunoDAO;
-
+/**
+ * Essa classe é responsável por criar um objeto do tipo Usuario;
+ * A classe contém os respectivos getters and setters de seus atributos únicos.
+ * Essa classe é a super classe que os usuarios do sistema herdam seus métodos e atributos, que são comuns a todos.
+ * @author EquipeACL
+ */
 public class Usuario implements Interface_manterAluno {
 	
 	protected AlunoDAO alunoDAO;
@@ -17,19 +22,35 @@ public class Usuario implements Interface_manterAluno {
 	protected String email;
 	protected String senhaAcesso;
 	
+	/**
+	 * Método Construtor da classe Usuário
+	 * Construtor vazio (utilizado para criar um objeto do tipo Usuario sem parâmetros definidos)
+	 */
 	public Usuario() {
 		
 	}
+	
+	/**
+	 * Método Construtor da classe Usuário
+	 * @param cpf, número do cpf do Usuário
+	 * @param nomeCompleto, nome completo do Usuário
+	 * @param rg, numero do rg do Usuário
+	 * @param naturalidade, cidade natal do Usuário
+	 * @param endereco, endereço completo do Usuário
+	 * @param telefone, telefone de contato do Usuário
+	 * @param email, endereço de email do Usuário
+	 * @param senhaAcesso, senha de acesso ao sistema do Usuário
+	 */
 	public Usuario(int cpf, String nomeCompleto, int rg, String naturalidade, String endereco, int telefone,
 			String email, String senhaAcesso) {
-		this.cpf = cpf;
-		this.nomeCompleto = nomeCompleto;
-		this.rg = rg;
-		this.naturalidade = naturalidade;
-		this.endereco = endereco;
-		this.telefone = telefone;
-		this.email = email;
-		this.senhaAcesso = senhaAcesso;
+		setCpf(cpf);
+		setNomeCompleto(nomeCompleto);
+		setRg(rg);
+		setNaturalidade(naturalidade);
+		setEndereco(endereco);
+		setTelefone(telefone);
+		setEmail(email);
+		setSenhaAcesso(senhaAcesso);
 	}
 	public int getCpf() {
 		return cpf;
@@ -79,25 +100,50 @@ public class Usuario implements Interface_manterAluno {
 	public void setSenhaAcesso(String senhaAcesso) {
 		this.senhaAcesso = senhaAcesso;
 	}
+
+	/**
+	 * Método responsável por inserir um objeto do tipo Aluno no sistema
+	 * @param aluno, que é um objeto do tipo Aluno
+	 * @return false, caso haja algum problema na validação do objeto recebido por parâmetro ou caso haja algum problema durante a inserção do objeto passado por parâmetro no banco de dados.
+	 * @return true, caso haja sucesso na inserção do objeto recebido por parâmetro no Banco de Dados
+	 */
 	public boolean createAluno(Aluno aluno) {
 		if(validaAluno(aluno)) {
 			return alunoDAO.createUsuario(aluno);
 		}
 		return false;
 	}
+	/**
+	 * Método responsável por atualizar um objeto do tipo Aluno no sistema
+	 * @param aluno, que é um objeto do tipo Aluno
+	 * @return false, caso haja algum problema na validação do objeto recebido por parâmetro ou caso haja algum problema durante a atualização do objeto passado por parâmetro no banco de dados.
+	 * @return true, caso haja sucesso na atualização do objeto recebido por parâmetro no Banco de Dados
+	 */
 	public boolean updateAluno(Aluno aluno) {
 		if(validaAluno(aluno)) {
 			return alunoDAO.updateUsuario(aluno);
 		}
 		return false;
 	}
+	
+	/**
+	 * Método responsável por realizar uma busca de um ou mais objetos do tipo Aluno no sistema
+	 * @param aluno, que é um objeto do tipo Aluno
+	 * @return null, caso haja algum problema na validação do objeto recebido por parâmetro ou caso a busca do objeto passado por parâmetro no banco de dados não tenha sucesso.
+	 * @return ArrayList<Aluno>, caso haja sucesso na busca de um ou mais objetos do tipo Aluno passado por parâmetro no Banco de Dados
+	 */
 	public ArrayList<Aluno> searchAluno(Aluno aluno) {
 		if(validaAluno(aluno)) {
 			return alunoDAO.searchUsuario(aluno);
 		}
 		return null;
 	}
-	
+	/**
+	 * Método responsável por validar um objeto do tipo Aluno
+	 * @param a, um objeto do tipo Aluno
+	 * @return false, caso haja algum problema ao longo da validação do objeto passado por parâmetro
+	 * @return true, caso haja sucesso no processo de validação do objeto passado por parâmetro
+	 */
 	public boolean validaAluno(Aluno a) {
 		// TODO validar o aluno
 		return true;
