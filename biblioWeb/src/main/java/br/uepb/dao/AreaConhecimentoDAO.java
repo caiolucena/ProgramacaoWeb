@@ -38,9 +38,9 @@ public class AreaConhecimentoDAO {
 			stmt.executeUpdate();
 			return true;
 		} catch	(SQLException e)	{
-			logger.error("Erro durante a inserção "+e);
+			logger.error("Erro durante a inserção ",e);
 		} catch (Exception e) {
-			logger.error("Erro durante a inserção "+e);
+			logger.error("Erro durante a inserção ",e);
 		} finally {
 			try {
 				stmt.close();
@@ -48,7 +48,7 @@ public class AreaConhecimentoDAO {
 				logger.info("Conexão Fechada na inserção");
 			
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na inserção "+e);
+				logger.error("Erro ao fechar a conexão na inserção ",e);
 			}
 		}
 		return false;
@@ -78,10 +78,10 @@ public class AreaConhecimentoDAO {
 				listaAreas.add(a);
 			}
 		} catch (SQLException e) {
-			logger.error("Erro durante a busca "+e);
+			logger.error("Erro durante a busca ",e);
 			return null;
 		} catch (Exception e) {
-			logger.error("Erro durante a busca "+e);
+			logger.error("Erro durante a busca ",e);
 			return null;
 		} finally {
 			try {
@@ -89,7 +89,7 @@ public class AreaConhecimentoDAO {
 				con.close();
 				logger.info("Conexão Fechada na busca");
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na busca "+e);	
+				logger.error("Erro ao fechar a conexão na busca ",e);	
 			}		
 		}
 		
@@ -118,17 +118,17 @@ public class AreaConhecimentoDAO {
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			logger.error("Erro durante a remoção "+e);
+			logger.error("Erro durante a remoção ",e);
 			
 		} catch (Exception e) {
-			logger.error("Erro durante a remoção "+e);
+			logger.error("Erro durante a remoção ",e);
 		} finally {
 			try {
 				stmt.close();
 				con.close();
 				logger.info("Conexão Fechada na remoção");
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na remoção "+e);
+				logger.error("Erro ao fechar a conexão na remoção ",e);
 			}
 		}
 		return false;
@@ -156,9 +156,9 @@ public class AreaConhecimentoDAO {
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			logger.error("Erro ao atualizar "+e);
+			logger.error("Erro ao atualizar ",e);
 		} catch (Exception e) {
-			logger.error("Erro ao atualizar "+e);
+			logger.error("Erro ao atualizar ",e);
 		} finally {
 			
 			try {
@@ -166,7 +166,7 @@ public class AreaConhecimentoDAO {
 				stmt.close();
 				logger.info("Conexão fechada na atualização");
 			} catch (SQLException e) {
-				logger.error("Erro ao fechar conexão na atualização "+e);
+				logger.error("Erro ao fechar conexão na atualização ",e);
 			}
 		}
 		return false;

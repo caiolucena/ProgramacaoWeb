@@ -38,7 +38,7 @@ public class CidadeDAO {
 			stmt.executeUpdate();
 			
 		} catch	(SQLException e)	{
-			logger.error("Erro durante a inserção "+e);
+			logger.error("Erro durante a inserção ",e);
 			return false;
 		} finally {
 			try {
@@ -47,7 +47,7 @@ public class CidadeDAO {
 				logger.info("Conexão Fechada na inserção");
 				return true;
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na inserção "+e);
+				logger.error("Erro ao fechar a conexão na inserção ",e);
 				return false;
 			}
 		}	
@@ -83,7 +83,7 @@ public class CidadeDAO {
 			}
 		
 		} catch (SQLException e) {
-			logger.error("Erro durante a busca "+e);
+			logger.error("Erro durante a busca ",e);
 			return null;
 		} finally {
 			try {
@@ -91,7 +91,7 @@ public class CidadeDAO {
 				con.close();
 				logger.info("Conexão Fechada na busca");
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na busca "+e);
+				logger.error("Erro ao fechar a conexão na busca ",e);
 			}
 		}
 		
@@ -120,7 +120,7 @@ public class CidadeDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			logger.error("Erro durante a remoção da cidade "+e);
+			logger.error("Erro durante a remoção da cidade ",e);
 			return false;
 			
 		} finally {
@@ -130,7 +130,7 @@ public class CidadeDAO {
 				logger.info("Conexão Fechada na remoção");
 				return true;
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na remoção "+e);
+				logger.error("Erro ao fechar a conexão na remoção ",e);
 				return false;
 			}
 		}		
@@ -159,7 +159,7 @@ public class CidadeDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			logger.error("Erro durante a atualização da cidade "+e);
+			logger.error("Erro durante a atualização da cidade ",e);
 			return false;
 			
 		} finally {
@@ -169,7 +169,7 @@ public class CidadeDAO {
 				logger.info("Conexão Fechada na atualização");
 				return true;
 			}catch(SQLException e){
-				logger.error("Erro ao fechar a conexão na atualização "+e);
+				logger.error("Erro ao fechar a conexão na atualização ",e);
 				return false;
 			}
 		}		
