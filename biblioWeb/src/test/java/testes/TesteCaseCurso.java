@@ -30,7 +30,7 @@ public class TesteCaseCurso {
 		curso.setNome("Computação");
 		curso.setSigla("CC");
 		curso.setTipo(Tipo_curso.GRADUACAO);
-		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
+		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve estar cadastrada
 		assertTrue(cursoDao.createCurso(curso));
 		
 		curso = new Curso();
