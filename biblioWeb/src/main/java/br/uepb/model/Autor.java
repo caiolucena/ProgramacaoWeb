@@ -1,15 +1,30 @@
 package br.uepb.model;
 
+/**
+ * Essa classe é responsável por criar um objeto do tipo Autor.
+ * A classe contém os respectivos getters and setters de seus atributos.
+ * @author EquipeACL
+ */
 public class Autor {
 	private int id;
 	private String nome;
 	
+	/**
+	 * Método construtor da classe Autor
+	 * Construtor vazio (utilizado para criar um objeto do tipo Autor sem parâmetros definidos)
+	 */
 	public Autor(){
 		
 	}
+	
+	/**
+	 * Método construtor da classe Autor (utilizado para criar um objeto do tipo Autor com parâmetros definidos)
+	 * @param id, id do autor
+	 * @param nome, nome do autor
+	 */
 	public Autor(int id, String nome) {
-		this.id = id;
-		this.nome = nome;
+		setId(id);
+		setNome(nome);
 	}
 	
 	public int getId() {

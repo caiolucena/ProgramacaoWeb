@@ -1,18 +1,33 @@
 package br.uepb.model;
 
+/**
+ * Essa classe é responsável por criar um objeto do tipo Orientador.
+ * A classe contém os respectivos getters and setters de seus atributos.
+ * @author EquipeACL
+ */
 public class Orientador {
 	private int id;
 	private String nome;
 	private String formacao;
 	
+	/**
+	 * Método construtor da classe Orientador
+	 * Construtor vazio (utilizado para criar um objeto do tipo Orientador sem parâmetros definidos)
+	 */
 	public Orientador(){		
 		
 	}
 	
+	/**
+	 * Método construtor da classe Orientador (utilizado para criar um objeto do tipo Orientador com parâmetros definidos)
+	 * @param id, id do orientador
+	 * @param nome, nome do orientador
+	 * @param formacao, formacao do orientado
+	 */
 	public Orientador(int id,String nome, String formacao){
-		this.id = id;
-		this.nome = nome;
-		this.formacao = formacao;
+		setId(id);
+		setNome(nome);
+		setFormacao(formacao);
 	}
 	
 	public int getId() {

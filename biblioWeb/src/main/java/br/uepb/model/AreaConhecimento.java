@@ -1,15 +1,30 @@
 package br.uepb.model;
 
+/**
+ * Essa classe é responsável por criar um objeto do tipo AreaConhecimento.
+ * A classe contém os respectivos getters and setters de seus atributos.
+ * @author EquipeACL
+ */
 public class AreaConhecimento {
 	private int id;
 	private String nome;
 	
+	/**
+	 * Método construtor da classe AreaConhecimento
+	 * Construtor vazio (utilizado para criar um objeto do tipo AreaConhecimento sem parâmetros definidos)
+	 */
 	public AreaConhecimento() {
 		
 	}
+	
+	/**
+	 * Método construtor da classe AreaConhecimento (utilizado para criar um objeto do tipo AreaConhecimento com parâmetros definidos)
+	 * @param id, id da área do conhecimento
+	 * @param nome, nome da área do conhecimento
+	 */
 	public AreaConhecimento(int id, String nome) {
-		this.id = id;
-		this.nome = nome;
+		setId(id);
+		setNome(nome);
 	}
 
 	public int getId() {

@@ -23,7 +23,7 @@ public class Funcionario extends Usuario {
 	public Funcionario(int cpf, String nomeCompleto, int rg, String naturalidade, String endereco, int telefone,
 			String email, String senhaAcesso, String nomeUsuario) {
 		super(cpf, nomeCompleto, rg, naturalidade, endereco, telefone, email, senhaAcesso);
-		this.nomeUsuario = nomeUsuario;
+		setNomeUsuario(nomeUsuario);
 	}
 
 	public String getNomeUsuario() {

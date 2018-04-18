@@ -12,6 +12,11 @@ import org.apache.log4j.Logger;
 import br.uepb.dao.Conexao;
 import br.uepb.model.usuarios.Funcionario;
 
+/**
+ * Essa classe é responsável por se conectar com a tabela funcionario do Banco de Dados para operações de inserir, atualizar, remover e buscar. 
+ * @author EquipeACL
+ *
+ */
 public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 
 	private Connection con;
@@ -19,9 +24,10 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 
 	/**
 	 * Método para inserir um Funcionario no banco de dados
-	 * @param funcionario
+	 * @param funcionario, objeto do tipo Funcionario
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a inserção dos dados no banco de dados é bem sucedida
+	 * @return false, se houver algum problema durante a inserção dos dados no banco de dados
 	 */
 	public boolean createUsuario(Funcionario funcionario) {
 
@@ -62,9 +68,10 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 
 	/**
 	 * Método para remover um Funcionario no banco de dados
-	 * @param funcionario
+	 * @param funcionario, objeto do tipo Funcionario
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a inserção dos dados no banco de dados é bem sucedida
+	 * @return false, se houver algum problema durante a inserção dos dados no banco de dados
 	 */
 	public boolean removeUsuario(Funcionario funcionario) {
 		PreparedStatement stmt = null;
@@ -93,9 +100,10 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 
 	/**
 	 * Método para atualizar um Funcionario no banco de dados
-	 * @param funcionario
+	 * @param funcionario, objeto do tipo Funcionario
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a inserção dos dados no banco de dados é bem sucedida
+	 * @return false, se houver algum problema durante a inserção dos dados no banco de dados
 	 */
 	public boolean updateUsuario(Funcionario funcionario) {
 		PreparedStatement stmt = null;
@@ -132,9 +140,10 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 
 	/**
 	 * Método para buscar um Funcionario no banco de dados
-	 * @param funcionario
+	 * @param funcionario, objeto do tipo Funcionario
 	 * @throws SQLException
-	 * @return ArrayList<Funcionario>
+	 * @return ArrayList<Funcionario>, se houver um ou mais funcionarios que atendam ao requisito
+	 * @return null, se a busca não retornar nenhum resultado	 
 	 */
 	public ArrayList<Funcionario> searchUsuario(Funcionario funcionario) {
 		ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();

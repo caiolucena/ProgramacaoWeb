@@ -1,19 +1,36 @@
 package br.uepb.model;
 
+/**
+ * Essa classe é responsável por criar um objeto do tipo Cidade.
+ * A classe contém os respectivos getters and setters de seus atributos.
+ * @author EquipeACL
+ */
 public class Cidade {
 	private int id;
 	private int codigo;
 	private String nome;
 	private String uf;
 	
+	/**
+	 * Método construtor da classe Cidade
+	 * Construtor vazio (utilizado para criar um objeto do tipo Cidade sem parâmetros definidos)
+	 */
 	public Cidade() {
 		
 	}
+	
+	/**
+	 * Método construtor da classe Cidade (utilizado para criar um objeto do tipo Cidade com parâmetros definidos)
+	 * @param id, id da cidade
+	 * @param codigo, codigo da cidade
+	 * @param nome, nome da cidade
+	 * @param uf, união federativa da cidade
+	 */
 	public Cidade(int id, int codigo, String nome, String uf) {
-		this.id = id;
-		this.codigo = codigo;
-		this.nome = nome;
-		this.uf = uf;
+		setId(id);
+		setCodigo(codigo);
+		setNome(nome);
+		setUf(uf);
 	}
 	
 	public int getId() {

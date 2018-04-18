@@ -19,7 +19,11 @@ import br.uepb.model.enums.Tipo_nivel_aluno;
 import br.uepb.model.usuarios.Aluno;
 
 
-
+/**
+ * Essa classe é responsável por se conectar com a tabela Aluno do Banco de Dados para operações de inserir, atualizar, remover e buscar. 
+ * @author EquipeACL
+ *
+ */
 public class AlunoDAO implements Interface_usuario<Aluno> {
 	
 	private Connection con;
@@ -27,9 +31,10 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 	
 	/**
 	 * Método para inserir um Aluno no banco de dados
-	 * @param aluno
+	 * @param aluno, objeto do tipo Aluno
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a inserção dos dados no banco de dados é bem sucedida
+	 * @return false, se houver algum problema durante a inserção dos dados no banco de dados
 	 */
 	public boolean createUsuario(Aluno aluno) {
 		
@@ -80,9 +85,10 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 	}
 	/**
 	 * Método para remover um Aluno no banco de dados
-	 * @param aluno
+	 * @param aluno, objeto do tipo Aluno
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a remoção dos dados no banco de dados é bem sucedida
+	 * @return false, se houver algum problema durante a remoção dos dados no banco de dados
 	 */
 	public boolean removeUsuario(Aluno aluno) {
 		
@@ -112,9 +118,10 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 
 	/**
 	 * Método para atualizar um Aluno no banco de dados
-	 * @param aluno
+	 * @param aluno, objeto do tipo Aluno
 	 * @throws SQLException
-	 * @return true or false
+	 * @return true, se a atualização dos dados no banco de dados é bem sucedida
+	 * @return false, se houver algum problema durante a atualização dos dados no banco de dados
 	 */
 	public boolean updateUsuario(Aluno aluno) {
 
@@ -159,10 +166,11 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 	}
 	
 	/**
-	 * Método para buscar um Aluno no banco de dados
-	 * @param aluno
+	 * Método para buscar um ou mais Alunos no banco de dados
+	 * @param aluno, objeto do tipo Aluno
 	 * @throws SQLException
-	 * @return ArrayList<Aluno>
+	 * @return ArrayList<Aluno>, se houver um ou mais alunos que atendam ao requisito
+	 * @return null, se a busca não retornar nenhum resultado
 	 */
 	public ArrayList<Aluno> searchUsuario(Aluno aluno) {
 		ArrayList<Aluno> listaAluno = new ArrayList<Aluno>();
