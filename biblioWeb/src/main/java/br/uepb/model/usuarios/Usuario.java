@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import br.uepb.dao.usuarios.AlunoDAO;
 /**
  * Essa classe é responsável por criar um objeto do tipo Usuario;
- * A classe contém os respectivos getters and setters de seus atributos únicos.
+ * A classe contém os respectivos getters and setters de seus atributos.
  * Essa classe é a super classe que os usuarios do sistema herdam seus métodos e atributos, que são comuns a todos.
  * @author EquipeACL
  */

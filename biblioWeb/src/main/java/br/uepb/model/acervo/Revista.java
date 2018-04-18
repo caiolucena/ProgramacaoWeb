@@ -3,17 +3,40 @@ package br.uepb.model.acervo;
 import java.sql.Date;
 
 import br.uepb.model.Editora;
-
+/**
+ * Essa classe é responsável por criar um objeto do tipo Revista.
+ * A classe contém os respectivos getters and setters de seus atributos.
+ * A classe Revista implementa a interface Acervo
+ * @author EquipeACL
+ */
 public class Revista implements Acervo{
 	private int id;
-	
 	private String titulo;
 	private Editora editora;
 	private Date data;
 	private int edicao;
 	private int num_pag;
 	
+	/**
+	 * Método construtor da classe Revista
+	 * Construtor vazio (utilizado para criar um objeto do tipo Revista sem parâmetros definidos)
+	 */
 	public Revista() {		
+	}
+	/**
+	 * Método construtor da classe Revista (utilizado para criar um objeto do tipo Revista com parâmetros definidos)
+	 * @param titulo, titulo da revista
+	 * @param editora, objeto do tipo Editora referente a revista
+	 * @param dataDePublicacao, data de publicacao da revista
+	 * @param edicao, edicao da revista
+	 * @param numeroDePaginas, numero de paginas da revista
+	 */
+	public Revista(String titulo, Editora editora, Date dataDePublicacao, int edicao, int numeroDePaginas) {
+		setTitulo(titulo);
+		setEditora(editora);
+		setData(dataDePublicacao);
+		setEdicao(edicao);
+		setNum_pag(numeroDePaginas);
 	}
 	
 	public int getId() {
@@ -23,15 +46,6 @@ public class Revista implements Acervo{
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public Revista(String titulo, Editora editora, Date dataDePublicacao, int edicao, int numeroDePaginas) {
-		this.titulo = titulo ;
-		this.editora = editora;
-		this.data = dataDePublicacao;
-		this.edicao = edicao;
-		this.num_pag = numeroDePaginas;
-	}
-
 	public String getTitulo() {
 		return titulo;
 	}

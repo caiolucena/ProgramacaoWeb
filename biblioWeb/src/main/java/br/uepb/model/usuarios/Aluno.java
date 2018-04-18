@@ -7,7 +7,7 @@ import br.uepb.model.Curso;
 import br.uepb.model.enums.Tipo_nivel_aluno;
 /**
  * Essa classe é responsável por criar um objeto do tipo Aluno;
- * A classe contém os respectivos getters and setters de seus atributos únicos.
+ * A classe contém os respectivos getters and setters de seus atributos.
  * A classe Aluno extende a classe Usuário, que contém os atributos e métodos comuns a todos os usuários do sistema.
  * @author EquipeACL
  */

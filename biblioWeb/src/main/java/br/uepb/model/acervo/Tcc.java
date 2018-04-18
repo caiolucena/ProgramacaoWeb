@@ -6,7 +6,12 @@ import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
 import br.uepb.model.enums.Tipo_tcc;
-
+/**
+ * Essa classe é responsável por criar um objeto do tipo Tcc.
+ * A classe contém os respectivos getters and setters de seus atributos.
+ * A classe Tcc implementa a interface Acervo
+ * @author EquipeACL
+ */
 public class Tcc implements Acervo{ 
 	private int id;
 	private String titulo;
@@ -16,17 +21,30 @@ public class Tcc implements Acervo{
 	private Date ano_defesa;
 	private Cidade cidade;
 	
+	/**
+	 * Método construtor da classe Tcc
+	 * Construtor vazio (utilizado para criar um objeto do tipo Tcc sem parâmetros definidos)
+	 */
 	public Tcc() {		
 	}
-	
+	/**
+	 * Método construtor da classe Tcc (utilizado para criar um objeto do tipo Tcc com parâmetros definidos)
+	 * @param id, id do tcc
+	 * @param titulo, titulo do tcc
+	 * @param autor, objeto do tipo Autor referente ao tcc
+	 * @param orientador, objeto do tipo Orientador referente ao tcc
+	 * @param tipo, Enum que define o tipo do tcc
+	 * @param ano_defesa, ano da defesa do tcc
+	 * @param cidade, cidade da defesa do tcc
+	 */
 	public Tcc(int id, String titulo, Autor autor, Orientador orientador, Tipo_tcc tipo, Date ano_defesa, Cidade cidade) {
-		this.id = id;
-		this.titulo = titulo;
-		this.autor = autor;
-		this.orientador = orientador;
-		this.tipo = tipo;
-		this.ano_defesa = ano_defesa;
-		this.cidade = cidade;
+		setId(id);
+		setTitulo(titulo);
+		setAutor(autor);
+		setOrientador(orientador);
+		setTipo(tipo);
+		setAno_defesa(ano_defesa);
+		setCidade(cidade);
 	}
 
 	public int getId() {
