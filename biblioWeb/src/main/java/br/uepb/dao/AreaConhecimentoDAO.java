@@ -11,7 +11,10 @@ import org.apache.log4j.Logger;
 
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Tema;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo AreaConhecimento
+ * @author EquipeACL
+ */
 public class AreaConhecimentoDAO {
 	
 	private Connection con;
@@ -20,12 +23,12 @@ public class AreaConhecimentoDAO {
 	
 	/**
 	 * Método para inserir Area de Conhecimento no banco de dados
-	 * @param area
+	 * @param area, objeto do tipo AreaConhecimento
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum problema na inserção
+	 */	
 	@SuppressWarnings("finally")
 	public boolean createAreaConhecimento(AreaConhecimento area) {
 		
@@ -56,10 +59,10 @@ public class AreaConhecimentoDAO {
     
 	/**
 	 * Método para pesquisar Area de Conhecimento no banco de dados
-	 * @param area
+	 * @param area, objeto do tipo AreaConhecimento.
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<AreaConhecimento> listaAreas
+	 * @return ArrayList<AreaConhecimento> listaAreas, lista de areas do conhecimento retornados pela busca.
 	 */
 	
 	public ArrayList<AreaConhecimento> searchAreaConhecimento(AreaConhecimento area){
@@ -99,12 +102,12 @@ public class AreaConhecimentoDAO {
 	
 	/**
 	 * Método para remover Area de Conhecimento do banco de dados
-	 * @param area
+	 * @param area, objeto do tipo AreaConhecimento.
 	 * @throws SQLException,
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de remoção for bem sucedida.
+	 * @return false, se ocorrer algum erro na remoção.
+	 */	
 	@SuppressWarnings("finally")
 	public boolean removeAreaConhecimento(AreaConhecimento area) {
 		
@@ -137,12 +140,12 @@ public class AreaConhecimentoDAO {
 	
 	/**
 	 * Método para atualizar Area de Conhecimento no banco de dados
-	 * @param area
+	 * @param area, objeto do tipo AreaConhecimento.
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na atualização.
+	 */	
 	@SuppressWarnings("finally")
 	public boolean updateAreaConhecimento(AreaConhecimento area) {
 		

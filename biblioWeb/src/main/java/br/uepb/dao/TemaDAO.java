@@ -11,7 +11,10 @@ import org.apache.log4j.Logger;
 
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Tema;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Tema
+ * @author EquipeACL
+ */
 public class TemaDAO {
 	
 	private Connection con;
@@ -19,10 +22,11 @@ public class TemaDAO {
 	
 	/**
 	 * Método para inserir Tema no banco de dados
-	 * @param tema
+	 * @param tema, objeto do tipo Tema
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean createTema(Tema tema) {
@@ -55,10 +59,11 @@ public class TemaDAO {
 	
 	/**
 	 * Método para remover Tema do banco de dados
-	 * @param tema
+	 * @param tema, objeto do tipo Tema
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean removeTema(Tema tema) {
@@ -92,10 +97,11 @@ public class TemaDAO {
 	
 	/**
 	 * Método para atualizar Tema no banco de dados
-	 * @param tema
+	 * @param tema, objeto do tipo Tema
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
 	public boolean updateTema(Tema tema) {
@@ -128,10 +134,10 @@ public class TemaDAO {
 	
 	/**
 	 * Método para pesquisar Tema no banco de dados
-	 * @param tema
+	 * @param tema, objeto do tipo Tema
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return ArrayList<Tema> listaTema, lista de temas retornados pela busca
 	 */
 	public ArrayList<Tema> searchTema(Tema tema){
 		

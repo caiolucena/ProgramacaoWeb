@@ -10,17 +10,21 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.model.Orientador;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Orientador
+ * @author EquipeACL
+ */
 public class OrientadorDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(OrientadorDAO.class);
 		
 	/**
 	 * Método para inserir Orientador no banco de dados
-	 * @param orientador
+	 * @param orientador, objeto do tipo Orientador
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean createOrientador(Orientador orientador){
 		String sql = "insert into orientador(nome,formacao)values(?,?)";
@@ -56,10 +60,11 @@ public class OrientadorDAO {
 	
 	/**
 	 * Método para remover Orientador do banco de dados
-	 * @param orientador
+	 * @param orientador, objeto do tipo Orientador
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean removeOrientador(Orientador orientador) {
 		String sql = "delete from orientador where id=?";
@@ -86,10 +91,11 @@ public class OrientadorDAO {
 	
 	/**
 	 * Método para atualizar Orientador no banco de dados
-	 * @param orientador
+	 * @param orientador, objeto do tipo Orientador
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
 	 */
 	public boolean updateOrientador(Orientador orientador) {
 		String sql = "update orientador set nome=?, formacao=? where id=?";
@@ -118,10 +124,10 @@ public class OrientadorDAO {
 	
 	/**
 	 * Método para pesquisar Orientador no banco de dados
-	 * @param orientador
+	 * @param orientador, objeto do tipo Orientador
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
+	 * @return ArrayList<Curso> orientadores, lista de orientadores retornados pela busca
 	 */
 	public ArrayList<Orientador> searchOrientador(Orientador orientador) {
 		String sql = "select * from orientador where nome like ?";

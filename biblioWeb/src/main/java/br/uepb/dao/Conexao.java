@@ -7,7 +7,10 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.mysql.jdbc.Connection;
-
+/**
+ * Essa classe é responsável por estabelcer uma conexão com o banco de dados
+ * @author EquipeACL
+ */
 public class Conexao {
     public static Connection con;
     private static String user = "root";
@@ -15,6 +18,11 @@ public class Conexao {
     
     private static final Logger logger = LogManager.getLogger(Conexao.class);
     
+    /**
+     * Método utilizado para criar uma conexao com o banco de dados
+     * @return con, objeto do tipo Connection
+     * @throws Exception
+     */
     public static Connection iniciarConexao() throws Exception{
     	try {
             Class.forName("com.mysql.jdbc.Driver");

@@ -11,19 +11,22 @@ import org.apache.log4j.Logger;
 
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Editora
+ * @author EquipeACL
+ */
 public class EditoraDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(EditoraDAO.class);
 	
 	/**
 	 * Metodo para inserir Editora no banco de dados
-	 * @param editora
+	 * @param editora, objeto do tipo Editora
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
- 	 */
-	
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+ 	 */	
 	@SuppressWarnings("finally")
 	public boolean createEditora(Editora editora){
 		String sql = "insert into editora(nome)values(?)";
@@ -59,12 +62,12 @@ public class EditoraDAO {
 	
 	/**
 	 * Método para remover Editora do banco de dados
-	 * @param editora
+	 * @param editora, objeto do tipo Editora
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+ 	 */	
 	@SuppressWarnings("finally")
 	public boolean removeEditora(Editora editora) {
 		String sql = "delete from editora where id=?";
@@ -91,12 +94,12 @@ public class EditoraDAO {
 	
 	/**
 	 * Método para atualizar Editora no banco de dados
-	 * @param editora
+	 * @param editora, objeto do tipo Editora
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+ 	 */		
 	public boolean updateEditora(Editora editora){
 		String sql = "update editora set nome=? where id=?;";
 		try {
@@ -133,12 +136,11 @@ public class EditoraDAO {
 	
 	/**
 	 * Método para pesquisar Editora no banco de dados
-	 * @param editora
+	 * @param editora, objeto do tipo Editora
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<Editora> editoras
-	 */
-	
+	 * @return ArrayList<Editora> editoras, lista de editoras retornadas pela busca
+	 */	
 	public ArrayList<Editora> searchEditora(Editora editora) {//busca varias editoras pelo nome
 		String sql = "select * from editora where nome like ?";
 		ArrayList<Editora> editoras = new ArrayList<Editora>();
@@ -170,12 +172,11 @@ public class EditoraDAO {
 	
 	/**
 	 * Método para pesquisar Editora no banco de dados
-	 * @param id_editora
+	 * @param nome, String com o nome da editora buscada
 	 * @throws SLQException
 	 * @throws JavaLangException
-	 * @return editora
-	 */
-	
+	 * @return editora, objeto do tipo editora retornado pela busca
+	 */	
 	public Editora searchEditora(String nome) {//busca uma unica editora pelo nome
 		String sql = "select * from editora where nome=?;";
 		Editora editora = new Editora();

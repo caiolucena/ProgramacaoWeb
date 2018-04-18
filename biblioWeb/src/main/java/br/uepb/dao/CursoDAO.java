@@ -13,19 +13,22 @@ import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Curso;
 import br.uepb.model.enums.Tipo_curso;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Curso
+ * @author EquipeACL
+ */
 public class CursoDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
 	/**
 	 * Método para inserir Curso no banco de dados
-	 * @param curso
+	 * @param curso, objeto do tipo Curso
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	public boolean createCurso(Curso curso){
 		String sql = "insert into curso(nome,sigla, tipo,area_conhecimento_id)values(?,?,?,?)";
 		try {
@@ -62,12 +65,12 @@ public class CursoDAO {
 	
 	/**
 	 * Método para remover Curso do banco de dados
-	 * @param curso
+	 * @param curso, objeto do tipo Curso
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	public boolean removeCurso(Curso curso){
 		String sql = "delete from curso where id=?";
 		try {
@@ -93,12 +96,12 @@ public class CursoDAO {
 	
 	/**
 	 * Método para atualizar Curso no banco de dados
-	 * @param curso
+	 * @param curso, objeto do tipo Curso
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	public boolean updateCurso(Curso curso){
 		String sql = "update curso set nome=?, sigla=?,tipo=?, area_conhecimento_id=? where id=?";
 		try {
@@ -128,12 +131,11 @@ public class CursoDAO {
 	
 	/**
 	 * Método para pesquisar Curso no banco de dados
-	 * @param curso
+	 * @param curso, objeto do tipo Curso
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<Curso> cursos
-	 */
-	
+	 * @return ArrayList<Curso> cursos, lista de cursos retornados pela busca
+	 */	
 	public ArrayList<Curso> searchCurso(Curso curso){
 		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.sigla as 'curso_sigla', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like ?";
 		ArrayList<Curso> cursos = new ArrayList<Curso>();

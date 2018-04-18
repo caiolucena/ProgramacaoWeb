@@ -10,7 +10,10 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.model.Cidade;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Cidade
+ * @author EquipeACL
+ */
 public class CidadeDAO {
 	
 	private Connection con;
@@ -18,12 +21,12 @@ public class CidadeDAO {
 		
 	/**
 	 * Método para inserir Cidade no banco de dados
-	 * @param cidade
+	 * @param cidade, objeto do tipo Cidade
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false 
-	 */
-	
+	 * @return true, se a inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	@SuppressWarnings("finally")
 	public boolean createCidade(Cidade cidade) {
 		
@@ -55,12 +58,11 @@ public class CidadeDAO {
 	
 	/**
 	 * Método para pesquisar Cidade no banco de dados
-	 * @param cidade
+	 * @param cidade, objeto do tipo Cidade
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<Cidade> listaCidades
-	 */
-	
+	 * @return ArrayList<Cidade> listaCidades, lista de cidades retornadas pela busca
+	 */	
 	public ArrayList<Cidade> searchCidade(Cidade cidade) {
 		
 		ArrayList<Cidade> listaCidades = new ArrayList<Cidade>();
@@ -100,12 +102,12 @@ public class CidadeDAO {
 	
 	/**
 	 * Método para remover Cidade do banco de dados
-	 * @param cidade
+	 * @param cidade, objeto do tipo Cidade
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false 
-	 */
-	
+	 * @return true, se a operação de remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	@SuppressWarnings("finally")
 	public boolean removeCidade(Cidade cidade) {
 		
@@ -138,12 +140,12 @@ public class CidadeDAO {
 	
 	/**
 	 * Método para atualizar Cidade no banco de dados
-	 * @param cidade
+	 * @param cidade, objeto do tipo Cidade
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false 
-	 */
-	
+	 * @return true, se a operação de atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */	
 	@SuppressWarnings("finally")
 	public boolean updateCidade(Cidade cidade) {
 		

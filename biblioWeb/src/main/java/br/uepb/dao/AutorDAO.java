@@ -10,19 +10,22 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.model.Autor;
-
+/**
+ * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Autor
+ * @author EquipeACL
+ */
 public class AutorDAO {
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
 	/**
 	 * Método para inserir Autor no banco de dados
-	 * @param autor
+	 * @param autor, objeto do tipo Autor
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return
-	 */
-	
+	 * @return true, se a inserção for bem sucedida
+	 * @return false, se ocorrer algum error na inserção.
+	 */	
 	@SuppressWarnings("finally")
 	public boolean createAutor(Autor autor){
 		String sql = "insert into autor(nome)values(?)";
@@ -63,12 +66,12 @@ public class AutorDAO {
 	
 	/**
 	 * Método para remover Autor do banco de dados
-	 * @param autor
+	 * @param autor, objeto do tipo Autor
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a remoção for bem sucedida
+	 * @return false, se ocorrer algum error na operação.
+	 */	
 	@SuppressWarnings("finally")
 	public boolean removeAutor(Autor autor) {
 		String sql = "delete from autor where id=?";
@@ -95,12 +98,12 @@ public class AutorDAO {
 	
 	/**
 	 * Método para atualizar Autor no banco de dados
-	 * @param autor
+	 * @param autor, objeto do tipo Autor
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return true or false
-	 */
-	
+	 * @return true, se a atualização for bem sucedida
+	 * @return false, se ocorrer algum error na operação.
+	 */	
 	@SuppressWarnings("finally")
 	public boolean updateAutor(Autor autor) {
 		String sql = "update autor set nome=? where id=?";
@@ -131,12 +134,11 @@ public class AutorDAO {
 	
 	/**
 	 * Método para pesquisar Autor no banco de dados
-	 * @param autor
+	 * @param autor, obejto do tipo Autor
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<Autor> autores
-	 */
-	
+	 * @return ArrayList<Autor> autores, lista de autores retornados pela busca. 
+	 */	
 	public ArrayList<Autor> searchAutor(Autor autor) {//busca varios autores pelo nome
 		String sql = "select * from autor where nome like ?";
 		ArrayList<Autor> autores = new ArrayList<Autor>();
@@ -168,12 +170,11 @@ public class AutorDAO {
 	
 	/**
 	 * Método para pesquisar Autor no banco de dados
-	 * @param autor
+	 * @param id_autor, atributo de identificação unico de cada instancia
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return autor
-	 */
-	
+	 * @return autor, objeto do tipo Autor retornado pela busca. 
+	 */		
 	public Autor searchAutor(int id_autor) {//busca um unico autor pelo id
 		String sql = "select * from autor where id=?";
 		Autor autor = new Autor();
@@ -203,10 +204,10 @@ public class AutorDAO {
 	
 	/**
 	 * Método para pesquisar Autor pelo ISBN no banco de dados
-	 * @param isbn
+	 * @param isbn, numero de identifição unico de cada livro
 	 * @throws SQLException
 	 * @throws JavaLangException
-	 * @return ArrayList<Autor> autores
+	 * @return ArrayList<Autor> autores, lista de autores retornados pela busca
 	 */
 	public ArrayList<Autor> buscarAutoresPorISBN(long isbn) {
 		
