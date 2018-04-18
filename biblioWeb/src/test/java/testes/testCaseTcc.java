@@ -1,4 +1,4 @@
-package testeTcc;
+package testes;
 
 import static org.junit.Assert.*;
 

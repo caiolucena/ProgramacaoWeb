@@ -1,4 +1,4 @@
-package testeAreaConhecimento;
+package testes;
 
 import static org.junit.Assert.*;
 

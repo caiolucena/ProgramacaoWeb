@@ -163,7 +163,6 @@ public class TemaDAO {
 				logger.error("Erro ao fechar a conexão na busca "+e);
 			}
 		}
-		
 		return listaTema;
 	}
 }

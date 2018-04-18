@@ -1,4 +1,4 @@
-package testeOrientador;
+package testes;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package testeAluno;
+package testes;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import br.uepb.model.enums.Tipo_curso;
 import br.uepb.model.enums.Tipo_nivel_aluno;
 import br.uepb.model.usuarios.Aluno;
 
-public class testCaseAluno {
+public class TesteCaseAluno {
 	
 	@Test
 	public void test() throws Exception {
