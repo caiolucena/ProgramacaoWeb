@@ -14,6 +14,7 @@ import br.uepb.dao.AutorDAO;
 import br.uepb.dao.EditoraDAO;
 import br.uepb.dao.TemaDAO;
 import br.uepb.dao.acervo.LivroDAO;
+import br.uepb.dao.usuarios.AdministradorDAO;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
@@ -24,123 +25,62 @@ import br.uepb.model.usuarios.Administrador;
 
 public class TesteCaseAdministrador {
 	private Administrador adm;
-	private Livro livro;
-	private Editora editora;
-	private EditoraDAO editoraDao;
-	private AreaConhecimento area;
-	private AreaConhecimentoDAO areaDao;
-	private Tema tema;
-	private TemaDAO temaDao;
-	private Autor autor1;
-	private Autor autor2;
-	private AutorDAO autorDao;
+	private AdministradorDAO admDAO;
 	
 	@Before
 	public void setup() {
-		adm = new Administrador();
-		livro = new Livro();
-		editora = new Editora();
-		editoraDao = new EditoraDAO();
-		area = new AreaConhecimento();
-		areaDao = new AreaConhecimentoDAO();
-		tema = new Tema();
-		temaDao = new TemaDAO();
-		autor1 = new Autor();
-		autor2 = new Autor();
-		autorDao = new AutorDAO();
-		
-		editora.setNome("Editora1");
-		assertTrue(editoraDao.createEditora(editora));
-		editora = editoraDao.searchEditora(editora).get(0);
-				
-		area.setNome("Area1");
-		areaDao.createAreaConhecimento(area);
-		area = areaDao.searchAreaConhecimento(area).get(0);
-		
-		tema.setNome("Tema1");
-		tema.setArea(area);
-		temaDao.createTema(tema);
-		tema = temaDao.searchTema(tema).get(0);
-		
-		autor1.setNome("Autor1");
-		autor2.setNome("Autor2");
-		autorDao.createAutor(autor1);
-		autorDao.createAutor(autor2);
-		autor1 = autorDao.searchAutor(autor1).get(0);
-		autor2 = autorDao.searchAutor(autor2).get(0);
+		admDAO = new AdministradorDAO();
 	}
 	
 	@Test
-	public void createItemAcervo() {
-		
-		livro.setIsbn(123456);
-		livro.setTitulo("Livro Teste");
-		livro.setArea(area);
-		livro.setAutores(new ArrayList<Autor>(){{add(autor1);add(autor2);}});
-		livro.setEdicao(1);
-		livro.setEditora(editora);
-		livro.setNumero_paginas(200);
-		livro.setData(new Date(System.currentTimeMillis()));		
-		assertTrue(adm.createItemAcervo(new LivroDAO(), livro));
-		assertTrue(adm.removeItemAcervo(new LivroDAO(), livro));
+	public void createAdministrador() {
+		adm = new Administrador(123, "Administrador", 456, "Brasileiro","Rua do beco", 3345, "email@gmail.com","senha","admin1");
+		assertTrue(admDAO.createAdministrador(adm));
+		assertTrue(admDAO.removeUsuario(adm));
 	}
 	
 	@Test
-	public void updateItemAcervo() {
-		livro.setIsbn(123456);
-		livro.setTitulo("Livro Teste1");
-		livro.setArea(area);
-		livro.setAutores(new ArrayList<Autor>(){{add(autor1);add(autor2);}});
-		livro.setEdicao(1);
-		livro.setEditora(editora);
-		livro.setNumero_paginas(200);
-		livro.setData(new Date(System.currentTimeMillis()));
-		assertTrue(adm.createItemAcervo(new LivroDAO(), livro));
-		
-		livro.setTitulo("Livro Teste2");
-		livro.setNumero_paginas(198);
-		livro.setEdicao(4);
-		
-		assertTrue(adm.updateItemAcervo(new LivroDAO(), livro));
-		assertTrue(adm.removeItemAcervo(new LivroDAO(), livro));
+	public void updateAdministrador() {
+		adm = new Administrador(123, "Administrador", 456, "Brasileiro","Rua do beco", 3345, "email@gmail.com","senha","admin1");
+		assertTrue(admDAO.createAdministrador(adm));
+		adm.setNomeCompleto("NovoNome");
+		adm.setSenhaAcesso("novaSenha");
+		assertTrue(admDAO.updateUsuario(adm));
 	}
 	
 	@Test
-	public void searchItemAcervo() {
-		livro.setIsbn(123456);
-		livro.setTitulo("Livro Teste1");
-		livro.setArea(area);
-		livro.setAutores(new ArrayList<Autor>(){{add(autor1);add(autor2);}});
-		livro.setEdicao(1);
-		livro.setEditora(editora);
-		livro.setNumero_paginas(200);
-		livro.setData(new Date(System.currentTimeMillis()));
-		assertTrue(adm.createItemAcervo(new LivroDAO(), livro));
-		
-		livro.setIsbn(121233);
-		livro.setTitulo("Livro Teste2");
-		livro.setArea(area);
-		livro.setAutores(new ArrayList<Autor>(){{add(autor1);add(autor2);}});
-		livro.setEdicao(2);
-		livro.setEditora(editora);
-		livro.setNumero_paginas(123);
-		livro.setData(new Date(System.currentTimeMillis()));
-		assertTrue(adm.createItemAcervo(new LivroDAO(), livro));
-		
-		livro.setTitulo("Livro Teste");
-		for(IFAcervo livroLista : adm.searchItemAcervo(new LivroDAO(), livro)){
-			Livro l = (Livro)livroLista;
-			assertTrue(adm.removeItemAcervo(new LivroDAO(), l));
+	public void removeAdministrador() {
+		adm = new Administrador(123, "Administrador1", 456, "Brasileiro","Rua do beco", 3345, "email@gmail.com","senha","admin1");
+		assertTrue(admDAO.createAdministrador(adm));
+		adm = new Administrador(123, "Administrador2", 456, "Brasileiro","Rua do beco", 3345, "email@gmail.com","senha","admin2");
+		assertTrue(admDAO.createAdministrador(adm));
+		adm = new Administrador(123, "Administrador3", 456, "Brasileiro","Rua do beco", 3345, "email@gmail.com","senha","admin3");
+		assertTrue(admDAO.createAdministrador(adm));
+		adm.setNomeCompleto("Administrador");
+		for(Administrador a : admDAO.searchUsuario(adm)){
+			assertTrue(admDAO.removeUsuario(a));			
 		}
+	}
+	
+	@Test
+	public void searchAdministrador() {
+		adm = new Administrador(123, "Administrador", 456, "Brasileiro","Rua do beco", 3345, "email@gmail.com","senha","admin1");
+		assertTrue(admDAO.createAdministrador(adm));
+		Administrador adminis = admDAO.searchUsuario(adm).get(0);
+		assertEquals(adm.getNomeCompleto(),adminis.getNomeCompleto());
+		assertEquals(adm.getCpf(),adminis.getCpf());
+		assertEquals(adm.getEmail(),adminis.getEmail());
+		assertEquals(adm.getEndereco(),adminis.getEndereco());
+		assertEquals(adm.getNaturalidade(),adminis.getNaturalidade());
+		assertEquals(adm.getNomeUsuario(),adminis.getNomeUsuario());
+		assertEquals(adm.getRg(),adminis.getRg());
+		assertEquals(adm.getSenhaAcesso(),adminis.getSenhaAcesso());
+		assertEquals(adm.getTelefone(),adminis.getTelefone());
 	}
 	
 	@After
 	public void clean(){
-		temaDao.removeTema(tema);
-		areaDao.removeAreaConhecimento(area);		
-		editoraDao.removeEditora(editora);		
-		autorDao.removeAutor(autor1);
-		autorDao.removeAutor(autor2);
+		
 		
 	}
 }

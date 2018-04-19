@@ -17,26 +17,21 @@ import br.uepb.model.acervo.IFAcervo;
 public class Administrador extends Usuario implements Interface_manterFuncionario,Interface_manterAcervo{
 	private FuncionarioDAO funcionarioDAO;
 	private String nomeUsuario;
-	public Administrador() { 
-		funcionarioDAO = new FuncionarioDAO(); 
-	}
+	
 	/**
 	 * Método construtor da classe Administrador
 	 * @param nomeUsuario, que é o nome de usuário do Administrador no sistema 
 	 */
 	public Administrador(String nomeUsuario) {
-		super();
 		setNomeUsuario(nomeUsuario);
 		this.funcionarioDAO = new FuncionarioDAO();
-		
 	}
-
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	
+	public Administrador(int cpf, String nomeCompleto, int rg, String naturalidade, String endereco, int telefone,
+			String email, String senhaAcesso,String nomeUsuario) {
+		super(cpf,nomeCompleto,rg,naturalidade,endereco,telefone,email,senhaAcesso);
+		setNomeUsuario(nomeUsuario);
+		this.funcionarioDAO = new FuncionarioDAO();
 	}
 	/**
 	 * Método responsável por remover um objeto do tipo Aluno no sistema
@@ -143,4 +138,15 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 		}
 		return true;
 	}
+	
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+	public Administrador() { 
+		funcionarioDAO = new FuncionarioDAO(); 
+	}
 }
+
