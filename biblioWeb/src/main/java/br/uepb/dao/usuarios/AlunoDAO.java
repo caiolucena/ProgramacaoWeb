@@ -130,9 +130,7 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 		try {
 
 			con = Conexao.iniciarConexao();
-			stmt = con.prepareStatement("update aluno set cpf=?,rg=?,naturalidade=?,"
-					+ "nomeCompleto=?,nomeMae=?,endereco=?,telefone=?,nivel=?,email=?,anoIngresso=?,"
-					+ "periodoIngresso=?,senha=?,curso_id=? where matricula = ?");
+			stmt = con.prepareStatement("update aluno set cpf=?,rg=?,naturalidade=?,nomeCompleto=?,nomeMae=?,endereco=?,telefone=?,nivel=?,email=?,anoIngresso=?,periodoIngresso=?,senha=?,curso_id=? where matricula = ?");
 			stmt.setInt(1, aluno.getCpf());
 			stmt.setInt(2, aluno.getRg());
 			stmt.setString(3, aluno.getNaturalidade());
@@ -181,6 +179,7 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 		Aluno a;
 		
 		try {
+			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("select A.matricula as aluno_matricula, A.cpf as aluno_cpf, A.rg as aluno_rg, A.naturalidade as aluno_naturalidade, " + 
 					"A.nomeCompleto as aluno_nomeCompleto, A.nomeMae as aluno_nomeMae, A.endereco as aluno_endereco, A.telefone as aluno_telefone, " + 
 					"A.nivel as aluno_nivel, A.email as aluno_email, A.anoIngresso as aluno_anoIngresso, A.periodoIngresso as aluno_periodoIngresso, A.senha as aluno_senha, " + 
@@ -190,13 +189,13 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 					"inner join curso as C on A.curso_id = C.id " + 
 					"inner join area_conhecimento as AC on C.area_conhecimento_id =  AC.id " + 
 					"where A.nomeCompleto like ?");
-			stmt.setString(1,"%"+aluno.getNomeCompleto()+"?");
+			stmt.setString(1,"%"+aluno.getNomeCompleto()+"%");
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				
 				area = new AreaConhecimento(rs.getInt("areaConhecimento_id"),rs.getString("areaConhecimento_nome"));
-				curso = new Curso(rs.getString("curso_nome"), rs.getString("curso_sigla"), area, Tipo_curso.valueOf(rs.getString("curso_tipo")));
+				curso = new Curso(rs.getInt("curso_id"),rs.getString("curso_nome"), rs.getString("curso_sigla"), area, Tipo_curso.valueOf(rs.getString("curso_tipo")));
 				a = new Aluno(rs.getString("aluno_matricula"),rs.getInt("aluno_cpf"), rs.getInt("aluno_rg"), rs.getString("aluno_naturalidade"), rs.getString("aluno_nomeCompleto"), rs.getString("aluno_nomeMae"),
 						rs.getString("aluno_endereco"), rs.getInt("aluno_telefone"), curso, Tipo_nivel_aluno.valueOf(rs.getString("aluno_nivel")), rs.getString("aluno_email"), rs.getDate("aluno_anoIngresso"), rs.getInt("aluno_periodoIngresso"), rs.getString("aluno_senha"));
 				listaAluno.add(a);				

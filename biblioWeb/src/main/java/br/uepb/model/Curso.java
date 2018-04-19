@@ -35,6 +35,13 @@ public class Curso {
 		setArea(area);
 		setTipo(tipo);
 	}
+	public Curso(int id,String nome, String sigla, AreaConhecimento area, Tipo_curso tipo) {
+		setId(id);
+		setNome(nome);
+		setSigla(sigla);
+		setArea(area);
+		setTipo(tipo);
+	}
 	
 	public int getId() {
 		return id;

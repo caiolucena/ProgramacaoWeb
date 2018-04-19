@@ -16,7 +16,7 @@ public class TesteCaseFuncionario {
 	public void setup() {
 		funcionario = new Funcionario();
 		administrador = new Administrador();
-	}
+	} 
 	
 	@Test
 	public void testeCreateFuncionario() {
@@ -29,9 +29,12 @@ public class TesteCaseFuncionario {
 	@Test
 	public void testeRemoveFuncionario() {
 		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
+		assertTrue(administrador.createFuncionario(funcionario));
 		funcionario = new Funcionario(123,"Funcionario2",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func2");
+		assertTrue(administrador.createFuncionario(funcionario));
 		funcionario = new Funcionario(123,"Funcionario3",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func3");
-		funcionario.setNomeCompleto("Funcionario");
+		assertTrue(administrador.createFuncionario(funcionario));
+		funcionario.setNomeCompleto("Funcionario");		
 		for(Funcionario f:administrador.searchFuncionario(funcionario)) {
 			assertTrue(administrador.removeFuncionario(f));
 		}
@@ -60,5 +63,48 @@ public class TesteCaseFuncionario {
 		assertEquals("senha123",funcionario.getSenhaAcesso());
 		assertEquals("func1",funcionario.getNomeUsuario());
 	}
-
+	
+	@Test
+	public void testeValidaFuncionario(){
+		funcionario.setCpf(0);
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setCpf(123);
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setEmail("");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setEmail("email@gmail.com");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setEndereco("");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setEndereco("Rua da laderia");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setNaturalidade("");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setNaturalidade("Brasil");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setNomeCompleto("");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setNomeCompleto("Funcionario");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setNomeUsuario("");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setNomeUsuario("func");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setRg(-1);
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setRg(123);
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setSenhaAcesso("");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setSenhaAcesso("senha");
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setTelefone(-1);
+		assertFalse(administrador.createFuncionario(funcionario));
+		funcionario.setTelefone(3333);
+		assertTrue(administrador.createFuncionario(funcionario));
+		for(Funcionario f: administrador.searchFuncionario(funcionario)) {
+			assertTrue(administrador.removeFuncionario(f));
+		}
+		
+	}
 }

@@ -17,8 +17,8 @@ import br.uepb.model.acervo.Acervo;
 public class Administrador extends Usuario implements Interface_manterFuncionario,Interface_manterAcervo{
 	private FuncionarioDAO funcionarioDAO;
 	private String nomeUsuario;
-	public Administrador() {
-		
+	public Administrador() { 
+		funcionarioDAO = new FuncionarioDAO();
 	}
 	/**
 	 * Método construtor da classe Administrador
@@ -58,8 +58,10 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return true, caso haja sucesso na inserção do objeto Funcionário passado por parâmetro no Banco de Dados
 	 */
 	public boolean createFuncionario(Funcionario f) {
-		// TODO validar funcionario
-		return funcionarioDAO.createUsuario(f);
+		if(validarFuncionario(f)) {
+			return funcionarioDAO.createUsuario(f);
+		}
+		return false;
 	}
 	/**
 	 * Método responsável por atualizar um objeto do tipo Funcionário no sistema
@@ -68,8 +70,10 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return true, caso haja sucesso na atualização do objeto Funcionário passado por parâmetro no Banco de Dados
 	 */
 	public boolean updateFuncionario(Funcionario f) {
-		// TODO validar funcionario
-		return funcionarioDAO.updateUsuario(f);
+		if(validarFuncionario(f)) {
+			return funcionarioDAO.updateUsuario(f);
+		}
+		return false;
 	}
 	/**
 	 * Método responsável por remover um objeto do tipo Funcionário no sistema
@@ -78,8 +82,10 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return true, caso haja sucesso na remoção do objeto Funcionário passado por parâmetro no Banco de Dados
 	 */
 	public boolean removeFuncionario(Funcionario f) {
-		// TODO validar funcionario
-		return funcionarioDAO.removeUsuario(f);
+		if(validarFuncionario(f)) {
+			return funcionarioDAO.removeUsuario(f);
+		}
+		return false;
 	}
 	/**
 	 * Método responsável por realizar uma busca de um ou mais objetos do tipo Funcionário no sistema
@@ -88,8 +94,10 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return ArrayList<Funcionario>, caso haja sucesso na busca de um ou mais objetos do tipo Funcionário passado por parâmetro no Banco de Dados
 	 */
 	public ArrayList<Funcionario> searchFuncionario(Funcionario f) {
-		// TODO validar funcionario
-		return funcionarioDAO.searchUsuario(f);
+		if(validarFuncionario(f)) {
+			return funcionarioDAO.searchUsuario(f);
+		}
+		return null;
 	}
 
 	public boolean createItemAcervo(Item_Acervo itemDao,Acervo item) {
@@ -111,5 +119,20 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 		//TODO Validar dados do item
 		return itemDao.searchItemAcervo(item);
 	}
-
+	private boolean validarFuncionario(Funcionario funcionario) {
+		if(funcionario == null){
+			return false;
+		}
+		if(funcionario.getCpf()<=0||
+				funcionario.getEmail() == null || funcionario.getEmail().equals("")||
+				funcionario.getEndereco()==null || funcionario.getEndereco().equals("")||
+				funcionario.getNaturalidade()==null || funcionario.getNaturalidade().equals("")||
+				funcionario.getNomeCompleto()==null || funcionario.getNomeCompleto().equals("")||
+				funcionario.getRg()<=0 ||
+				funcionario.getSenhaAcesso() == null || funcionario.getSenhaAcesso().equals("") ||
+				funcionario.getTelefone()<=0){
+			return false;
+		}
+		return true;
+	}
 }

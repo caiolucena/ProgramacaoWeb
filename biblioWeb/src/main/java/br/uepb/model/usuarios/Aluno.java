@@ -25,6 +25,7 @@ public class Aluno extends Usuario {
 	 * Construtor vazio (utilizado para criar um objeto do tipo Aluno sem parâmetros definidos)
 	 */
 	public Aluno() {	
+
 	}
 	/**
 	 * Método construtor da classe Aluno (utilizado para instanciar objetos durante a busca de um objeto do tipo Aluno no Banco de Dados)
@@ -48,6 +49,7 @@ public class Aluno extends Usuario {
 			int periodoIngresso, String senhaAcesso) {
 		super(cpf, nomeCompleto, rg, naturalidade, endereco, telefone, email, senhaAcesso);
 		setMatricula(matricula);
+		setNomeMae(nomeMae);
 		setCurso(curso);
 		setNivel(nivel);
 		setAnoIngresso(anoIngresso);

@@ -21,7 +21,13 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(FuncionarioDAO.class);
-
+	public FuncionarioDAO() {
+		try {
+			con = Conexao.iniciarConexao();
+		} catch (Exception e) {
+			logger.error("Conexao nao foi aberta",e);
+		}
+	}	
 	/**
 	 * Método para inserir um Funcionario no banco de dados
 	 * @param funcionario, objeto do tipo Funcionario
@@ -149,16 +155,16 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 		ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		Funcionario f;
+		Funcionario f; 
 		
 		try {
 			con = Conexao.iniciarConexao();
-			stmt = con.prepareStatement("select * from funcionario where nome like ?");
+			stmt = con.prepareStatement("select * from funcionario where nomeCompleto like ?");
 			stmt.setString(1,"%"+funcionario.getNomeCompleto()+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				f = new Funcionario(rs.getInt("cpf"), rs.getString("nomeCompleto"), rs.getInt("rg"), rs.getString("naturalidade"), rs.getString("endereco"), rs.getInt("telefone"), rs.getString("email"), rs.getString("senhaAcesso"), rs.getString("nomeUsuario"));
+				f = new Funcionario(rs.getInt("cpf"), rs.getString("nomeCompleto"), rs.getInt("rg"), rs.getString("naturalidade"), rs.getString("endereco"), rs.getInt("telefone"), rs.getString("email"), rs.getString("senha"), rs.getString("nomeUsuario"));
 				listaFuncionario.add(f);
 			}
 			
