@@ -13,7 +13,7 @@ import br.uepb.model.Editora;
  * A classe Livro estende a classe ItemAcervo
  * @author EquipeACL
  */
-public class Livro extends ItemAcervo{
+public class Livro extends ItemAcervo implements IFAcervo{
 	private long isbn;
 
 	private ArrayList<Autor> autores;
@@ -90,6 +90,10 @@ public class Livro extends ItemAcervo{
 
 	public void setArea(AreaConhecimento area) {
 		this.area = area;
+	}
+
+	public boolean validaItem() {
+		return true;
 	}
 	
 }

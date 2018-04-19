@@ -4,6 +4,7 @@ package br.uepb.model.acervo;
  * @author EquipeACL
  *
  */
-public interface Acervo {
+public interface IFAcervo {
+	public boolean validaItem();
 
 }

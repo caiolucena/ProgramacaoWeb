@@ -9,7 +9,7 @@ import br.uepb.model.Editora;
  * A classe Revista implementa a interface Acervo
  * @author EquipeACL
  */
-public class Revista implements Acervo{
+public class Revista implements IFAcervo{
 	private int id;
 	private String titulo;
 	private Editora editora;
@@ -84,6 +84,9 @@ public class Revista implements Acervo{
 
 	public void setNum_pag(int numeroDePaginas) {
 		this.num_pag = numeroDePaginas;
+	}
+	public boolean validaItem() {
+		return true;
 	}
 	
 		

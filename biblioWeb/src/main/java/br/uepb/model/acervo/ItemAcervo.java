@@ -9,6 +9,7 @@ import java.util.Date;
  * @author EquipeACL
  */
 public class ItemAcervo {
+	
 	private int id;
 	private  Date data;
 	private int edicao;

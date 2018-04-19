@@ -12,7 +12,7 @@ import br.uepb.model.enums.Tipo_tcc;
  * A classe Tcc implementa a interface Acervo
  * @author EquipeACL
  */
-public class Tcc implements Acervo{ 
+public class Tcc implements IFAcervo{ 
 	private int id;
 	private String titulo;
 	private Autor autor;
@@ -88,6 +88,9 @@ public class Tcc implements Acervo{
 	}
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+	public boolean validaItem() {
+		return true;
 	}
 	
 }

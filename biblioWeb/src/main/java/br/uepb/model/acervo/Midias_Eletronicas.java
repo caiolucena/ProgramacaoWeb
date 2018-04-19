@@ -10,7 +10,7 @@ import br.uepb.model.enums.Tipo_midia;
  * A classe Midias_Eletronicas implementa a interface Acervo
  * @author EquipeACL
  */
-public class Midias_Eletronicas implements Acervo{
+public class Midias_Eletronicas implements IFAcervo{
 	private int id;
 	private String titulo;
 	private Tipo_midia tipo;
@@ -65,6 +65,10 @@ public class Midias_Eletronicas implements Acervo{
 
 	public void setData_gravacao(Date data_gravacao) {
 		this.data_gravacao = data_gravacao;
+	}
+
+	public boolean validaItem() {
+		return true;
 	}	
 
 }

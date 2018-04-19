@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import br.uepb.dao.Item_Acervo;
 import br.uepb.dao.usuarios.FuncionarioDAO;
-import br.uepb.model.acervo.Acervo;
+import br.uepb.model.acervo.IFAcervo;
 
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Administrador.
@@ -18,7 +18,7 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	private FuncionarioDAO funcionarioDAO;
 	private String nomeUsuario;
 	public Administrador() { 
-		funcionarioDAO = new FuncionarioDAO();
+		funcionarioDAO = new FuncionarioDAO(); 
 	}
 	/**
 	 * Método construtor da classe Administrador
@@ -100,24 +100,32 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 		return null;
 	}
 
-	public boolean createItemAcervo(Item_Acervo itemDao,Acervo item) {
-		//TODO Validar dados do item
-		return itemDao.createItemAcervo(item);
+	public boolean createItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+		if(item.validaItem()) {
+			return itemDao.createItemAcervo(item);
+		}
+		return false;
 	}
 
-	public boolean removeItemAcervo(Item_Acervo itemDao,Acervo item) {
-		//TODO Validar dados do item
-		return itemDao.removeItemAcervo(item);
+	public boolean removeItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+		if(item.validaItem()) {
+			return itemDao.removeItemAcervo(item);
+		}
+		return false;
 	}
 
-	public boolean updateItemAcervo(Item_Acervo itemDao,Acervo item) {
-		//TODO Validar dados do item
-		return itemDao.updateItemAcervo(item);
+	public boolean updateItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+		if(item.validaItem()) {
+			return itemDao.updateItemAcervo(item);
+		}
+		return false;
 	}
 
-	public ArrayList<Acervo> searchItemAcervo(Item_Acervo itemDao,Acervo item) {
-		//TODO Validar dados do item
-		return itemDao.searchItemAcervo(item);
+	public ArrayList<IFAcervo> searchItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+		if(item.validaItem()) {
+			return itemDao.searchItemAcervo(item);
+		}
+		return null;
 	}
 	private boolean validarFuncionario(Funcionario funcionario) {
 		if(funcionario == null){

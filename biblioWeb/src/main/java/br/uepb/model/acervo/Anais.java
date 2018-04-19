@@ -12,7 +12,7 @@ import br.uepb.model.enums.Tipo_anal;
  * A classe Anais implementa a interface Acervo
  * @author EquipeACL
  */
-public class Anais implements Acervo{
+public class Anais implements IFAcervo{
 	private int id;
 	private Tipo_anal tipo;
 	private String titulo;
@@ -89,6 +89,10 @@ public class Anais implements Acervo{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean validaItem() {
+		return true;
 	}
 	
 }

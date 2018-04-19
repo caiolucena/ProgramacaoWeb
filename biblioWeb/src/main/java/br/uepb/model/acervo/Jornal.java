@@ -8,7 +8,7 @@ import java.util.Date;
  * A classe Jornal estende a classe ItemAcervo
  * @author EquipeACL
  */
-public class Jornal extends ItemAcervo{
+public class Jornal extends ItemAcervo implements IFAcervo{
 	
 	private int id;
 	
@@ -37,6 +37,10 @@ public class Jornal extends ItemAcervo{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean validaItem() {
+		return true;
 	}
 
 
