@@ -116,8 +116,7 @@ public class AreaConhecimentoDAO {
 		try {
 			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("DELETE FROM area_conhecimento WHERE id =?");
-			stmt.setInt(1, area.getId());
-		
+			stmt.setInt(1, area.getId());		
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {

@@ -1,4 +1,4 @@
-package testes;
+package testes.acervo;
 
 import static org.junit.Assert.*;
 
