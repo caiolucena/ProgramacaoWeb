@@ -8,6 +8,10 @@ package br.uepb.model.usuarios;
 public class Funcionario extends Usuario {
 	
 	private String nomeUsuario;
+	
+	public Funcionario() {
+		
+	}	
 	/**
 	 * Método construtor da classe Funcionário
 	 * @param cpf, número do CPF do Funcionário

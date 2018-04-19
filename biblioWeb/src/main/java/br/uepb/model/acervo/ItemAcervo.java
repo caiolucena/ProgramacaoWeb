@@ -9,10 +9,10 @@ import java.util.Date;
  * @author EquipeACL
  */
 public class ItemAcervo {
-
-	protected Date data;
-	protected int edicao;
-	protected String titulo;
+	private int id;
+	private  Date data;
+	private int edicao;
+	private String titulo;
 	
 	
 	public Date getData() {

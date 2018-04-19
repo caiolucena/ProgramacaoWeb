@@ -1,0 +1,64 @@
+package testes;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.uepb.model.usuarios.Administrador;
+import br.uepb.model.usuarios.Funcionario;
+
+public class TesteCaseFuncionario {
+	private Funcionario funcionario;
+	private Administrador administrador;
+	
+	@Before
+	public void setup() {
+		funcionario = new Funcionario();
+		administrador = new Administrador();
+	}
+	
+	@Test
+	public void testeCreateFuncionario() {
+		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
+		assertTrue(administrador.createFuncionario(funcionario));
+		funcionario = administrador.searchFuncionario(funcionario).get(0);
+		assertTrue(administrador.removeFuncionario(funcionario));
+	}
+	
+	@Test
+	public void testeRemoveFuncionario() {
+		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
+		funcionario = new Funcionario(123,"Funcionario2",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func2");
+		funcionario = new Funcionario(123,"Funcionario3",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func3");
+		funcionario.setNomeCompleto("Funcionario");
+		for(Funcionario f:administrador.searchFuncionario(funcionario)) {
+			assertTrue(administrador.removeFuncionario(f));
+		}
+	}
+	
+	@Test
+	public void testeUpdateFuncionario() {
+		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
+		assertTrue(administrador.createFuncionario(funcionario));
+		funcionario = administrador.searchFuncionario(funcionario).get(0);
+		funcionario.setNomeCompleto("Novo Nome");
+		funcionario.setEmail("novoemail@gmail.com");
+		assertTrue(administrador.updateFuncionario(funcionario));
+	}
+	
+	@Test
+	public void testeSearchFuncionario() {
+		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
+		assertTrue(administrador.createFuncionario(funcionario));
+		
+		funcionario = administrador.searchFuncionario(funcionario).get(0);
+		assertEquals("Funcionario1",funcionario.getNomeCompleto());
+		assertEquals(123,funcionario.getCpf());
+		assertEquals("Rua da ladeira",funcionario.getEndereco());
+		assertEquals("email@gmail.com",funcionario.getEmail());
+		assertEquals("senha123",funcionario.getSenhaAcesso());
+		assertEquals("func1",funcionario.getNomeUsuario());
+	}
+
+}

@@ -17,7 +17,9 @@ import br.uepb.model.acervo.Acervo;
 public class Administrador extends Usuario implements Interface_manterFuncionario,Interface_manterAcervo{
 	private FuncionarioDAO funcionarioDAO;
 	private String nomeUsuario;
-	
+	public Administrador() {
+		
+	}
 	/**
 	 * Método construtor da classe Administrador
 	 * @param nomeUsuario, que é o nome de usuário do Administrador no sistema 
