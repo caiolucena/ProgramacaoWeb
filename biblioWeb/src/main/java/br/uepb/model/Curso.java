@@ -1,5 +1,6 @@
 package br.uepb.model;
 
+import br.uepb.interfaces.IFDependencia;
 import br.uepb.model.enums.Tipo_curso;
 
 /**
@@ -7,7 +8,7 @@ import br.uepb.model.enums.Tipo_curso;
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */
-public class Curso {
+public class Curso implements IFDependencia{
 	private int id;
 	private String nome;
 	private String sigla;
@@ -72,6 +73,10 @@ public class Curso {
 	}
 	public void setTipo(Tipo_curso tipo) {
 		this.tipo = tipo;
+	}
+
+	public boolean validaDependencia() {
+		return true;
 	}
 
 }

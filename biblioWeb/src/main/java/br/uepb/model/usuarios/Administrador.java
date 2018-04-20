@@ -1,18 +1,23 @@
 package br.uepb.model.usuarios;
 
 import java.util.ArrayList;
-
 import br.uepb.dao.AreaConhecimentoDAO;
 import br.uepb.dao.AutorDAO;
 import br.uepb.dao.CursoDAO;
 import br.uepb.dao.EditoraDAO;
-import br.uepb.dao.Item_Acervo;
 import br.uepb.dao.usuarios.FuncionarioDAO;
+import br.uepb.interfaces.DAO_Acervo;
+import br.uepb.interfaces.DAO_Dependencia;
+import br.uepb.interfaces.IFAcervo;
+import br.uepb.interfaces.IFDependencia;
+import br.uepb.interfaces.Interface_manterAcervo;
+import br.uepb.interfaces.Interface_manterDependencias;
+import br.uepb.interfaces.Interface_manterFuncionario;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Curso;
 import br.uepb.model.Editora;
-import br.uepb.model.acervo.IFAcervo;
 
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Administrador.
@@ -22,7 +27,7 @@ import br.uepb.model.acervo.IFAcervo;
  * A classe Administrador contém um método único, que serve para remover um aluno do sistema.
  * @author EquipeACL
  */
-public class Administrador extends Usuario implements Interface_manterFuncionario,Interface_manterAcervo{
+public class Administrador extends Usuario implements Interface_manterFuncionario,Interface_manterAcervo, Interface_manterDependencias{
 	private FuncionarioDAO funcionarioDAO;
 	private AreaConhecimentoDAO areaDAO;
 	private CursoDAO cursoDAO;
@@ -134,11 +139,8 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return null, caso haja algum problema na validação do objeto recebido por parâmetro ou caso a busca do objeto passado por parâmetro no banco de dados não tenha sucesso.
 	 * @return ArrayList<Funcionario>, caso haja sucesso na busca de um ou mais objetos do tipo Funcionário passado por parâmetro no Banco de Dados
 	 */
-	public ArrayList<Funcionario> searchFuncionario(Funcionario f) {
-		if(validarFuncionario(f)) {
-			return funcionarioDAO.searchUsuario(f);
-		}
-		return null;
+	public ArrayList<Funcionario> searchFuncionario(String nome) {
+		return funcionarioDAO.searchUsuario(nome);		
 	}
 	
 	// - - - - - - - - - - - - - - - - - - - - - MANTER ACERVO - - - - - - - - - - - - - - - - - - - - - - -
@@ -149,7 +151,7 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return true, se a inserção for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */
-	public boolean createItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+	public boolean createItemAcervo(DAO_Acervo itemDao,IFAcervo item) {
 		if(item.validaItem()) {
 			return itemDao.createItemAcervo(item);
 		}
@@ -162,7 +164,7 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return true, se a remoção for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */
-	public boolean removeItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+	public boolean removeItemAcervo(DAO_Acervo itemDao,IFAcervo item) {
 		if(item.validaItem()) {
 			return itemDao.removeItemAcervo(item);
 		}
@@ -175,7 +177,7 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return true, se a atualização for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */
-	public boolean updateItemAcervo(Item_Acervo itemDao,IFAcervo item) {
+	public boolean updateItemAcervo(DAO_Acervo itemDao,IFAcervo item) {
 		if(item.validaItem()) {
 			return itemDao.updateItemAcervo(item);
 		}
@@ -188,11 +190,8 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	 * @return null, caso haja algum problema na validação do objeto recebido por parâmetro ou caso a busca do objeto passado por parâmetro no banco de dados não tenha sucesso.
 	 * @return ArrayList<IFAcervo>, caso haja sucesso na busca de um ou mais objetos do acervo do banco de dados passado por parâmetro
 	 */
-	public ArrayList<IFAcervo> searchItemAcervo(Item_Acervo itemDao,IFAcervo item) {
-		if(item.validaItem()) {
-			return itemDao.searchItemAcervo(item);
-		}
-		return null;
+	public ArrayList<IFAcervo> searchItemAcervo(DAO_Acervo itemDao,String titulo) {
+		return itemDao.searchItemAcervo(titulo);		
 	}
 	/**
 	 * Método responsável por validar os parametros dos objetos do tipo Funcionario
@@ -217,152 +216,34 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 		return true;
 	}
 	
-	// - - - - - - - - - - - - - - - - - - - - - MANTER AREA CONHECIMENTO - - - - - - - - - - - - - - - - - - - - - - -
-	/**
-	 * Método responsável por inserir um objeto do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que deve ser salvo no banco
-	 * @return true, se a inserção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean createAreaConhecimento(AreaConhecimento area){
-		return areaDAO.createAreaConhecimento(area);
-	}
-	/**
-	 * Método responsável por remover um objeto do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que deve ser removido no banco
-	 * @return true, se a remoção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean removeAreaConhecimento(AreaConhecimento area){
-		return areaDAO.removeAreaConhecimento(area);
-	}
-	/**
-	 * Método responsável por atualizar um objeto do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que deve ser atualizado no banco
-	 * @return true, se a atualização for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean updateAreaConhecimento(AreaConhecimento area){
-		return areaDAO.updateAreaConhecimento(area);
-	}
-	/**
-	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
-	 * @return ArrayList<AreaConhecimento> listaAreas, lista de objetos do tipo AreaConhecimento retornados pela busca
-	 */
-	public ArrayList<AreaConhecimento> searchAreaConhecimento(AreaConhecimento area){
-		return areaDAO.searchAreaConhecimento(area);
-	}
 	
-	// - - - - - - - - - - - - - - - - - - - - - MANTER AREA CURSO - - - - - - - - - - - - - - - - - - - - - - -
-	/**
-	 * Método responsável por inserir um objeto do tipo Curso no banco de dados
-	 * @param curso, que é o objeto que deve ser salvo no banco
-	 * @return true, se a inserção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean createCurso(Curso curso){
-		return cursoDAO.createCurso(curso);
-	}
-	/**
-	 * Método responsável por remover um objeto do tipo Curso no banco de dados
-	 * @param curso, que é o objeto que deve ser removido no banco
-	 * @return true, se a remoção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean removeCurso(Curso curso){
-		return cursoDAO.removeCurso(curso);
-	}
-	/**
-	 * Método responsável por atualizar um objeto do tipo Curso no banco de dados
-	 * @param curso, que é o objeto que deve ser atualizado no banco
-	 * @return true, se a atualização for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean updateCurso(Curso curso){
-		return cursoDAO.updateCurso(curso);
-	}
-	/**
-	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
-	 * @return ArrayList<Curso> listaCursos, lista de objetos do tipo Curso retornados pela busca
-	 */
-	public ArrayList<Curso> searchCurso(Curso curso){
-		return cursoDAO.searchCurso(curso);
-	}
 	
-	// - - - - - - - - - - - - - - - - - - - - - MANTER AUTOR - - - - - - - - - - - - - - - - - - - - - - -
-	/**
-	 * Método responsável por inserir um objeto do tipo Autor no banco de dados
-	 * @param autor, que é o objeto que deve ser salvo no banco
-	 * @return true, se a inserção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean createAutor(Autor autor){
-		return autorDAO.createAutor(autor);
-	}
-	/**
-	 * Método responsável por remover um objeto do tipo Autor no banco de dados
-	 * @param autor, que é o objeto que deve ser removido no banco
-	 * @return true, se a remoção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean removeAutor(Autor autor){
-		return autorDAO.removeAutor(autor);
-	}
-	/**
-	 * Método responsável por atualizar um objeto do tipo Autor no banco de dados
-	 * @param autor, que é o objeto que deve ser atualizado no banco
-	 * @return true, se a atualização for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean updateAutor(Autor autor){
-		return autorDAO.updateAutor(autor);
-	}
-	/**
-	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
-	 * @return ArrayList<Autor> autores, lista de objetos do tipo Autor retornados pela busca
-	 */
-	public ArrayList<Autor> searchAutor(Autor autor){
-		return autorDAO.searchAutor(autor);
-	}
+	// - - - - - - - - - - - - - - - - - - - - - MANTER DEPENDENCIAS - - - - - - - - - - - - - - - - - - - - - - -
 	
-	// - - - - - - - - - - - - - - - - - - - - - MANTER EDITORA - - - - - - - - - - - - - - - - - - - - - - -
-	/**
-	 * Método responsável por inserir um objeto do tipo Editora no banco de dados
-	 * @param editora, que é o objeto que deve ser salvo no banco
-	 * @return true, se a inserção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean createEditora(Editora editora){
-		return editoraDAO.createEditora(editora);
+	
+	public boolean create(DAO_Dependencia itemDAO, IFDependencia item) {
+		if(item.validaDependencia()){
+			return itemDAO.createItemDependencia(item);
+		}
+		return false;
 	}
-	/**
-	 * Método responsável por remover um objeto do tipo Editora no banco de dados
-	 * @param editora, que é o objeto que deve ser removido no banco
-	 * @return true, se a remoção for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean removeEditora(Editora editora){
-		return editoraDAO.removeEditora(editora);
+
+	public boolean update(DAO_Dependencia itemDAO, IFDependencia item) {
+		if(item.validaDependencia()){
+			return itemDAO.updateItemDependencia(item);
+		}
+		return false;
 	}
-	/**
-	 * Método responsável por atualizar um objeto do tipo Editora no banco de dados
-	 * @param editora, que é o objeto que deve ser atualizado no banco
-	 * @return true, se a atualização for bem sucedida
-	 * @return false, se ocorrer algum erro na operação
-	 */
-	public boolean updateEditora(Editora editora){
-		return editoraDAO.updateEditora(editora);
+
+	public boolean remove(DAO_Dependencia itemDAO, IFDependencia item) {
+		if(item.validaDependencia()){
+			return itemDAO.removeItemDependencia(item);
+		}
+		return false;
 	}
-	/**
-	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
-	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
-	 * @return ArrayList<Editora> editoras, lista de objetos do tipo Editora retornados pela busca
-	 */
-	public ArrayList<Editora> searchEditora(Editora editora){
-		return editoraDAO.searchEditora(editora);
+
+	public ArrayList<IFDependencia> search(DAO_Dependencia itemDAO, String nome) {
+		return itemDAO.searchItemDependencia(nome);
 	}
 	
 	public String getNomeUsuario() {
@@ -371,5 +252,6 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
+
 }
 

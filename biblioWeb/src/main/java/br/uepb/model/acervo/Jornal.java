@@ -2,6 +2,8 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
+import br.uepb.interfaces.IFAcervo;
+
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Jornal.
  * A classe contém os respectivos getters and setters de seus atributos.
@@ -9,8 +11,6 @@ import java.util.Date;
  * @author EquipeACL
  */
 public class Jornal extends ItemAcervo implements IFAcervo{
-	
-	private int id;
 	
 	/**
 	 * Método construtor da classe Jornal
@@ -30,13 +30,6 @@ public class Jornal extends ItemAcervo implements IFAcervo{
 		setTitulo(titulo);
 		setData(data);
 		setEdicao(edicao);
-	}
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public boolean validaItem() {

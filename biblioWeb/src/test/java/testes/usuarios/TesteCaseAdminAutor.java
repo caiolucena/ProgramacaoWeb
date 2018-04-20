@@ -5,57 +5,62 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.uepb.dao.AutorDAO;
+import br.uepb.interfaces.IFDependencia;
 import br.uepb.model.Autor;
 import br.uepb.model.usuarios.Administrador;
 
 public class TesteCaseAdminAutor {
 	private Administrador adm;
 	private Autor autor;
+	private AutorDAO autorDAO;
 	
 	@Before
 	public void setup(){
 		adm = new Administrador();
 		autor = new Autor();
+		autorDAO = new AutorDAO();
 	}
 	
 	@Test
-	public void createAutor(){
+	public void create(){
 		autor = new Autor("Autor1");
-		assertTrue(adm.createAutor(autor));
-		assertTrue(adm.removeAutor(autor));
+		assertTrue(adm.create(autorDAO,autor));
+		assertTrue(adm.remove(autorDAO,autor));
 	}
 	
 	@Test
-	public void updateAutor(){
+	public void update(){
 		autor = new Autor("Autor1");
-		assertTrue(adm.createAutor(autor));
-		autor = adm.searchAutor(autor).get(0);
+		assertTrue(adm.create(autorDAO,autor));
+		autor = (Autor)adm.search(autorDAO,"Autor1").get(0);
 		autor.setNome("NovoAutor");
-		assertTrue(adm.updateAutor(autor));
-		assertTrue(adm.removeAutor(autor));
+		assertTrue(adm.update(autorDAO,autor));
+		assertTrue(adm.remove(autorDAO,autor));
 	}
 	
 	@Test
-	public void removeAutor(){
+	public void remove(){
 		autor = new Autor("Autor1");
-		assertTrue(adm.createAutor(autor));
+		assertTrue(adm.create(autorDAO,autor));
 		autor = new Autor("Autor2");
-		assertTrue(adm.createAutor(autor));
+		assertTrue(adm.create(autorDAO,autor));
 		autor = new Autor("Autor3");
-		assertTrue(adm.createAutor(autor));
+		assertTrue(adm.create(autorDAO,autor));
 		autor.setNome("Autor");
-		for(Autor a:adm.searchAutor(autor)){
-			assertTrue(adm.removeAutor(a));
+		for(IFDependencia dep:adm.search(autorDAO,"Autor")){
+			Autor a = (Autor)dep;
+			assertTrue(adm.remove(autorDAO,a));
 		}
 	}
 	
 	@Test
-	public void searchAutor(){
+	public void search(){
 		autor = new Autor("Autor1");
-		assertTrue(adm.createAutor(autor));
-		autor = adm.searchAutor(autor).get(0);
+		assertTrue(adm.create(autorDAO,autor));
+		autor = (Autor)adm.search(autorDAO,"Autor1").get(0);
 		assertEquals("Autor1",autor.getNome());
-		assertTrue(adm.removeAutor(autor));
+		assertTrue(adm.remove(autorDAO,autor));
 	}
 
 	

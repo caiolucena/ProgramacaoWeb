@@ -3,6 +3,7 @@ package br.uepb.model.usuarios;
 import java.util.ArrayList;
 
 import br.uepb.dao.usuarios.AlunoDAO;
+import br.uepb.interfaces.Interface_manterAluno;
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Usuario;
  * A classe contém os respectivos getters and setters de seus atributos.
@@ -86,11 +87,8 @@ public class Usuario implements Interface_manterAluno {
 	 * @return null, caso haja algum problema na validação do objeto recebido por parâmetro ou caso a busca do objeto passado por parâmetro no banco de dados não tenha sucesso.
 	 * @return ArrayList<Aluno>, caso haja sucesso na busca de um ou mais objetos do tipo Aluno passado por parâmetro no Banco de Dados
 	 */
-	public ArrayList<Aluno> searchAluno(Aluno aluno) {
-		if(validaAluno(aluno)) {
-			return alunoDAO.searchUsuario(aluno);
-		}
-		return null;
+	public ArrayList<Aluno> searchAluno(String nome) {
+		return alunoDAO.searchUsuario(nome);
 	}
 	/**
 	 * Método responsável por validar um objeto do tipo Aluno

@@ -15,11 +15,11 @@ import br.uepb.dao.EditoraDAO;
 import br.uepb.dao.TemaDAO;
 import br.uepb.dao.acervo.LivroDAO;
 import br.uepb.dao.usuarios.AdministradorDAO;
+import br.uepb.interfaces.IFAcervo;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 import br.uepb.model.Tema;
-import br.uepb.model.acervo.IFAcervo;
 import br.uepb.model.acervo.Livro;
 import br.uepb.model.usuarios.Administrador;
 

@@ -11,7 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.dao.Conexao;
-import br.uepb.dao.Item_Acervo;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.acervo.Anais;
@@ -21,7 +21,7 @@ import br.uepb.model.enums.Tipo_anal;
  * Ela implementa a interface Item_Acervo passando o tipo Anais.
  * @author EquipeACL
  */
-public class AnaisDAO implements Item_Acervo<Anais>{
+public class AnaisDAO implements DAO_Acervo<Anais>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AnaisDAO.class);
@@ -175,7 +175,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 	 * @throws SQLException
 	 * @return ArrayList<Anais> listaAnais, lista de anais retornados pela busca
 	 */
-	public ArrayList<Anais> searchItemAcervo(Anais anal) {
+	public ArrayList<Anais> searchItemAcervo(String titulo) {
 		
 		ArrayList<Anais> listaAnais = new ArrayList<Anais>();
 		PreparedStatement stmt = null;
@@ -191,7 +191,7 @@ public class AnaisDAO implements Item_Acervo<Anais>{
 					+ "inner join autor as AU on AU.id = anal_has_autor.autor_id "
 					+ "inner join cidade as C on A.cidade_id = C.Id "
 					+ "where titulo like ? ");
-			stmt.setString(1,"%"+anal.getTitulo()+"%");
+			stmt.setString(1,"%"+titulo+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {

@@ -32,15 +32,15 @@ public class TesteCaseAluno {
 		cursoDao = new CursoDAO();
 		area = new AreaConhecimento(1,"EXATAS");
 		curso = new Curso("Computacao","CP", area, Tipo_curso.GRADUACAO);
-		assertTrue(cursoDao.createCurso(curso));
-		curso = cursoDao.searchCurso(curso).get(0);
+		assertTrue(cursoDao.createItemDependencia(curso));
+		curso = cursoDao.searchItemDependencia("Computacao").get(0);
 	}
 	
 	@Test
 	public void testeCreateAluno() throws Exception {
 		aluno = new Aluno(123,123,"CG","Lucas","Cleo","rua 2",123,curso,Tipo_nivel_aluno.G,"qwe",new Date(System.currentTimeMillis()),1,"123");
 		assertTrue(usuario.createAluno(aluno));
-		aluno = usuario.searchAluno(aluno).get(0);
+		aluno = usuario.searchAluno("Lucas").get(0);
 		assertTrue(administrador.removeAluno(aluno));
 	}
 	
@@ -51,7 +51,7 @@ public class TesteCaseAluno {
 		aluno = new Aluno(123,123,"CG","Lucas Cosmo","Cleo","rua 3",123,curso,Tipo_nivel_aluno.G,"qwe",new Date(System.currentTimeMillis()),1,"123");
 		aluno.setNomeCompleto("Lucas");
 		assertTrue(usuario.createAluno(aluno));
-		for(Aluno a:usuario.searchAluno(aluno)){
+		for(Aluno a:usuario.searchAluno("Lucas")){
 			assertTrue(administrador.removeAluno(a));
 		}	
 		
@@ -61,7 +61,7 @@ public class TesteCaseAluno {
 	public void testeUpdateAluno() throws Exception {
 		aluno = new Aluno(123,123,"CG","Lucas","Cleo","rua 2",123,curso,Tipo_nivel_aluno.G,"qwe",new Date(System.currentTimeMillis()),1,"123");
 		assertTrue(usuario.createAluno(aluno));
-		aluno = usuario.searchAluno(aluno).get(0);
+		aluno = usuario.searchAluno("Lucas").get(0);
 		aluno.setNomeCompleto("Lucas Cosmo");
 		aluno.setEmail("email@gmail.com");
 		assertTrue(usuario.updateAluno(aluno));	
@@ -129,16 +129,16 @@ public class TesteCaseAluno {
 		assertFalse(usuario.createAluno(aluno));
 		aluno.setTelefone(12345);
 		assertTrue(usuario.createAluno(aluno));
-		aluno = usuario.searchAluno(aluno).get(0);
+		aluno = usuario.searchAluno("Aluno1").get(0);
 		administrador.removeAluno(aluno);
 	}
 	
 	@After
 	public void remove(){
 		curso.setNome("Computacao");
-		if(cursoDao.searchCurso(curso).size() >= 1){
-			for(Curso c:cursoDao.searchCurso(curso)){
-				assertTrue(cursoDao.removeCurso(c));
+		if(cursoDao.searchItemDependencia("Computacao").size() >= 1){
+			for(Curso c:cursoDao.searchItemDependencia("Computacao")){
+				assertTrue(cursoDao.removeItemDependencia(c));
 			}
 		}		
 		

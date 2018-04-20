@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import br.uepb.dao.AreaConhecimentoDAO;
 import br.uepb.dao.AutorDAO;
 import br.uepb.dao.Conexao;
-import br.uepb.dao.Item_Acervo;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
@@ -23,7 +23,7 @@ import br.uepb.model.acervo.Livro;
  * Ela implementa a interface Item_Acervo passando o tipo Livro.
  * @author EquipeACL
  */
-public class LivroDAO implements Item_Acervo<Livro>{
+public class LivroDAO implements DAO_Acervo<Livro>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(LivroDAO.class); 
 
@@ -166,7 +166,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 	 * @throws SQLException
 	 * @return ArrayList<Livro> livros, lista de livros retornados pela busca
 	 */
-	public ArrayList<Livro> searchItemAcervo(Livro livro) {
+	public ArrayList<Livro> searchItemAcervo(String titulo) {
 		String sql = "select L.isbn as 'isbn', L.titulo as 'titulo', L.ano as 'ano', L.edicao as 'edicao', "
 				+ "L.num_pag as 'NumeroDePaginas', E.id as 'editora_id', E.nome as 'editora_nome', A.id as 'area_id', "
 				+ "A.nome as 'area_nome'  from livro as L inner join editora as E on L.editora_id = E.id "
@@ -175,7 +175,7 @@ public class LivroDAO implements Item_Acervo<Livro>{
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,"%"+livro.getTitulo()+"%");
+			stmt.setString(1,"%"+titulo+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Livro l = new Livro();

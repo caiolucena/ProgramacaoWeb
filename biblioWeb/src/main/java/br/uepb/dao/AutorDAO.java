@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.interfaces.DAO_Dependencia;
 import br.uepb.model.Autor;
 /**
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Autor
  * @author EquipeACL
  */
-public class AutorDAO {
+public class AutorDAO implements DAO_Dependencia<Autor>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
@@ -27,7 +28,7 @@ public class AutorDAO {
 	 * @return false, se ocorrer algum error na inserção.
 	 */	
 	@SuppressWarnings("finally")
-	public boolean createAutor(Autor autor){
+	public boolean createItemDependencia(Autor autor){
 		String sql = "insert into autor(nome)values(?)";
 		try {
 			con = Conexao.iniciarConexao();
@@ -73,7 +74,7 @@ public class AutorDAO {
 	 * @return false, se ocorrer algum error na operação.
 	 */	
 	@SuppressWarnings("finally")
-	public boolean removeAutor(Autor autor) {
+	public boolean removeItemDependencia(Autor autor) {
 		String sql = "delete from autor where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -105,7 +106,7 @@ public class AutorDAO {
 	 * @return false, se ocorrer algum error na operação.
 	 */	
 	@SuppressWarnings("finally")
-	public boolean updateAutor(Autor autor) {
+	public boolean updateItemDependencia(Autor autor) {
 		String sql = "update autor set nome=? where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -139,13 +140,13 @@ public class AutorDAO {
 	 * @throws JavaLangException
 	 * @return ArrayList<Autor> autores, lista de autores retornados pela busca. 
 	 */	
-	public ArrayList<Autor> searchAutor(Autor autor) {//busca varios autores pelo nome
+	public ArrayList<Autor> searchItemDependencia(String nome) {//busca varios autores pelo nome
 		String sql = "select * from autor where nome like ?";
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,"%"+autor.getNome()+"%");
+			stmt.setString(1,"%"+nome+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Autor a = new Autor();
@@ -175,7 +176,7 @@ public class AutorDAO {
 	 * @throws JavaLangException
 	 * @return autor, objeto do tipo Autor retornado pela busca. 
 	 */		
-	public Autor searchAutor(int id_autor) {//busca um unico autor pelo id
+	public Autor searchItemDependencia(int id_autor) {//busca um unico autor pelo id
 		String sql = "select * from autor where id=?";
 		Autor autor = new Autor();
 		try {

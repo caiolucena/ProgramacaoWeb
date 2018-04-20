@@ -26,17 +26,17 @@ public class TesteCaseEditora {
 	@Test
 	public void testCreateEditora() {
 		ed.setNome("Abril");
-		assertTrue(edDao.createEditora(ed));
-		assertFalse(edDao.createEditora(new Editora()));
+		assertTrue(edDao.createItemDependencia(ed));
+		assertFalse(edDao.createItemDependencia(new Editora()));
 	}
 
 	@Test
 	public void testBuscaDeleteEditora() {
 		ed.setNome("Abril");
-		listaEd = edDao.searchEditora(ed);
+		listaEd = edDao.searchItemDependencia("Abril");
 		System.out.println(listaEd.size());
 		for(Editora a:listaEd) {
-			assertTrue(edDao.removeEditora(a));
+			assertTrue(edDao.removeItemDependencia(a));
 		}
 	}
 }

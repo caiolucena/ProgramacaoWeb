@@ -33,8 +33,8 @@ public class TesteCaseAnais {
 	@Test
 	public void testeCreateAnais() {
 		autor.setNome("Autor1");
-		autorDao.createAutor(autor);
-		autor = autorDao.searchAutor(autor).get(0);
+		autorDao.createItemDependencia(autor);
+		autor = autorDao.searchItemDependencia("Autor1").get(0);
 		anais.setAnoPublicacao(new Date(System.currentTimeMillis()));
 		anais.setAutor(autor);		
 		anais.setLocal(cidade);
@@ -47,7 +47,7 @@ public class TesteCaseAnais {
 	@Test
 	public void testeRemoveAnais() {
 		anais.setTitulo("Titulo1");
-		anais = anaisDao.searchItemAcervo(anais).get(0);
+		anais = anaisDao.searchItemAcervo("Titulo1").get(0);
 		assertTrue(anaisDao.removeItemAcervo(anais));
 	}
 	

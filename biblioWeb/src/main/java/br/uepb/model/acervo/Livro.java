@@ -3,6 +3,7 @@ package br.uepb.model.acervo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import br.uepb.interfaces.IFAcervo;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
@@ -14,11 +15,10 @@ import br.uepb.model.Editora;
  * @author EquipeACL
  */
 public class Livro extends ItemAcervo implements IFAcervo{
-	private long isbn;
-
-	private ArrayList<Autor> autores;
-	private Editora editora;
 	
+	private long isbn;
+	private ArrayList<Autor> autores;
+	private Editora editora;	
 	private int numero_paginas;
 	private AreaConhecimento area;
 	
@@ -74,7 +74,14 @@ public class Livro extends ItemAcervo implements IFAcervo{
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-
+	
+	public Date getAnoPublicacao(){
+		return getData();
+	}
+	
+	public void setAnoPublicacao(Date anoPublicacao){
+		setData(anoPublicacao);
+	}
 
 	public int getNumero_paginas() {
 		return numero_paginas;

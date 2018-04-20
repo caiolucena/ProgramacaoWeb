@@ -22,7 +22,7 @@ public class TesteCaseFuncionario {
 	public void testeCreateFuncionario() {
 		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
 		assertTrue(administrador.createFuncionario(funcionario));
-		funcionario = administrador.searchFuncionario(funcionario).get(0);
+		funcionario = administrador.searchFuncionario("Funcionario1").get(0);
 		assertTrue(administrador.removeFuncionario(funcionario));
 	}
 	
@@ -35,7 +35,7 @@ public class TesteCaseFuncionario {
 		funcionario = new Funcionario(123,"Funcionario3",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func3");
 		assertTrue(administrador.createFuncionario(funcionario));
 		funcionario.setNomeCompleto("Funcionario");		
-		for(Funcionario f:administrador.searchFuncionario(funcionario)) {
+		for(Funcionario f:administrador.searchFuncionario("Funcionario")) {
 			assertTrue(administrador.removeFuncionario(f));
 		}
 	}
@@ -44,7 +44,7 @@ public class TesteCaseFuncionario {
 	public void testeUpdateFuncionario() {
 		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
 		assertTrue(administrador.createFuncionario(funcionario));
-		funcionario = administrador.searchFuncionario(funcionario).get(0);
+		funcionario = administrador.searchFuncionario("Funcionario1").get(0);
 		funcionario.setNomeCompleto("Novo Nome");
 		funcionario.setEmail("novoemail@gmail.com");
 		assertTrue(administrador.updateFuncionario(funcionario));
@@ -55,7 +55,7 @@ public class TesteCaseFuncionario {
 		funcionario = new Funcionario(123,"Funcionario1",123,"Brasil","Rua da ladeira",1234,"email@gmail.com","senha123","func1");
 		assertTrue(administrador.createFuncionario(funcionario));
 		
-		funcionario = administrador.searchFuncionario(funcionario).get(0);
+		funcionario = administrador.searchFuncionario("Funcionario1").get(0);
 		assertEquals("Funcionario1",funcionario.getNomeCompleto());
 		assertEquals(123,funcionario.getCpf());
 		assertEquals("Rua da ladeira",funcionario.getEndereco());
@@ -102,7 +102,7 @@ public class TesteCaseFuncionario {
 		assertFalse(administrador.createFuncionario(funcionario));
 		funcionario.setTelefone(3333);
 		assertTrue(administrador.createFuncionario(funcionario));
-		for(Funcionario f: administrador.searchFuncionario(funcionario)) {
+		for(Funcionario f: administrador.searchFuncionario("Funcionario")) {
 			assertTrue(administrador.removeFuncionario(f));
 		}
 		

@@ -11,7 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.dao.Conexao;
-import br.uepb.dao.Item_Acervo;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
@@ -22,7 +22,7 @@ import br.uepb.model.enums.Tipo_tcc;
  * Ela implementa a interface Item_Acervo passando o tipo Tcc.
  * @author EquipeACL
  */
-public class TccDAO implements Item_Acervo<Tcc>{
+public class TccDAO implements DAO_Acervo<Tcc>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(TccDAO.class);
@@ -150,7 +150,7 @@ public class TccDAO implements Item_Acervo<Tcc>{
 	 * @throws JavaLangException
 	 * @return ArrayList<Tcc> listaTcc, lista de tccs retornados pela busca
 	 */
-	public ArrayList<Tcc> searchItemAcervo(Tcc tcc) {
+	public ArrayList<Tcc> searchItemAcervo(String titulo) {
 		
 		ArrayList<Tcc> listaTcc = new ArrayList<Tcc>();		
 		PreparedStatement stmt = null;
@@ -167,7 +167,7 @@ public class TccDAO implements Item_Acervo<Tcc>{
 					+ "INNER JOIN cidade AS C ON T.cidade_id = C.id "
 					+ "INNER JOIN orientador AS O ON T.orientador_id = O.id  "
 					+ "WHERE T.titulo LIKE ?");
-			stmt.setString(1,"%"+tcc.getTitulo()+"%");
+			stmt.setString(1,"%"+titulo+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {

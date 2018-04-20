@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.interfaces.DAO_Dependencia;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Tema;
 /**
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo AreaConhecimento
  * @author EquipeACL
  */
-public class AreaConhecimentoDAO {
+public class AreaConhecimentoDAO implements DAO_Dependencia<AreaConhecimento>{
 	
 	private Connection con;
 	private static final Logger  logger = LogManager.getLogger(AreaConhecimentoDAO.class);
@@ -30,7 +31,7 @@ public class AreaConhecimentoDAO {
 	 * @return false, se ocorrer algum problema na inserção
 	 */	
 	@SuppressWarnings("finally")
-	public boolean createAreaConhecimento(AreaConhecimento area) {
+	public boolean createItemDependencia(AreaConhecimento area) {
 		
 		PreparedStatement stmt = null;
 
@@ -65,7 +66,7 @@ public class AreaConhecimentoDAO {
 	 * @return ArrayList<AreaConhecimento> listaAreas, lista de areas do conhecimento retornados pela busca.
 	 */
 	
-	public ArrayList<AreaConhecimento> searchAreaConhecimento(AreaConhecimento area){
+	public ArrayList<AreaConhecimento> searchItemDependencia(String nome){
 		ArrayList<AreaConhecimento> listaAreas = new ArrayList<AreaConhecimento>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -74,7 +75,7 @@ public class AreaConhecimentoDAO {
 			con = Conexao.iniciarConexao();
 			//stmt = con.prepareStatement("SELECT A.id AS id_area, A.nome AS nome_area, T.id AS id_tema, T.nome as nome_tema FROM area_conhecimento AS A INNER JOIN tema AS T ON A.tema_id = T.id WHERE A.nome LIKE '%?%'");
 			stmt = con.prepareStatement("SELECT * from area_conhecimento where nome LIKE ?");
-			stmt.setString(1,"%"+area.getNome()+"%");			
+			stmt.setString(1,"%"+nome+"%");			
 			rs = stmt.executeQuery();			
 			while(rs.next()) {
 				AreaConhecimento a = new AreaConhecimento(rs.getInt("id"),rs.getString("nome"));				
@@ -109,7 +110,7 @@ public class AreaConhecimentoDAO {
 	 * @return false, se ocorrer algum erro na remoção.
 	 */	
 	@SuppressWarnings("finally")
-	public boolean removeAreaConhecimento(AreaConhecimento area) {
+	public boolean removeItemDependencia(AreaConhecimento area) {
 		
 		PreparedStatement stmt = null;
 
@@ -146,7 +147,7 @@ public class AreaConhecimentoDAO {
 	 * @return false, se ocorrer algum erro na atualização.
 	 */	
 	@SuppressWarnings("finally")
-	public boolean updateAreaConhecimento(AreaConhecimento area) {
+	public boolean updateItemDependencia(AreaConhecimento area) {
 		
 		PreparedStatement stmt = null;
 		
@@ -173,4 +174,5 @@ public class AreaConhecimentoDAO {
 		}
 		return false;
 	}
+
 }

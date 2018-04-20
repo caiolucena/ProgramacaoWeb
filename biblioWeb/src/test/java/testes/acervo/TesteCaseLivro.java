@@ -48,24 +48,24 @@ public class TesteCaseLivro {
 		autorDao = new AutorDAO();
 		
 		editora.setNome("Editora1");
-		assertTrue(editoraDao.createEditora(editora));
-		editora = editoraDao.searchEditora(editora).get(0);
+		assertTrue(editoraDao.createItemDependencia(editora));
+		editora = editoraDao.searchItemDependencia("Editora1").get(0);
 				
 		area.setNome("Area1");
-		areaDao.createAreaConhecimento(area);
-		area = areaDao.searchAreaConhecimento(area).get(0);
+		areaDao.createItemDependencia(area);
+		area = areaDao.searchItemDependencia("Area1").get(0);
 		
 		tema.setNome("Tema1");
 		tema.setArea(area);
-		temaDao.createTema(tema);
-		tema = temaDao.searchTema(tema).get(0);
+		temaDao.createItemDependencia(tema);
+		tema = temaDao.searchItemDependencia("Tema1").get(0);
 		
 		autor1.setNome("Autor1");
 		autor2.setNome("Autor2");
-		autorDao.createAutor(autor1);
-		autorDao.createAutor(autor2);
-		autor1 = autorDao.searchAutor(autor1).get(0);
-		autor2 = autorDao.searchAutor(autor2).get(0);
+		autorDao.createItemDependencia(autor1);
+		autorDao.createItemDependencia(autor2);
+		autor1 = autorDao.searchItemDependencia("Autor1").get(0);
+		autor2 = autorDao.searchItemDependencia("Autor2").get(0);
 	}
 	
 	@Test
@@ -111,18 +111,18 @@ public class TesteCaseLivro {
 		assertTrue(livroDao.createItemAcervo(livro));
 		livro.setTitulo("NovoTitulo");
 		assertTrue(livroDao.updateItemAcervo(livro));
-		Livro novoLivro = livroDao.searchItemAcervo(livro).get(0);
+		Livro novoLivro = livroDao.searchItemAcervo("NovoTitulo").get(0);
 		//preciso comprar os valores de livro e novoLivro
 		assertTrue(livroDao.removeItemAcervo(livro));
 	}
 	
 	@After
 	public void clean(){
-		temaDao.removeTema(tema);
-		areaDao.removeAreaConhecimento(area);		
-		editoraDao.removeEditora(editora);		
-		autorDao.removeAutor(autor1);
-		autorDao.removeAutor(autor2);
+		temaDao.removeItemDependencia(tema);
+		areaDao.removeItemDependencia(area);		
+		editoraDao.removeItemDependencia(editora);		
+		autorDao.removeItemDependencia(autor1);
+		autorDao.removeItemDependencia(autor2);
 		
 	}
 

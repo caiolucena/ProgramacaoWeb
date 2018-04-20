@@ -44,12 +44,12 @@ public class TesteCaseTcc {
 	public void testCreateDeleteTcc() {
 		orientador.setNome("Orientador1");
 		orientador.setFormacao("Graduado");
-		assertTrue(orientadorDao.createOrientador(orientador));
-		orientador = orientadorDao.searchOrientador(orientador).get(0);
+		assertTrue(orientadorDao.createItemDependencia(orientador));
+		orientador = orientadorDao.searchItemDependencia("Orientador1").get(0);
 		
 		autor.setNome("Autor1");
-		autorDao.createAutor(autor);
-		autor = autorDao.searchAutor(autor).get(0);
+		autorDao.createItemDependencia(autor);
+		autor = autorDao.searchItemDependencia("Autor1").get(0);
 		
 		
 		trabalho.setAutor(autor);
@@ -61,9 +61,9 @@ public class TesteCaseTcc {
 		
 		assertTrue(trabalhoDao.createItemAcervo(trabalho));
 		
-		trabalho = trabalhoDao.searchItemAcervo(trabalho).get(0);
+		trabalho = trabalhoDao.searchItemAcervo("Trabalho de conclusao").get(0);
 		assertTrue(trabalhoDao.removeItemAcervo(trabalho));
-		assertTrue(orientadorDao.removeOrientador(orientador));
+		assertTrue(orientadorDao.removeItemDependencia(orientador));
 		
 		
 		

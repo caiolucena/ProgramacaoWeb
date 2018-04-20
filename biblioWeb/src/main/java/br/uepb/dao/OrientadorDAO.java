@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.interfaces.DAO_Dependencia;
 import br.uepb.model.Orientador;
 /**
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Orientador
  * @author EquipeACL
  */
-public class OrientadorDAO {
+public class OrientadorDAO implements DAO_Dependencia<Orientador>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(OrientadorDAO.class);
 		
@@ -26,7 +27,7 @@ public class OrientadorDAO {
 	 * @return true, se a operação de inserção for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */
-	public boolean createOrientador(Orientador orientador){
+	public boolean createItemDependencia(Orientador orientador){
 		String sql = "insert into orientador(nome,formacao)values(?,?)";
 		try {
 			con = Conexao.iniciarConexao();
@@ -66,7 +67,7 @@ public class OrientadorDAO {
 	 * @return true, se a operação de remoção for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */
-	public boolean removeOrientador(Orientador orientador) {
+	public boolean removeItemDependencia(Orientador orientador) {
 		String sql = "delete from orientador where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -97,7 +98,7 @@ public class OrientadorDAO {
 	 * @return true, se a operação de atualização for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */
-	public boolean updateOrientador(Orientador orientador) {
+	public boolean updateItemDependencia(Orientador orientador) {
 		String sql = "update orientador set nome=?, formacao=? where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -129,13 +130,13 @@ public class OrientadorDAO {
 	 * @throws JavaLangException
 	 * @return ArrayList<Curso> orientadores, lista de orientadores retornados pela busca
 	 */
-	public ArrayList<Orientador> searchOrientador(Orientador orientador) {
+	public ArrayList<Orientador> searchItemDependencia(String nome) {
 		String sql = "select * from orientador where nome like ?";
 		ArrayList<Orientador> orientadores = new ArrayList<Orientador>();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,"%"+orientador.getNome()+"%");
+			stmt.setString(1,"%"+nome+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Orientador o = new Orientador(rs.getInt("id"),rs.getString("nome"),rs.getString("formacao"));

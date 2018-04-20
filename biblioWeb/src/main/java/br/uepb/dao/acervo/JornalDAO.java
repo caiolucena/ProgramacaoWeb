@@ -6,19 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.apache.log4j.Logger;
 
+import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
 import br.uepb.dao.Conexao;
-import br.uepb.dao.Item_Acervo;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.acervo.Jornal;
 /**
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Jornal
  * Ela implementa a interface Item_Acervo passando o tipo Jornal.
  * @author EquipeACL
  */
-public class JornalDAO implements Item_Acervo<Jornal>{
+public class JornalDAO implements DAO_Acervo<Jornal>{
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(JornalDAO.class);
@@ -147,7 +147,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 	 * @throws SQLException
 	 * @return ArrayList <Jornal> jornais, lista de jornais retornados pela busca
 	 */	
-	public ArrayList<Jornal> searchItemAcervo(Jornal jornal) {
+	public ArrayList<Jornal> searchItemAcervo(String titulo) {
 
 		PreparedStatement stmt = null;
 		ArrayList <Jornal> jornais = new ArrayList <Jornal>();
@@ -156,7 +156,7 @@ public class JornalDAO implements Item_Acervo<Jornal>{
 		try{
 			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("select * from jornal where titulo like ?");
-			stmt .setString(1,"%"+ jornal.getTitulo()+ "%");
+			stmt .setString(1,"%"+ titulo+ "%");
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {

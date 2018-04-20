@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.apache.log4j.Logger;
 
+import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
 import br.uepb.dao.Conexao;
-import br.uepb.dao.Item_Acervo;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.Editora;
 import br.uepb.model.acervo.Revista;
 /**
@@ -19,7 +19,7 @@ import br.uepb.model.acervo.Revista;
  * Ela implementa a interface Item_Acervo passando o tipo Revista.
  * @author EquipeACL
  */
-public class RevistaDAO implements Item_Acervo<Revista>{
+public class RevistaDAO implements DAO_Acervo<Revista>{
 
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(RevistaDAO.class);
@@ -149,7 +149,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 	 * @throws JavaLangException
 	 * @return ArrayList<Revista> revistas, lista de revistas retornadas pela busca
 	 */
-	public ArrayList<Revista> searchItemAcervo(Revista revista) {
+	public ArrayList<Revista> searchItemAcervo(String titulo) {
 
 		PreparedStatement stmt = null;
 		ArrayList <Revista> revistas = new ArrayList <Revista>();
@@ -159,7 +159,7 @@ public class RevistaDAO implements Item_Acervo<Revista>{
 			stmt = con.prepareStatement("SELECT revista.id as 'id_revista', revista.titulo as 'titulo_revista', revista.data as 'data_revista'," + 
 					" revista.edicao as 'edicao_revista', revista.num_pag as 'pag_revista', editora.id as 'id_editora', editora.nome as 'nome_editora'" + 
 					" FROM revista INNER JOIN editora ON revista.editora_id = editora.id where revista.titulo like ?;");
-			stmt .setString(1,"%"+revista.getTitulo()+"%");
+			stmt .setString(1,"%"+titulo+"%");
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {

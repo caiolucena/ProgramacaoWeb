@@ -31,17 +31,17 @@ public class TesteCaseCurso {
 		curso.setSigla("CC");
 		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve estar cadastrada
-		assertTrue(cursoDao.createCurso(curso));
+		assertTrue(cursoDao.createItemDependencia(curso));
 		
 		curso = new Curso();
 		curso.setNome("Teste");
-		assertFalse(cursoDao.createCurso(curso));
+		assertFalse(cursoDao.createItemDependencia(curso));
 		
 		curso.setNome("Computação");
 		ArrayList<Curso> lista = new ArrayList<Curso>();
-		lista = cursoDao.searchCurso(curso);
+		lista = cursoDao.searchItemDependencia("Teste");
 		for(Curso c : lista){
-			assertTrue(cursoDao.removeCurso(c));
+			assertTrue(cursoDao.removeItemDependencia(c));
 		}
 	}
 	
@@ -51,23 +51,23 @@ public class TesteCaseCurso {
 		curso.setSigla("CC");
 		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
-		assertTrue(cursoDao.createCurso(curso));
+		assertTrue(cursoDao.createItemDependencia(curso));
 		
 		curso.setNome("Computação2");
 		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
-		assertTrue(cursoDao.createCurso(curso));
+		assertTrue(cursoDao.createItemDependencia(curso));
 		
 		curso.setNome("Computação3");
 		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
-		assertTrue(cursoDao.createCurso(curso));
+		assertTrue(cursoDao.createItemDependencia(curso));
 		
 		curso.setNome("Computação");
 		ArrayList<Curso> lista = new ArrayList<Curso>();
-		lista = cursoDao.searchCurso(curso);
+		lista = cursoDao.searchItemDependencia("Computação");
 		for(Curso c : lista){
-			assertTrue(cursoDao.removeCurso(c));
+			assertTrue(cursoDao.removeItemDependencia(c));
 		}
 	}
 	
@@ -77,22 +77,22 @@ public class TesteCaseCurso {
 		curso.setSigla("CC");
 		curso.setTipo(Tipo_curso.GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
-		assertTrue(cursoDao.createCurso(curso));
+		assertTrue(cursoDao.createItemDependencia(curso));
 		
 		ArrayList<Curso> lista = new ArrayList<Curso>();
-		lista = cursoDao.searchCurso(curso);
+		lista = cursoDao.searchItemDependencia("Computação1");
 		curso = lista.get(0);
 		
 		curso.setNome("ComputaçãoNovo");
 		curso.setTipo(Tipo_curso.POS_GRADUACAO);
 		curso.setArea(new AreaConhecimento(1,"EXATAS"));//A area de conhecimento ja deve está cadastrada
-		assertTrue(cursoDao.updateCurso(curso));
+		assertTrue(cursoDao.updateItemDependencia(curso));
 		
 		curso.setNome("Computação");
 		lista = new ArrayList<Curso>();
-		lista = cursoDao.searchCurso(curso);
+		lista = cursoDao.searchItemDependencia("Computação");
 		for(Curso c : lista){
-			assertTrue(cursoDao.removeCurso(c));
+			assertTrue(cursoDao.removeItemDependencia(c));
 		}
 		
 	}

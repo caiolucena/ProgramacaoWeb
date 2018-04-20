@@ -36,7 +36,7 @@ public class TesteCaseRevista {
 	public void testCreate() {
 		ed.setNome("Editora Tec");
 		
-		edDao.createEditora(ed);
+		edDao.createItemDependencia(ed);
 		
 		ed = edDao.searchEditora(ed.getNome());
 		
@@ -57,17 +57,17 @@ public class TesteCaseRevista {
 		ed = edDao.searchEditora(ed.getNome());
 		
 		rev.setTitulo("MasterClass");
-		rev = revDao.searchItemAcervo(rev).get(0);
+		rev = revDao.searchItemAcervo("MasterClass").get(0);
 		
 		assertTrue(revDao.removeItemAcervo(rev));
-		assertTrue(edDao.removeEditora(ed));
+		assertTrue(edDao.removeItemDependencia(ed));
 	}
 	
 	@Test
 	public void testBusca() {
 		ed.setNome("Editora Tec");
 		
-		edDao.createEditora(ed);
+		edDao.createItemDependencia(ed);
 		
 		ed = edDao.searchEditora(ed.getNome());
 		
@@ -81,7 +81,7 @@ public class TesteCaseRevista {
 		
 		assertTrue(revDao.createItemAcervo(rev));
 		
-		lista = revDao.searchItemAcervo(rev);
+		lista = revDao.searchItemAcervo("MasterClass");
 		assertFalse(rev.getId() == lista.get(0).getId());
 		assertEquals(rev.getTitulo(),lista.get(0).getTitulo());		
 		
@@ -90,7 +90,7 @@ public class TesteCaseRevista {
 			assertTrue(revDao.removeItemAcervo(a));
 		}
 		
-		assertTrue(edDao.removeEditora(ed));
+		assertTrue(edDao.removeItemDependencia(ed));
 	}
 	
 }

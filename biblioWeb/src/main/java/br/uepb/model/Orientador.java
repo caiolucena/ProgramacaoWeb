@@ -1,11 +1,13 @@
 package br.uepb.model;
 
+import br.uepb.interfaces.IFDependencia;
+
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Orientador.
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */
-public class Orientador {
+public class Orientador implements IFDependencia{
 	private int id;
 	private String nome;
 	private String formacao;
@@ -47,5 +49,9 @@ public class Orientador {
 	}
 	public void setFormacao(String formacao) {
 		this.formacao = formacao;
+	}
+
+	public boolean validaDependencia() {
+		return true;
 	}	
 }

@@ -10,6 +10,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.dao.Conexao;
+import br.uepb.interfaces.Interface_usuario;
 import br.uepb.model.usuarios.Funcionario;
 
 /**
@@ -151,7 +152,7 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 	 * @return ArrayList<Funcionario>, se houver um ou mais funcionarios que atendam ao requisito
 	 * @return null, se a busca não retornar nenhum resultado	 
 	 */
-	public ArrayList<Funcionario> searchUsuario(Funcionario funcionario) {
+	public ArrayList<Funcionario> searchUsuario(String nome) {
 		ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -160,7 +161,7 @@ public class FuncionarioDAO implements Interface_usuario<Funcionario> {
 		try {
 			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("select * from funcionario where nomeCompleto like ?");
-			stmt.setString(1,"%"+funcionario.getNomeCompleto()+"%");
+			stmt.setString(1,"%"+nome+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {

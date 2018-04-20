@@ -1,4 +1,4 @@
-package br.uepb.dao;
+package br.uepb.interfaces;
 
 import java.util.ArrayList;
 
@@ -8,11 +8,11 @@ import java.util.ArrayList;
  *
  * @param <T>, tipo generico de dado.
  */
-public interface Item_Acervo<T> {
+public interface DAO_Acervo<T> {
 	
 	public boolean createItemAcervo(T objeto);
 	public boolean removeItemAcervo(T objeto);
 	public boolean updateItemAcervo(T objeto);
-	public ArrayList<T> searchItemAcervo(T objeto);
+	public ArrayList<T> searchItemAcervo(String titulo);
 	
 }

@@ -1,7 +1,8 @@
 package br.uepb.model.acervo;
 
-import java.sql.Date;
+import java.util.Date;
 
+import br.uepb.interfaces.IFAcervo;
 import br.uepb.model.Editora;
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Revista.
@@ -9,12 +10,8 @@ import br.uepb.model.Editora;
  * A classe Revista implementa a interface Acervo
  * @author EquipeACL
  */
-public class Revista implements IFAcervo{
-	private int id;
-	private String titulo;
+public class Revista extends ItemAcervo implements IFAcervo{
 	private Editora editora;
-	private Date data;
-	private int edicao;
 	private int num_pag;
 	
 	/**
@@ -39,21 +36,6 @@ public class Revista implements IFAcervo{
 		setNum_pag(numeroDePaginas);
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
 	public Editora getEditora() {
 		return editora;
 	}
@@ -62,20 +44,12 @@ public class Revista implements IFAcervo{
 		this.editora = editora;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataPublicacao() {
+		return getData();
 	}
 
-	public void setData(Date dataDePublicacao) {
-		this.data = dataDePublicacao;
-	}
-
-	public int getEdicao() {
-		return edicao;
-	}
-
-	public void setEdicao(int edicao) {
-		this.edicao = edicao;
+	public void setDataPublicacao(Date dataDePublicacao) {
+		setData(dataDePublicacao);
 	}
 
 	public int getNum_pag() {

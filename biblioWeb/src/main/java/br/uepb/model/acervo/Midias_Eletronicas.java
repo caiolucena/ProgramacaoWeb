@@ -2,6 +2,7 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
+import br.uepb.interfaces.IFAcervo;
 import br.uepb.model.enums.Tipo_midia;
 
 /**
@@ -10,11 +11,8 @@ import br.uepb.model.enums.Tipo_midia;
  * A classe Midias_Eletronicas implementa a interface Acervo
  * @author EquipeACL
  */
-public class Midias_Eletronicas implements IFAcervo{
-	private int id;
-	private String titulo;
+public class Midias_Eletronicas extends ItemAcervo implements IFAcervo{
 	private Tipo_midia tipo;
-	private Date data_gravacao;
 	
 	/**
 	 * Método construtor da classe Midias_Eletronicas
@@ -35,22 +33,6 @@ public class Midias_Eletronicas implements IFAcervo{
 		setData_gravacao(data_gravacao);
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
 	public Tipo_midia getTipo() {
 		return tipo;
 	}
@@ -60,11 +42,11 @@ public class Midias_Eletronicas implements IFAcervo{
 	}
 
 	public Date getData_gravacao() {
-		return data_gravacao;
+		return getData();
 	}
 
 	public void setData_gravacao(Date data_gravacao) {
-		this.data_gravacao = data_gravacao;
+		setData(data_gravacao);
 	}
 
 	public boolean validaItem() {

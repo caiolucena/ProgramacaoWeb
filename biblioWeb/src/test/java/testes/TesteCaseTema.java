@@ -27,13 +27,13 @@ public class TesteCaseTema {
 	}
 	@Test
 	public void createTema() {
-		assertFalse(temaDAO.createTema(tema));
+		assertFalse(temaDAO.createItemDependencia(tema));
 		tema.setNome("Filosofia");
-		assertFalse(temaDAO.createTema(tema));
+		assertFalse(temaDAO.createItemDependencia(tema));
 		area.setNome("COMPUTACAO");
 		area.setId(1);
 		tema.setArea(area);
-		assertTrue(temaDAO.createTema(tema));
+		assertTrue(temaDAO.createItemDependencia(tema));
 	}
 	
 	@Test
@@ -43,19 +43,19 @@ public class TesteCaseTema {
 		area.setNome("COMPUTACAO");
 		area.setId(1);
 		tema2.setArea(area);
-		temaDAO.createTema(tema2);
-		assertTrue(temaDAO.removeTema(tema2));		
+		temaDAO.createItemDependencia(tema2);
+		assertTrue(temaDAO.removeItemDependencia(tema2));		
 	}
 	
 	@Test
 	public void updateRemoveTema() {
 		tema.setNome("Filosofia");
 		ArrayList<Tema> listTema = new ArrayList<Tema>();
-		listTema = temaDAO.searchTema(tema);
+		listTema = temaDAO.searchItemDependencia("Filosofia");
 		for(Tema t: listTema) {
 			t.setNome("Humanas");
-			temaDAO.updateTema(t);
-			temaDAO.removeTema(t);
+			temaDAO.updateItemDependencia(t);
+			temaDAO.removeItemDependencia(t);
 		}
 				
 	}

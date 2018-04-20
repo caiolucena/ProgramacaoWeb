@@ -29,14 +29,13 @@ public class TesteCaseAreaConhecimento {
 	
 	@Test
 	public void testCreateSearchRemoveArea() {
-		
-		assertFalse(areaDAO.createAreaConhecimento(area));
+		assertFalse(areaDAO.createItemDependencia(area));
 		area.setNome("Saude");
-		assertTrue(areaDAO.createAreaConhecimento(area));
+		assertTrue(areaDAO.createItemDependencia(area));
 		ArrayList<AreaConhecimento> areaList = new ArrayList<AreaConhecimento>();
-		areaList = areaDAO.searchAreaConhecimento(area);
+		areaList = areaDAO.searchItemDependencia("Saude");
 		for(AreaConhecimento a:areaList) {
-			areaDAO.removeAreaConhecimento(a);
+			areaDAO.removeItemDependencia(a);
 		} 
 	}
 	
@@ -44,13 +43,13 @@ public class TesteCaseAreaConhecimento {
 	public void testUpdateSearchRemove() {
 		AreaConhecimento area2 = new AreaConhecimento();
 		area2.setNome("Humanas");
-		areaDAO.createAreaConhecimento(area2);
+		areaDAO.createItemDependencia(area2);
 		ArrayList<AreaConhecimento> listArea = new ArrayList<AreaConhecimento>();
-		listArea = areaDAO.searchAreaConhecimento(area2);
+		listArea = areaDAO.searchItemDependencia("Humanas");
 		for(AreaConhecimento ar: listArea) {
 			ar.setNome("Saude");
-			areaDAO.updateAreaConhecimento(ar);
-			areaDAO.removeAreaConhecimento(ar);
+			areaDAO.updateItemDependencia(ar);
+			areaDAO.removeItemDependencia(ar);
 		}
 		
 	}

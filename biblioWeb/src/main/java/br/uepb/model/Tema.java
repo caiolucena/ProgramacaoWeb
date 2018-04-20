@@ -1,11 +1,13 @@
 package br.uepb.model;
 
+import br.uepb.interfaces.IFDependencia;
+
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Tema.
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */
-public class Tema {
+public class Tema implements IFDependencia{
 	private int id;
 	private String nome;
 	private AreaConhecimento area;
@@ -52,5 +54,9 @@ public class Tema {
 
 	public void setArea(AreaConhecimento area) {
 		this.area = area;
+	}
+
+	public boolean validaDependencia() {
+		return true;
 	}
 }

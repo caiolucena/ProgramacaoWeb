@@ -11,7 +11,9 @@ import org.apache.log4j.Logger;
 
 
 
+
 import br.uepb.dao.Conexao;
+import br.uepb.interfaces.Interface_usuario;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Curso;
 import br.uepb.model.enums.Tipo_curso;
@@ -170,7 +172,7 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 	 * @return ArrayList<Aluno>, se houver um ou mais alunos que atendam ao requisito
 	 * @return null, se a busca não retornar nenhum resultado
 	 */
-	public ArrayList<Aluno> searchUsuario(Aluno aluno) {
+	public ArrayList<Aluno> searchUsuario(String nome) {
 		ArrayList<Aluno> listaAluno = new ArrayList<Aluno>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -189,7 +191,7 @@ public class AlunoDAO implements Interface_usuario<Aluno> {
 					"inner join curso as C on A.curso_id = C.id " + 
 					"inner join area_conhecimento as AC on C.area_conhecimento_id =  AC.id " + 
 					"where A.nomeCompleto like ?");
-			stmt.setString(1,"%"+aluno.getNomeCompleto()+"%");
+			stmt.setString(1,"%"+nome+"%");
 			
 			rs = stmt.executeQuery();
 			while(rs.next()) {

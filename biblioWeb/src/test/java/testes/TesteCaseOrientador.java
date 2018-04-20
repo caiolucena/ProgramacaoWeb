@@ -25,16 +25,16 @@ public class TesteCaseOrientador {
 	public void testeCreateOrientador(){
 		orientador.setNome("Orientador1");
 		orientador.setFormacao("Graduado");
-		assertTrue(orientadorDao.createOrientador(orientador));
+		assertTrue(orientadorDao.createItemDependencia(orientador));
 		
 		orientador = new Orientador();
-		assertFalse(orientadorDao.createOrientador(orientador));
+		assertFalse(orientadorDao.createItemDependencia(orientador));
 		
 		orientador.setNome("Orientador1");
 		ArrayList<Orientador> lista = new ArrayList<Orientador>();
-		lista = orientadorDao.searchOrientador(orientador);
+		lista = orientadorDao.searchItemDependencia("Orientador");
 		for(Orientador o:lista){
-			assertTrue(orientadorDao.removeOrientador(o));
+			assertTrue(orientadorDao.removeItemDependencia(o));
 		}
 	}
 	
@@ -42,19 +42,19 @@ public class TesteCaseOrientador {
 	public void testeRemoveOrientador(){
 		orientador.setNome("Orientador1");
 		orientador.setFormacao("Graducação");
-		assertTrue(orientadorDao.createOrientador(orientador));
+		assertTrue(orientadorDao.createItemDependencia(orientador));
 		orientador.setNome("Orientador2");
 		orientador.setFormacao("PosGraducação");
-		assertTrue(orientadorDao.createOrientador(orientador));
+		assertTrue(orientadorDao.createItemDependencia(orientador));
 		orientador.setNome("Orientador3");
 		orientador.setFormacao("Graducação");
-		assertTrue(orientadorDao.createOrientador(orientador));
+		assertTrue(orientadorDao.createItemDependencia(orientador));
 		
 		orientador.setNome("Orientador");
 		ArrayList<Orientador> lista = new ArrayList<Orientador>();
-		lista = orientadorDao.searchOrientador(orientador);
+		lista = orientadorDao.searchItemDependencia("Orientador");
 		for(Orientador o:lista){
-			assertTrue(orientadorDao.removeOrientador(o));
+			assertTrue(orientadorDao.removeItemDependencia(o));
 		}
 	}
 	
@@ -62,19 +62,19 @@ public class TesteCaseOrientador {
 	public void testeUpdateOrientador(){
 		orientador.setNome("Orientador1");
 		orientador.setFormacao("Graducação");
-		assertTrue(orientadorDao.createOrientador(orientador));
+		assertTrue(orientadorDao.createItemDependencia(orientador));
 		ArrayList<Orientador> lista = new ArrayList<Orientador>();
-		lista = orientadorDao.searchOrientador(orientador);
+		lista = orientadorDao.searchItemDependencia("Orientador");
 		orientador = lista.get(0);
 		orientador.setNome("OrientadorNovo");
 		orientador.setFormacao("PosGraducação");
-		assertTrue(orientadorDao.updateOrientador(orientador));
+		assertTrue(orientadorDao.updateItemDependencia(orientador));
 		
 		orientador.setNome("Orientador");
 		lista = new ArrayList<Orientador>();
-		lista = orientadorDao.searchOrientador(orientador);
+		lista = orientadorDao.searchItemDependencia("Orientador");
 		for(Orientador o:lista){
-			assertTrue(orientadorDao.removeOrientador(o));
+			assertTrue(orientadorDao.removeItemDependencia(o));
 		}
 	}
 

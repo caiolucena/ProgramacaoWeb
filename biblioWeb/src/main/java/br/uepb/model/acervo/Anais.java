@@ -2,6 +2,7 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
+import br.uepb.interfaces.IFAcervo;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.enums.Tipo_anal;
@@ -12,13 +13,11 @@ import br.uepb.model.enums.Tipo_anal;
  * A classe Anais implementa a interface Acervo
  * @author EquipeACL
  */
-public class Anais implements IFAcervo{
-	private int id;
+public class Anais extends ItemAcervo implements IFAcervo{
+	
 	private Tipo_anal tipo;
-	private String titulo;
 	private Autor autor;
 	private String nome_congresso;
-	private Date anoPublicacao;
 	private Cidade local;
 	
 	/**
@@ -54,12 +53,6 @@ public class Anais implements IFAcervo{
 	public void setTipo(Tipo_anal tipo) {
 		this.tipo = tipo;
 	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
 	public Autor getAutor() {
 		return autor;
 	}
@@ -73,10 +66,10 @@ public class Anais implements IFAcervo{
 		this.nome_congresso = nome_congresso;
 	}
 	public Date getAnoPublicacao() {
-		return anoPublicacao;
+		return getData();
 	}
 	public void setAnoPublicacao(Date anoPublicacao) {
-		this.anoPublicacao = anoPublicacao;
+		setData(anoPublicacao);
 	}
 	public Cidade getLocal() {
 		return local;
@@ -84,13 +77,6 @@ public class Anais implements IFAcervo{
 	public void setLocal(Cidade local) {
 		this.local = local;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public boolean validaItem() {
 		return true;
 	}

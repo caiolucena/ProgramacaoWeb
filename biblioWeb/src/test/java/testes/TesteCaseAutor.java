@@ -24,51 +24,51 @@ public class TesteCaseAutor {
 	@Test
 	public void testeCreateAutor(){
 		autor.setNome("Autor1");
-		assertTrue(autorDao.createAutor(autor));
+		assertTrue(autorDao.createItemDependencia(autor));
 		
 		autor = new Autor();
-		assertFalse(autorDao.createAutor(autor));
+		assertFalse(autorDao.createItemDependencia(autor));
 		
 		autor.setNome("Autor1");
 		ArrayList<Autor> lista = new ArrayList<Autor>();
-		lista = autorDao.searchAutor(autor);
+		lista = autorDao.searchItemDependencia("Autor1");
 		for(Autor a:lista){
-			assertTrue(autorDao.removeAutor(a));
+			assertTrue(autorDao.removeItemDependencia(a));
 		}
 	}
 	
 	@Test
 	public void testeRemoveAutor(){
 		autor.setNome("Autor1");
-		assertTrue(autorDao.createAutor(autor));
+		assertTrue(autorDao.createItemDependencia(autor));
 		autor.setNome("Autor2");
-		assertTrue(autorDao.createAutor(autor));
+		assertTrue(autorDao.createItemDependencia(autor));
 		autor.setNome("Autor3");
-		assertTrue(autorDao.createAutor(autor));
+		assertTrue(autorDao.createItemDependencia(autor));
 		
 		autor.setNome("Autor");
 		ArrayList<Autor> lista = new ArrayList<Autor>();
-		lista = autorDao.searchAutor(autor);
+		lista = autorDao.searchItemDependencia("Autor");
 		for(Autor a:lista){
-			assertTrue(autorDao.removeAutor(a));
+			assertTrue(autorDao.removeItemDependencia(a));
 		}
 	}
 	
 	@Test
 	public void testeUpdateAutor(){
 		autor.setNome("Autor1");
-		assertTrue(autorDao.createAutor(autor));
+		assertTrue(autorDao.createItemDependencia(autor));
 		ArrayList<Autor> lista = new ArrayList<Autor>();
-		lista = autorDao.searchAutor(autor);
+		lista = autorDao.searchItemDependencia("Autor1");
 		autor = lista.get(0);
 		autor.setNome("AutorNovo");
-		assertTrue(autorDao.updateAutor(autor));
+		assertTrue(autorDao.updateItemDependencia(autor));
 		
 		autor.setNome("Autor");
 		lista = new ArrayList<Autor>();
-		lista = autorDao.searchAutor(autor);
+		lista = autorDao.searchItemDependencia("Autor");
 		for(Autor a:lista){
-			assertTrue(autorDao.removeAutor(a));
+			assertTrue(autorDao.removeItemDependencia(a));
 		}
 	}
 

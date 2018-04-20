@@ -9,12 +9,18 @@ import java.util.Date;
  * @author EquipeACL
  */
 public class ItemAcervo {
-	
 	private int id;
 	private  Date data;
 	private int edicao;
 	private String titulo;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public Date getData() {
 		return data;

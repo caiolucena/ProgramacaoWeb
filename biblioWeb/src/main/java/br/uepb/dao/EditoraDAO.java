@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.interfaces.DAO_Dependencia;
 import br.uepb.model.Autor;
 import br.uepb.model.Editora;
 /**
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Editora
  * @author EquipeACL
  */
-public class EditoraDAO {
+public class EditoraDAO implements DAO_Dependencia<Editora>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(EditoraDAO.class);
 	
@@ -28,7 +29,7 @@ public class EditoraDAO {
 	 * @return false, se ocorrer algum erro na operação
  	 */	
 	@SuppressWarnings("finally")
-	public boolean createEditora(Editora editora){
+	public boolean createItemDependencia(Editora editora){
 		String sql = "insert into editora(nome)values(?)";
 		try {
 			con = Conexao.iniciarConexao();
@@ -69,7 +70,7 @@ public class EditoraDAO {
 	 * @return false, se ocorrer algum erro na operação
  	 */	
 	@SuppressWarnings("finally")
-	public boolean removeEditora(Editora editora) {
+	public boolean removeItemDependencia(Editora editora) {
 		String sql = "delete from editora where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -100,7 +101,7 @@ public class EditoraDAO {
 	 * @return true, se a operação de atualização for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
  	 */		
-	public boolean updateEditora(Editora editora){
+	public boolean updateItemDependencia(Editora editora){
 		String sql = "update editora set nome=? where id=?;";
 		try {
 			con = Conexao.iniciarConexao();
@@ -141,13 +142,13 @@ public class EditoraDAO {
 	 * @throws JavaLangException
 	 * @return ArrayList<Editora> editoras, lista de editoras retornadas pela busca
 	 */	
-	public ArrayList<Editora> searchEditora(Editora editora) {//busca varias editoras pelo nome
+	public ArrayList<Editora> searchItemDependencia(String nome) {//busca varias editoras pelo nome
 		String sql = "select * from editora where nome like ?";
 		ArrayList<Editora> editoras = new ArrayList<Editora>();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,"%"+editora.getNome()+"%");
+			stmt.setString(1,"%"+nome+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Editora e = new Editora();

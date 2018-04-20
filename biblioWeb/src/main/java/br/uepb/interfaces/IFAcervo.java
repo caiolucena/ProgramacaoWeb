@@ -1,4 +1,4 @@
-package br.uepb.model.acervo;
+package br.uepb.interfaces;
 /**
  * Interface Acervo
  * @author EquipeACL

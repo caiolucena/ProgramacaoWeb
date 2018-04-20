@@ -1,11 +1,13 @@
 package br.uepb.model;
 
+import br.uepb.interfaces.IFDependencia;
+
 /**
  * Essa classe é utilizada como modelo para um objeto do tipo Autor.
  * A classe contém os respectivos getters and setters de seus atributos.
  * @author EquipeACL
  */
-public class Autor {
+public class Autor implements IFDependencia{
 	private int id;
 	private String nome;
 	
@@ -43,6 +45,9 @@ public class Autor {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public boolean validaDependencia() {
+		return true;
 	}	
 	
 }

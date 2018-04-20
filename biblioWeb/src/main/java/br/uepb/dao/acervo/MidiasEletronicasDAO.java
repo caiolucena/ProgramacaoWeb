@@ -11,7 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.uepb.dao.Conexao;
-import br.uepb.dao.Item_Acervo;
+import br.uepb.interfaces.DAO_Acervo;
 import br.uepb.model.acervo.Livro;
 import br.uepb.model.acervo.Midias_Eletronicas;
 import br.uepb.model.enums.Tipo_midia;
@@ -20,7 +20,7 @@ import br.uepb.model.enums.Tipo_midia;
  * Ela implementa a interface Item_Acervo passando o tipo Midias_Eletronicas.
  * @author EquipeACL
  */
-public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
+public class MidiasEletronicasDAO implements DAO_Acervo<Midias_Eletronicas>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(MidiasEletronicasDAO.class); 
 	
@@ -133,13 +133,13 @@ public class MidiasEletronicasDAO implements Item_Acervo<Midias_Eletronicas>{
 	 * @throws JavaLangException 
 	 * @return ArrayList<Midias_Eletronicas> midias, lista de midias retornadas pela busca
 	 */
-	public ArrayList<Midias_Eletronicas> searchItemAcervo(Midias_Eletronicas midia) {
+	public ArrayList<Midias_Eletronicas> searchItemAcervo(String titulo) {
 		String sql = "select * from midia where titulo like ?";
 		ArrayList<Midias_Eletronicas> midias = new ArrayList<Midias_Eletronicas>();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,"%"+midia.getTitulo()+"%");
+			stmt.setString(1,"%"+titulo+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Midias_Eletronicas m = new Midias_Eletronicas();

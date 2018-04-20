@@ -34,7 +34,7 @@ public class TesteCaseMidia {
 		assertFalse(midiaDao.createItemAcervo(midia));
 		
 		ArrayList<Midias_Eletronicas> lista = new ArrayList<Midias_Eletronicas>();
-		lista = midiaDao.searchItemAcervo(midia);
+		lista = midiaDao.searchItemAcervo("Teste");
 		for(Midias_Eletronicas m:lista){
 			assertTrue(midiaDao.removeItemAcervo(m));
 		}
@@ -49,12 +49,12 @@ public class TesteCaseMidia {
 		assertTrue(midiaDao.createItemAcervo(midia));
 		ArrayList<Midias_Eletronicas> lista = new ArrayList<Midias_Eletronicas>();
 		midia.setTitulo("Teste");
-		lista = midiaDao.searchItemAcervo(midia);
+		lista = midiaDao.searchItemAcervo("Teste");
 		midia = lista.get(0);
 		midia.setTitulo("Novo Teste");
 		midia.setTipo(Tipo_midia.DVD);
 		assertTrue(midiaDao.updateItemAcervo(midia));
-		lista = midiaDao.searchItemAcervo(midia);
+		lista = midiaDao.searchItemAcervo("Novo Teste");
 		for(Midias_Eletronicas m:lista){
 			assertTrue(midiaDao.removeItemAcervo(m));
 		}
@@ -79,7 +79,7 @@ public class TesteCaseMidia {
 		assertTrue(midiaDao.createItemAcervo(midia));
 		ArrayList<Midias_Eletronicas> lista = new ArrayList<Midias_Eletronicas>();
 		midia.setTitulo("Teste");
-		lista = midiaDao.searchItemAcervo(midia);
+		lista = midiaDao.searchItemAcervo("Teste");
 		System.out.println(lista.size());
 		for(Midias_Eletronicas m:lista){
 			assertTrue(midiaDao.removeItemAcervo(m));

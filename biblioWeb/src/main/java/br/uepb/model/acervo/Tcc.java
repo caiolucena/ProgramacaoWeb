@@ -2,6 +2,7 @@ package br.uepb.model.acervo;
 
 import java.util.Date;
 
+import br.uepb.interfaces.IFAcervo;
 import br.uepb.model.Autor;
 import br.uepb.model.Cidade;
 import br.uepb.model.Orientador;
@@ -12,13 +13,11 @@ import br.uepb.model.enums.Tipo_tcc;
  * A classe Tcc implementa a interface Acervo
  * @author EquipeACL
  */
-public class Tcc implements IFAcervo{ 
-	private int id;
-	private String titulo;
+public class Tcc extends ItemAcervo implements IFAcervo{ 
+	
 	private Autor autor;
 	private Orientador orientador;
 	private Tipo_tcc tipo;
-	private Date ano_defesa;
 	private Cidade cidade;
 	
 	/**
@@ -47,18 +46,6 @@ public class Tcc implements IFAcervo{
 		setCidade(cidade);
 	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
 	public Autor getAutor() {
 		return autor;
 	}
@@ -78,10 +65,10 @@ public class Tcc implements IFAcervo{
 		this.tipo = tipo;
 	}
 	public Date getAno_defesa() {
-		return ano_defesa;
+		return getData();
 	}
 	public void setAno_defesa(Date ano_defesa) {
-		this.ano_defesa = ano_defesa;
+		setData(ano_defesa);
 	}
 	public Cidade getCidade() {
 		return cidade;

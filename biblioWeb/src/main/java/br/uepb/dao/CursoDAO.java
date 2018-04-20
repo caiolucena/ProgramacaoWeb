@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.interfaces.DAO_Dependencia;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Autor;
 import br.uepb.model.Curso;
@@ -17,7 +18,7 @@ import br.uepb.model.enums.Tipo_curso;
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Curso
  * @author EquipeACL
  */
-public class CursoDAO {
+public class CursoDAO implements DAO_Dependencia<Curso>{
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(AutorDAO.class);
 	
@@ -29,7 +30,7 @@ public class CursoDAO {
 	 * @return true, se a operação de inserção for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */	
-	public boolean createCurso(Curso curso){
+	public boolean createItemDependencia(Curso curso){
 		String sql = "insert into curso(nome,sigla, tipo,area_conhecimento_id)values(?,?,?,?)";
 		try {
 			con = Conexao.iniciarConexao();
@@ -71,7 +72,7 @@ public class CursoDAO {
 	 * @return true, se a operação de remoção for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */	
-	public boolean removeCurso(Curso curso){
+	public boolean removeItemDependencia(Curso curso){
 		String sql = "delete from curso where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -102,7 +103,7 @@ public class CursoDAO {
 	 * @return true, se a operação de atualização for bem sucedida
 	 * @return false, se ocorrer algum erro na operação
 	 */	
-	public boolean updateCurso(Curso curso){
+	public boolean updateItemDependencia(Curso curso){
 		String sql = "update curso set nome=?, sigla=?,tipo=?, area_conhecimento_id=? where id=?";
 		try {
 			con = Conexao.iniciarConexao();
@@ -136,13 +137,13 @@ public class CursoDAO {
 	 * @throws JavaLangException
 	 * @return ArrayList<Curso> cursos, lista de cursos retornados pela busca
 	 */	
-	public ArrayList<Curso> searchCurso(Curso curso){
+	public ArrayList<Curso> searchItemDependencia(String nome){
 		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.sigla as 'curso_sigla', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like ?";
 		ArrayList<Curso> listaCursos = new ArrayList<Curso>();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,"%"+curso.getNome()+"%");
+			stmt.setString(1,"%"+nome+"%");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 	            Curso c = new Curso();

@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.uepb.interfaces.DAO_Dependencia;
 import br.uepb.model.AreaConhecimento;
 import br.uepb.model.Tema;
 /**
  * Essa classe é responsável por se conectar com o Banco de Dados para operações de inserir, atualizar, remover e buscar objetos do tipo Tema
  * @author EquipeACL
  */
-public class TemaDAO {
+public class TemaDAO implements DAO_Dependencia<Tema>{
 	
 	private Connection con;
 	private static final Logger logger = LogManager.getLogger(TemaDAO.class);
@@ -29,7 +30,7 @@ public class TemaDAO {
 	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
-	public boolean createTema(Tema tema) {
+	public boolean createItemDependencia(Tema tema) {
 		
 		PreparedStatement stmt = null;
 		
@@ -66,7 +67,7 @@ public class TemaDAO {
 	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
-	public boolean removeTema(Tema tema) {
+	public boolean removeItemDependencia(Tema tema) {
 		
 		PreparedStatement stmt = null;
 		
@@ -104,7 +105,7 @@ public class TemaDAO {
 	 * @return false, se ocorrer algum erro na operação
 	 */
 	@SuppressWarnings("finally")
-	public boolean updateTema(Tema tema) {
+	public boolean updateItemDependencia(Tema tema) {
 		
 		PreparedStatement stmt = null;
 		
@@ -139,7 +140,7 @@ public class TemaDAO {
 	 * @throws JavaLangException
 	 * @return ArrayList<Tema> listaTema, lista de temas retornados pela busca
 	 */
-	public ArrayList<Tema> searchTema(Tema tema){
+	public ArrayList<Tema> searchItemDependencia(String nome){
 		
 		ArrayList<Tema> listaTema = new ArrayList<Tema>();
 		PreparedStatement stmt = null;
@@ -148,7 +149,7 @@ public class TemaDAO {
 		try {
 			con = Conexao.iniciarConexao();
 			stmt = con.prepareStatement("select t.id as 'tema_id', t.nome as 'tema_nome', a.id as 'area_id', a.nome as 'area_nome' from tema as t inner join area_conhecimento as a on t.areaconhecimento_id = a.id where t.nome like ?");
-			stmt.setString(1,"%"+tema.getNome()+"%");			
+			stmt.setString(1,"%"+nome+"%");			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Tema t = new Tema(rs.getInt("tema_id"),rs.getString("tema_nome"),new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
