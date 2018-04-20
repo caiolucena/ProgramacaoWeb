@@ -123,7 +123,7 @@ public class TccDAO implements DAO_Acervo<Tcc>{
 			stmt = con.prepareStatement("UPDATE tcc SET titulo=?, tipo=?, defesa = ?  WHERE id=?");
 			stmt.setString(1, tcc.getTitulo());
 			stmt.setString(2, tcc.getTipo().toString());
-			stmt.setDate(3,(Date) tcc.getAno_defesa());
+			stmt.setDate(3, new java.sql.Date(tcc.getAno_defesa().getTime()));
 			stmt.setInt(4, tcc.getId());
 			
 			stmt.executeUpdate();
