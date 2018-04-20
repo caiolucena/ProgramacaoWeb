@@ -30,7 +30,9 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	private AutorDAO autorDAO;
 	private String nomeUsuario;
 	
-	
+	/**
+	 * Método construtor da classe Administrador 
+	 */
 	public Administrador() {
 		this.funcionarioDAO = new FuncionarioDAO();
 		this.areaDAO = new AreaConhecimentoDAO();
@@ -52,6 +54,18 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 		this.autorDAO = new AutorDAO();
 	}
 	
+	/**
+	 * Método construtor da classe Administrador
+	 * @param cpf, valor inteiro correspondente ao cpf do Administrador do sistema
+	 * @param nomeCompleto, que é o nome do Administrador do sistema
+	 * @param rg, valor inteiro correspondete ao RG do Administrador do sistema
+	 * @param naturalidade, que indica a naturalidade do Administrador do sistema
+	 * @param endereco, que é o endereço do Administrador do sistema
+	 * @param telefone, que é o numero de telefone do Administrador do sistema
+	 * @param email, que é o email de contato do Administrador do sistema
+	 * @param senhaAcesso, que é a senha de acesso ao sistema do Administrador
+	 * @param nomeUsuario, que é o nome de usuario do Administrador do sistema
+	 */
 	public Administrador(int cpf, String nomeCompleto, int rg, String naturalidade, String endereco, int telefone,
 			String email, String senhaAcesso,String nomeUsuario) {
 		super(cpf,nomeCompleto,rg,naturalidade,endereco,telefone,email,senhaAcesso);
@@ -204,57 +218,149 @@ public class Administrador extends Usuario implements Interface_manterFuncionari
 	}
 	
 	// - - - - - - - - - - - - - - - - - - - - - MANTER AREA CONHECIMENTO - - - - - - - - - - - - - - - - - - - - - - -
+	/**
+	 * Método responsável por inserir um objeto do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que deve ser salvo no banco
+	 * @return true, se a inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean createAreaConhecimento(AreaConhecimento area){
 		return areaDAO.createAreaConhecimento(area);
-	}	
+	}
+	/**
+	 * Método responsável por remover um objeto do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que deve ser removido no banco
+	 * @return true, se a remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean removeAreaConhecimento(AreaConhecimento area){
 		return areaDAO.removeAreaConhecimento(area);
 	}
+	/**
+	 * Método responsável por atualizar um objeto do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que deve ser atualizado no banco
+	 * @return true, se a atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean updateAreaConhecimento(AreaConhecimento area){
 		return areaDAO.updateAreaConhecimento(area);
 	}
+	/**
+	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
+	 * @return ArrayList<AreaConhecimento> listaAreas, lista de objetos do tipo AreaConhecimento retornados pela busca
+	 */
 	public ArrayList<AreaConhecimento> searchAreaConhecimento(AreaConhecimento area){
 		return areaDAO.searchAreaConhecimento(area);
 	}
 	
 	// - - - - - - - - - - - - - - - - - - - - - MANTER AREA CURSO - - - - - - - - - - - - - - - - - - - - - - -
+	/**
+	 * Método responsável por inserir um objeto do tipo Curso no banco de dados
+	 * @param curso, que é o objeto que deve ser salvo no banco
+	 * @return true, se a inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean createCurso(Curso curso){
 		return cursoDAO.createCurso(curso);
-	}	
+	}
+	/**
+	 * Método responsável por remover um objeto do tipo Curso no banco de dados
+	 * @param curso, que é o objeto que deve ser removido no banco
+	 * @return true, se a remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean removeCurso(Curso curso){
 		return cursoDAO.removeCurso(curso);
 	}
+	/**
+	 * Método responsável por atualizar um objeto do tipo Curso no banco de dados
+	 * @param curso, que é o objeto que deve ser atualizado no banco
+	 * @return true, se a atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean updateCurso(Curso curso){
 		return cursoDAO.updateCurso(curso);
 	}
+	/**
+	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
+	 * @return ArrayList<Curso> listaCursos, lista de objetos do tipo Curso retornados pela busca
+	 */
 	public ArrayList<Curso> searchCurso(Curso curso){
 		return cursoDAO.searchCurso(curso);
 	}
 	
 	// - - - - - - - - - - - - - - - - - - - - - MANTER AUTOR - - - - - - - - - - - - - - - - - - - - - - -
+	/**
+	 * Método responsável por inserir um objeto do tipo Autor no banco de dados
+	 * @param autor, que é o objeto que deve ser salvo no banco
+	 * @return true, se a inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean createAutor(Autor autor){
 		return autorDAO.createAutor(autor);
 	}
+	/**
+	 * Método responsável por remover um objeto do tipo Autor no banco de dados
+	 * @param autor, que é o objeto que deve ser removido no banco
+	 * @return true, se a remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean removeAutor(Autor autor){
 		return autorDAO.removeAutor(autor);
 	}
+	/**
+	 * Método responsável por atualizar um objeto do tipo Autor no banco de dados
+	 * @param autor, que é o objeto que deve ser atualizado no banco
+	 * @return true, se a atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean updateAutor(Autor autor){
 		return autorDAO.updateAutor(autor);
 	}
+	/**
+	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
+	 * @return ArrayList<Autor> autores, lista de objetos do tipo Autor retornados pela busca
+	 */
 	public ArrayList<Autor> searchAutor(Autor autor){
 		return autorDAO.searchAutor(autor);
 	}
 	
 	// - - - - - - - - - - - - - - - - - - - - - MANTER EDITORA - - - - - - - - - - - - - - - - - - - - - - -
+	/**
+	 * Método responsável por inserir um objeto do tipo Editora no banco de dados
+	 * @param editora, que é o objeto que deve ser salvo no banco
+	 * @return true, se a inserção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean createEditora(Editora editora){
 		return editoraDAO.createEditora(editora);
 	}
+	/**
+	 * Método responsável por remover um objeto do tipo Editora no banco de dados
+	 * @param editora, que é o objeto que deve ser removido no banco
+	 * @return true, se a remoção for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean removeEditora(Editora editora){
 		return editoraDAO.removeEditora(editora);
 	}
+	/**
+	 * Método responsável por atualizar um objeto do tipo Editora no banco de dados
+	 * @param editora, que é o objeto que deve ser atualizado no banco
+	 * @return true, se a atualização for bem sucedida
+	 * @return false, se ocorrer algum erro na operação
+	 */
 	public boolean updateEditora(Editora editora){
 		return editoraDAO.updateEditora(editora);
 	}
+	/**
+	 * Método responsável por busca um ou mais objetos do tipo AreaConhecimento no banco de dados
+	 * @param area, que é o objeto que possui as informações que deve ser buscados no banco de dados
+	 * @return ArrayList<Editora> editoras, lista de objetos do tipo Editora retornados pela busca
+	 */
 	public ArrayList<Editora> searchEditora(Editora editora){
 		return editoraDAO.searchEditora(editora);
 	}

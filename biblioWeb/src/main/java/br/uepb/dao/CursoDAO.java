@@ -138,7 +138,7 @@ public class CursoDAO {
 	 */	
 	public ArrayList<Curso> searchCurso(Curso curso){
 		String sql = "select c.id as 'curso_id', c.nome as 'curso_nome', c.sigla as 'curso_sigla', c.tipo as 'curso_tipo', a.id as 'area_id', a.nome as 'area_nome' from curso as c inner join area_conhecimento as a on c.area_conhecimento_id = a.id where c.nome like ?";
-		ArrayList<Curso> cursos = new ArrayList<Curso>();
+		ArrayList<Curso> listaCursos = new ArrayList<Curso>();
 		try {
 			con = Conexao.iniciarConexao();
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class CursoDAO {
 	            c.setSigla(rs.getString("curso_sigla"));
 	            c.setTipo(Enum.valueOf(Tipo_curso.class,rs.getString("curso_tipo")));
 	            c.setArea(new AreaConhecimento(rs.getInt("area_id"),rs.getString("area_nome")));
-	            cursos.add(c);
+	            listaCursos.add(c);
 	        }
 		} catch (SQLException e) {
 			logger.error("Erro na busca",e);
@@ -165,6 +165,6 @@ public class CursoDAO {
 				logger.error("Conexao não pode ser fechada na busca ",e);
 			}
 		}
-		return cursos;
+		return listaCursos;
 	}
 }
