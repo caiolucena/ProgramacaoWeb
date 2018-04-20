@@ -63,8 +63,6 @@ public class TesteCaseTcc {
 		
 		trabalho = trabalhoDao.searchItemAcervo("Trabalho de conclusao").get(0);
 		assertTrue(trabalhoDao.removeItemAcervo(trabalho));
-		
-		
 		assertTrue(orientadorDao.removeItemDependencia(orientador));
 		
 		
