@@ -5,7 +5,7 @@
 /*!40101 SET NAMES utf8 */;
 
 DROP DATABASE IF EXISTS `biblioteca`;
-CEATE DATABASE `biblioteca`;
+CREATE DATABASE `biblioteca`;
 USE `biblioteca`;
 
 #
