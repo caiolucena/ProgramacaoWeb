@@ -9,12 +9,14 @@ public class Autor {
 	private int id;
 	private String nome;
 	
+	public Autor(){
+	}
 	/**
 	 * Método construtor da classe Autor
 	 * Construtor vazio (utilizado para criar um objeto do tipo Autor sem parâmetros definidos)
 	 */
-	public Autor(){
-		
+	public Autor(String nome){
+		setNome(nome);
 	}
 	
 	/**

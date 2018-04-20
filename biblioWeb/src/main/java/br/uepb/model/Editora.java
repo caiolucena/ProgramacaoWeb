@@ -17,6 +17,10 @@ public class Editora {
 
 	}
 	
+	public Editora(String nome){
+		setNome(nome);
+	}
+	
 	/**
 	 * Método construtor da classe Editora (utilizado para criar um objeto do tipo Editora com parâmetros definidos)
 	 * @param id, id da editora
