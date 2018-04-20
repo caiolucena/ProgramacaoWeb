@@ -27,6 +27,7 @@ public class TesteCaseAdminRevista {
 		adm = new Administrador();
 		revista = new Revista();
 		editora = new Editora();
+		editoraDao = new EditoraDAO();
 		editora.setNome("Editora1");
 		assertTrue(editoraDao.createItemDependencia(editora));
 		editora = editoraDao.searchItemDependencia("Editora1").get(0);
@@ -34,8 +35,8 @@ public class TesteCaseAdminRevista {
 	}
 
 	@Test
-	public void createMidiaEletronica() {
-		revista = new Revista("revista do meu tcc do meu tcc", editora, new Date(System.currentTimeMillis()),2,200);
+	public void createRevista() {
+		revista = new Revista("revista tcc", editora, new Date(System.currentTimeMillis()),2,200);
 		assertTrue(adm.createItemAcervo(new RevistaDAO(), revista));
 		
 		revista = (Revista) adm.searchItemAcervo(new RevistaDAO(),revista.getTitulo()).get(0);
@@ -45,17 +46,17 @@ public class TesteCaseAdminRevista {
 	}
 	
 	@Test
-	public void removeMidiaEletronica() {
-		revista = new Revista("revista do meu tcc do meu tcc", editora, new Date(System.currentTimeMillis()),2,200);
+	public void removeRevista() {
+		revista = new Revista("revista tcc", editora, new Date(System.currentTimeMillis()),2,200);
 		assertTrue(adm.createItemAcervo(new RevistaDAO(), revista));
 		
-		revista = new Revista("revista do meu tcc do meu tcc", editora, new Date(System.currentTimeMillis()),2,200);
+		revista = new Revista("revista tcc", editora, new Date(System.currentTimeMillis()),2,200);
 		assertTrue(adm.createItemAcervo(new RevistaDAO(), revista));
 		
-		revista = new Revista("revista do meu tcc do meu tcc", editora, new Date(System.currentTimeMillis()),2,200);
+		revista = new Revista("revista tcc", editora, new Date(System.currentTimeMillis()),2,200);
 		assertTrue(adm.createItemAcervo(new RevistaDAO(), revista));
 		
-		for(IFAcervo dep:adm.searchItemAcervo(new RevistaDAO(),"revista do meu tcc")){
+		for(IFAcervo dep:adm.searchItemAcervo(new RevistaDAO(),"revista tcc")){
 			Revista e = (Revista) dep;
 			assertTrue(adm.removeItemAcervo(new RevistaDAO(),e));
 		}
@@ -63,8 +64,8 @@ public class TesteCaseAdminRevista {
 	}
 	
 	@Test
-	public void updateMidiaEletronica() {
-		revista = new Revista("revista do meu tcc do meu tcc", editora, new Date(System.currentTimeMillis()),2,200);
+	public void updateRevista() {
+		revista = new Revista("revista tcc", editora, new Date(System.currentTimeMillis()),2,200);
 		assertTrue(adm.createItemAcervo(new RevistaDAO(), revista));
 		
 		revista = (Revista) adm.searchItemAcervo(new RevistaDAO(),revista.getTitulo()).get(0);
