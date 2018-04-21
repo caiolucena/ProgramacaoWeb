@@ -1,9 +1,3 @@
-﻿# Host: localhost  (Version 5.5.21)
-# Date: 2018-04-20 13:58:04
-# Generator: MySQL-Front 5.3  (Build 5.24)
-
-/*!40101 SET NAMES utf8 */;
-
 DROP DATABASE IF EXISTS `biblioteca`;
 CREATE DATABASE `biblioteca`;
 USE `biblioteca`;
@@ -12,7 +6,6 @@ USE `biblioteca`;
 # Structure for table "area_conhecimento"
 #
 
-DROP TABLE IF EXISTS `area_conhecimento`;
 CREATE TABLE `area_conhecimento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -29,7 +22,7 @@ INSERT INTO `area_conhecimento` VALUES (1,'EXATAS'),(2,'CIENCIAS NATURAIS'),(3,'
 # Structure for table "autor"
 #
 
-DROP TABLE IF EXISTS `autor`;
+
 CREATE TABLE `autor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -45,7 +38,6 @@ CREATE TABLE `autor` (
 # Structure for table "cidade"
 #
 
-DROP TABLE IF EXISTS `cidade`;
 CREATE TABLE `cidade` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) NOT NULL,
@@ -65,7 +57,7 @@ INSERT INTO `cidade` VALUES (2983,3162948,'São José da Barra','MG'),(2984,3162
 # Structure for table "anal"
 #
 
-DROP TABLE IF EXISTS `anal`;
+
 CREATE TABLE `anal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` enum('ARTIGO','POSTER','RESUMO') NOT NULL,
@@ -87,7 +79,7 @@ CREATE TABLE `anal` (
 # Structure for table "anal_has_autor"
 #
 
-DROP TABLE IF EXISTS `anal_has_autor`;
+
 CREATE TABLE `anal_has_autor` (
   `anal_id` int(11) NOT NULL AUTO_INCREMENT,
   `autor_id` int(11) NOT NULL,
@@ -107,7 +99,7 @@ CREATE TABLE `anal_has_autor` (
 # Structure for table "curso"
 #
 
-DROP TABLE IF EXISTS `curso`;
+
 CREATE TABLE `curso` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -128,7 +120,7 @@ CREATE TABLE `curso` (
 # Structure for table "aluno"
 #
 
-DROP TABLE IF EXISTS `aluno`;
+
 CREATE TABLE `aluno` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` varchar(45) NOT NULL,
@@ -159,7 +151,7 @@ CREATE TABLE `aluno` (
 # Structure for table "editora"
 #
 
-DROP TABLE IF EXISTS `editora`;
+
 CREATE TABLE `editora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -175,7 +167,7 @@ CREATE TABLE `editora` (
 # Structure for table "funcionario"
 #
 
-DROP TABLE IF EXISTS `funcionario`;
+
 CREATE TABLE `funcionario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cpf` int(10) unsigned NOT NULL,
@@ -200,7 +192,7 @@ CREATE TABLE `funcionario` (
 # Structure for table "jornal"
 #
 
-DROP TABLE IF EXISTS `jornal`;
+
 CREATE TABLE `jornal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
@@ -218,7 +210,7 @@ CREATE TABLE `jornal` (
 # Structure for table "livro"
 #
 
-DROP TABLE IF EXISTS `livro`;
+
 CREATE TABLE `livro` (
   `isbn` int(11) NOT NULL,
   `titulo` varchar(45) NOT NULL,
@@ -243,7 +235,7 @@ CREATE TABLE `livro` (
 # Structure for table "autor_has_livro"
 #
 
-DROP TABLE IF EXISTS `autor_has_livro`;
+
 CREATE TABLE `autor_has_livro` (
   `autor_id` int(11) NOT NULL AUTO_INCREMENT,
   `livro_isbn` int(11) NOT NULL,
@@ -263,7 +255,7 @@ CREATE TABLE `autor_has_livro` (
 # Structure for table "midia"
 #
 
-DROP TABLE IF EXISTS `midia`;
+
 CREATE TABLE `midia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
@@ -281,7 +273,7 @@ CREATE TABLE `midia` (
 # Structure for table "orientador"
 #
 
-DROP TABLE IF EXISTS `orientador`;
+
 CREATE TABLE `orientador` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -298,7 +290,7 @@ CREATE TABLE `orientador` (
 # Structure for table "revista"
 #
 
-DROP TABLE IF EXISTS `revista`;
+
 CREATE TABLE `revista` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
@@ -320,7 +312,7 @@ CREATE TABLE `revista` (
 # Structure for table "tcc"
 #
 
-DROP TABLE IF EXISTS `tcc`;
+
 CREATE TABLE `tcc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
@@ -347,7 +339,7 @@ CREATE TABLE `tcc` (
 # Structure for table "tema"
 #
 
-DROP TABLE IF EXISTS `tema`;
+
 CREATE TABLE `tema` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
