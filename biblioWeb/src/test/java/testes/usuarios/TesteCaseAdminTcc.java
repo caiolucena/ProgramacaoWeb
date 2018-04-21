@@ -2,8 +2,10 @@ package testes.usuarios;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,9 +65,21 @@ public class TesteCaseAdminTcc {
 		trabalho.setOrientador(orientador);
 
 		assertTrue(adm.createItemAcervo(new TccDAO(), trabalho));
-
+		trabalho = (Tcc)adm.searchItemAcervo(new TccDAO(),"Trabalho de conclusao").get(0);
 		trabalho.setTitulo("Trabalho");
 		assertTrue(adm.updateItemAcervo(new TccDAO(), trabalho));
+		adm.removeItemAcervo(new TccDAO(), trabalho);
 
+		
+	}
+	
+	@After
+	public void limpar() {
+		ArrayList<Autor> lista = autorDao.searchItemDependencia("Autor");
+		for(Autor a: lista) {
+			autorDao.removeItemDependencia(a);
+			
+		}
+		
 	}
 }

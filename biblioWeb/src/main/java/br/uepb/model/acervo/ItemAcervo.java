@@ -46,5 +46,4 @@ public class ItemAcervo {
 		this.titulo = titulo;
 	}
 	
-	
 }

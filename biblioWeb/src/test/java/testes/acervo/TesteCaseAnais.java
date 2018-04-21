@@ -2,8 +2,10 @@ package testes.acervo;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +37,7 @@ public class TesteCaseAnais {
 		autor.setNome("Autor1");
 		autorDao.createItemDependencia(autor);
 		autor = autorDao.searchItemDependencia("Autor1").get(0);
+		System.out.println(autor.getId());
 		anais.setAnoPublicacao(new Date(System.currentTimeMillis()));
 		anais.setAutor(autor);		
 		anais.setLocal(cidade);
@@ -42,6 +45,7 @@ public class TesteCaseAnais {
 		anais.setTipo(Tipo_anal.ARTIGO);
 		anais.setTitulo("Titulo1");
 		assertTrue(anaisDao.createItemAcervo(anais));
+		autorDao.removeItemDependencia(autor);
 	}
 	
 	@Test
@@ -50,5 +54,16 @@ public class TesteCaseAnais {
 		anais = anaisDao.searchItemAcervo("Titulo1").get(0);
 		assertTrue(anaisDao.removeItemAcervo(anais));
 	}
+	
+	@After
+	public void limpar() {
+		ArrayList<Autor> lista = autorDao.searchItemDependencia("Autor");
+		for(Autor a: lista) {
+			autorDao.removeItemDependencia(a);
+			
+		}
+		
+	}
+	
 	
 }

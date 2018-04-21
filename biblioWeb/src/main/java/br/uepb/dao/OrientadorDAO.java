@@ -78,7 +78,7 @@ public class OrientadorDAO implements DAO_Dependencia<Orientador>{
 		} catch (SQLException e) {
 			logger.error("Erro na remoção",e);
 		} catch (Exception e) {
-			logger.error("Erro naremoção",e);
+			logger.error("Erro na remoção",e);
 		}finally {
 			try {
 				con.close();

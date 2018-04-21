@@ -63,5 +63,4 @@ public class Revista extends ItemAcervo implements IFAcervo{
 		return true;
 	}
 	
-		
 }

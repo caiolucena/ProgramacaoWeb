@@ -2,8 +2,10 @@ package testes.acervo;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,9 +65,17 @@ public class TesteCaseTcc {
 		
 		trabalho = trabalhoDao.searchItemAcervo("Trabalho de conclusao").get(0);
 		assertTrue(trabalhoDao.removeItemAcervo(trabalho));
-		assertTrue(orientadorDao.removeItemDependencia(orientador));
+		assertTrue(orientadorDao.removeItemDependencia(orientador));		
 		
-		
+	}
+	
+	@After
+	public void limpar() {
+		ArrayList<Autor> lista = autorDao.searchItemDependencia("Autor");
+		for(Autor a: lista) {
+			autorDao.removeItemDependencia(a);
+			
+		}
 		
 	}
 
