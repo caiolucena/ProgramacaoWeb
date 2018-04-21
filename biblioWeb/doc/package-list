@@ -1,6 +1,7 @@
 br.uepb.dao
 br.uepb.dao.acervo
 br.uepb.dao.usuarios
+br.uepb.interfaces
 br.uepb.model
 br.uepb.model.acervo
 br.uepb.model.enums
@@ -8,3 +9,4 @@ br.uepb.model.usuarios
 testes
 testes.acervo
 testes.usuarios
+testes.usuarios.admin
